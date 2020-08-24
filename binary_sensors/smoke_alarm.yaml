@@ -1,0 +1,47 @@
+#####################################################################
+#
+#   SMOKE ALARM
+#
+#####################################################################
+- platform: mqtt
+  name: "Alarm Smoke Front Door"
+  state_topic: "smartthings/Smoke Alarm Front Door/smoke/state"
+  payload_on: "detected"
+  payload_off: "clear"
+  device_class: smoke
+  
+
+
+- platform: mqtt
+  name: "Alarm Smoke KitchenUtility"
+  state_topic: "smartthings/Smoke Alarm Kitchen-Utility/smoke/state"
+  payload_on: "detected"
+  payload_off: "clear"
+  device_class: smoke
+  
+
+
+- platform: mqtt
+  name: "Alarm Smoke-CO Bedroom"
+  state_topic: "smartthings/Smoke-CO Alarm Bedroom/smoke/state"
+  payload_on: "detected"
+  payload_off: "clear"
+  device_class: smoke
+  
+
+
+- platform: mqtt
+  name: "Alarm Carbon Monoxide Bedroom"
+  state_topic: "smartthings/Smoke-CO Alarm Bedroom/carbonMonoxide/state"
+  payload_on: "detected"
+  payload_off: "clear"
+  device_class: gas
+  
+  
+- platform: mqtt
+  name: "Alarm Smoke Bedroom"
+  state_topic: "smartthings/Smoke Alarm Bedroom/smoke/state"
+  payload_on: "detected"
+  payload_off: "clear"
+  device_class: smoke
+  

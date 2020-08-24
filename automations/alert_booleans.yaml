@@ -1,0 +1,244 @@
+- id: balcony_door_opened
+  alias: Balcony Door Opened
+  trigger:
+    platform: state
+    entity_id: binary_sensor.contact_balcony_door_contact
+  condition:
+    condition: state
+    entity_id: group.presence
+    state: 'not_home'
+  action:
+    - service_template: "input_boolean.turn_{{ states('binary_sensor.contact_balcony_door_contact') }}"
+      entity_id: input_boolean.balcony_door_status
+    - condition: state
+      entity_id: binary_sensor.contact_balcony_door_contact
+      state: 'on'
+    - service: notify.pushbullet
+      data:
+        message: ALERT!!! Balcony Door Has Been Opened!!
+        
+- id: balcony_door_left_open
+  alias: Balcony Door Left Open
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: 'home'
+    to: 'not_home'
+  condition:
+    condition: state
+    entity_id: binary_sensor.contact_balcony_door_contact
+    state: 'on'
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.balcony_door_status
+    - service: notify.pushbullet
+      data:
+        message: ALERT!!! You left the Balcony Door Open!!
+        
+- id: balcony_door_closed
+  alias: Balcony Door Closed
+  trigger:
+    platform: state
+    entity_id: binary_sensor.contact_balcony_door_contact
+    from: 'on'
+    to: 'off'
+  condition:
+    condition: state
+    entity_id: group.presence
+    state: 'home'
+  action:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.balcony_door_status
+
+- id: bedroom_balcony_door_opened
+  alias: Bedroom Balcony Door Opened
+  trigger:
+    platform: state
+    entity_id: binary_sensor.contact_bedroom_balcony_door_contact
+  condition:
+    condition: state
+    entity_id: group.presence
+    state: 'not_home'
+  action:
+    - service_template: "input_boolean.turn_{{ states('binary_sensor.contact_bedroom_balcony_door_contact') }}"
+      entity_id: input_boolean.bedroom_balcony_door_status
+    - condition: state
+      entity_id: binary_sensor.contact_bedroom_balcony_door_contact
+      state: 'on'
+    - service: notify.pushbullet
+      data:
+        message: ALERT!!! Bedroom Balcony Door Has Been Opened!!
+        
+- id: bedroom_balcony_door_left_open
+  alias: Bedroom Balcony Door Left Open
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: 'home'
+    to: 'not_home'
+  condition:
+    condition: state
+    entity_id: binary_sensor.contact_bedroom_balcony_door_contact
+    state: 'on'
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.bedroom_balcony_door_status
+    - service: notify.pushbullet
+      data:
+        message: ALERT!!! You left the Bedroom Balcony Door Open!!
+        
+- id: bedroom_balcony_door_closed
+  alias: Bedroom Balcony Door Closed
+  trigger:
+    platform: state
+    entity_id: binary_sensor.contact_bedroom_balcony_door_contact
+    from: 'on'
+    to: 'off'
+  condition:
+    condition: state
+    entity_id: group.presence
+    state: 'home'
+  action:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.bedroom_balcony_door_status
+
+- id: bedroom_east_window_opened
+  alias: Bedroom East Window Opened
+  trigger:
+    platform: state
+    entity_id: binary_sensor.contact_bedroom_east_window_contact
+  condition:
+    condition: state
+    entity_id: group.presence
+    state: 'not_home'
+  action:
+    - service_template: "input_boolean.turn_{{ states('binary_sensor.contact_bedroom_east_window_contact') }}"
+      entity_id: input_boolean.bedroom_east_window_status
+    - condition: state
+      entity_id: binary_sensor.contact_bedroom_east_window_contact
+      state: 'on'
+    - service: notify.pushbullet
+      data:
+        message: ALERT!!! Bedroom East Window Has Been Opened!!
+        
+- id: bedroom_east_window_left_open
+  alias: Bedroom East Window Left Open
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: 'home'
+    to: 'not_home'
+  condition:
+    condition: state
+    entity_id: binary_sensor.contact_bedroom_east_window_contact
+    state: 'on'
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.bedroom_east_window_status
+    - service: notify.pushbullet
+      data:
+        message: ALERT!!! You left the Bedroom East Window Open!!
+        
+- id: bedroom_east_window_closed
+  alias: Bedroom East Window Closed
+  trigger:
+    platform: state
+    entity_id: binary_sensor.contact_bedroom_east_window_contact
+    from: 'on'
+    to: 'off'
+  condition:
+    condition: state
+    entity_id: group.presence
+    state: 'home'
+  action:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.bedroom_east_window_status
+        
+- id: bedroom_north_window_opened
+  alias: Bedroom North Window Opened
+  trigger:
+    platform: state
+    entity_id: binary_sensor.contact_bedroom_north_window_contact
+  condition:
+    condition: state
+    entity_id: group.presence
+    state: 'not_home'
+  action:
+    - service_template: "input_boolean.turn_{{ states('binary_sensor.contact_bedroom_north_window_contact') }}"
+      entity_id: input_boolean.bedroom_north_window_status
+    - condition: state
+      entity_id: binary_sensor.contact_bedroom_north_window_contact
+      state: 'on'
+    - service: notify.pushbullet
+      data:
+        message: ALERT!!! Bedroom North Window Has Been Opened!!
+        
+- id: bedroom_north_window_left_open
+  alias: Bedroom North Window Left Open
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: 'home'
+    to: 'not_home'
+  condition:
+    condition: state
+    entity_id: binary_sensor.contact_bedroom_north_window_contact
+    state: 'on'
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.bedroom_north_window_status
+    - service: notify.pushbullet
+      data:
+        message: ALERT!!! You left the Bedroom North Window Open!!
+        
+- id: guest_room_window_opened
+  alias: Guest Room Window Opened
+  trigger:
+    platform: state
+    entity_id: binary_sensor.contact_guest_room_window_contact
+  condition:
+    condition: state
+    entity_id: group.presence
+    state: 'not_home'
+  action:
+    - service_template: "input_boolean.turn_{{ states('binary_sensor.contact_guest_room_window_contact') }}"
+      entity_id: input_boolean.guest_room_window_status
+    - condition: state
+      entity_id: binary_sensor.contact_guest_room_window_contact
+      state: 'on'
+    - service: notify.pushbullet
+      data:
+        message: ALERT!!! Guest Room North Window Has Been Opened!!
+        
+- id: guest_room_window_left_open
+  alias: Guest Room Window Left Open
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: 'home'
+    to: 'not_home'
+  condition:
+    condition: state
+    entity_id: binary_sensor.contact_guest_room_window_contact
+    state: 'on'
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.guest_room_window_status
+    - service: notify.pushbullet
+      data:
+        message: ALERT!!! You left the Guest Room Window Open!!
+        
+- id: guest_room_window_closed
+  alias: Guest Room Window Closed
+  trigger:
+    platform: state
+    entity_id: binary_sensor.contact_guest_room_window_contact
+    from: 'on'
+    to: 'off'
+  condition:
+    condition: state
+    entity_id: group.presence
+    state: 'home'
+  action:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.guest_room_window_status

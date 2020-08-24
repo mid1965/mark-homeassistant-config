@@ -1,0 +1,22 @@
+alexa:
+  filter:
+#    include_entities:
+#    exclude_entities:
+    exclude_domains:
+      - alarm_control_panel
+      - alert
+      - automation
+      - binary_sensor
+      - camera
+      - climate
+      - cover
+      - fan
+      - group
+      - input_boolean
+      - light
+      - lock
+      - media_player
+      - scene
+      - script
+      - sensor
+      - switch

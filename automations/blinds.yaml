@@ -1,0 +1,338 @@
+# **************************************************************
+    
+- id: close_bedroom_blinds
+  alias: Close Bedroom Blinds
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: '-00:05:00'
+  condition:
+  - condition: state
+    entity_id: binary_sensor.contact_bedroom_east_window_contact
+    state: 'off'
+  - condition: state
+    entity_id: binary_sensor.contact_bedroom_north_window_contact
+    state: 'off'
+  action:
+  - service: scene.turn_on
+    entity_id: scene.close_bedroom_shades
+    
+# **************************************************************
+    
+- id: open_bedroom_blinds_vacation_mode
+  alias: Open Bedroom Blinds (Vacation Mode)
+  trigger:
+  - platform: time
+    at: '08:00:00'
+  condition:
+  - condition: state
+    entity_id: input_boolean.vacation
+    state: 'on'
+  action:
+  - service: scene.turn_on
+    entity_id: scene.open_bedroom_shades
+    
+# **************************************************************
+    
+- id: close_guest_room_blinds
+  alias: Close Guest Room Blinds
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: '-00:05:00'
+  condition:
+  - condition: state
+    entity_id: binary_sensor.contact_guest_room_window_contact
+    state: 'off'
+  action:
+  - service: cover.close_cover
+    entity_id: cover.guest_room_blind_window
+    
+# **************************************************************
+    
+- id: close_guest_room_blinds_sunrise
+  alias: Close Guest Room Blinds At Sunrise
+  trigger:
+  - platform: sun
+    event: sunrise
+    offset: '-00:30:00'
+  # condition:
+  # - condition: state
+    # entity_id: binary_sensor.contact_guest_room_window_contact
+    # state: 'off'
+  action:
+  - service: cover.close_cover
+    entity_id: cover.guest_room_blind_window
+    
+# **************************************************************
+    
+- id: open_guest_room_blinds_vacation_mode
+  alias: Open Guest Room Blinds (Vacation Mode)
+  trigger:
+  - platform: time
+    at: '08:00:00'
+  condition:
+  - condition: state
+    entity_id: input_boolean.vacation
+    state: 'on'
+  action:
+  - service: cover.open_cover
+    entity_id: cover.guest_room_blind_window
+
+
+# **************************************************************
+    
+- id: close_dining_room_blind
+  alias: Close Dining Room Blind
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: '-00:15:00'
+  condition:
+  - condition: state
+    entity_id: binary_sensor.contact_dining_room_window_contact
+    state: 'off'
+  action:
+  - service: cover.close_cover
+    entity_id: cover.dining_room_blind_window
+
+# **************************************************************
+
+- id: close_living_room_blinds
+  alias: Close Living Room Blinds
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: '+00:20:00'
+  action:
+  - service: cover.close_cover
+    entity_id:
+      - cover.living_room_blind_right_window
+      - cover.living_room_blind_left_window
+      - cover.living_room_blind_right_door
+
+# **************************************************************
+
+- id: close_living_room_blind_left_door
+  alias: Close Living Room Blind Left Door
+  trigger:
+  - platform: time
+    at: '23:59:00'
+  condition:
+  - condition: state
+    entity_id: binary_sensor.contact_balcony_door_contact
+    state: 'off'
+  action:
+  - service: cover.close_cover
+    entity_id: cover.living_room_blind_left_door
+
+# **************************************************************
+
+- id: open_living_room_blinds
+  alias: Open Living Room Blinds
+  trigger:
+  - platform: time
+    at: '07:30:00'
+  action:
+  - service: scene.turn_on
+    entity_id: scene.open_living_room_shades
+
+# **************************************************************    
+    
+- id: open_dining_room_blinds
+  alias: Open Dining Room Blinds
+  trigger:
+  - platform: time
+    at: '07:30:00'
+  action:
+  - service: cover.open_cover
+    entity_id: cover.dining_room_blind_window
+
+# **************************************************************
+
+# - id: open_bedroom_blind_north_window
+  # alias: Open Bedroom Blind North Window
+  # trigger:
+  # - platform: time
+    # at: '08:00:00'
+  # condition:
+  # - condition: time
+    # weekday:
+      # - thu
+  # action:
+  # - service: cover.open_cover
+    # entity_id: cover.bedroom_blind_north_window
+
+# **************************************************************
+
+- id: close_east_blinds_if_nobody_home_and_sun_is_hot
+  alias: 'close east blinds if nobody home and sun is hot'
+  trigger:
+    - platform: numeric_state
+      entity_id: sun.sun
+      value_template: "{{ states.sun.sun.attributes.azimuth }}"
+      above: 90
+      # El 46.6
+      below: 190
+      # El 69.41
+    - platform: numeric_state
+      entity_id: sensor.temperature_bedroom_window
+      above: 80
+    - platform: state
+      entity_id: 'group.presence'
+      to: 'not_home'
+  condition:
+    - condition: state
+      entity_id: 'group.presence'
+      state: 'not_home'
+    - condition: numeric_state
+      entity_id: sensor.temperature_bedroom_window
+      above: 80
+    - condition: numeric_state
+      entity_id: sun.sun
+      value_template: "{{ states.sun.sun.attributes.azimuth }}"
+      above: 90
+      # El 46.6
+      below: 190
+      # El 69.41
+  action:
+    - service: automation.turn_on
+      entity_id: automation.close_east_blinds_if_nobody_home_and_sun_is_hot
+    - service: cover.close_cover
+      data:
+        entity_id: cover.bedroom_blind_door, cover.bedroom_blind_east_window, cover.guest_room_blind_window, cover.living_room_blind_right_door, cover.living_room_blind_left_window, cover.living_room_blind_right_window
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.east_blinds_azimuth
+    - service: notify.gmail
+      data:
+        title: "{{ now().strftime('%a - %H:%M') }}: Auto Closed East Blinds to Keep Apartment Cool"
+        message: "Azimuth When Triggered: {{ states.sun.sun.attributes.azimuth }}°"
+    - service: notify.pushbullet
+      data:
+        message: "{{ now().strftime('%a - %H:%M') }}: East Blinds Auto Closed to Keep Apartment Cool"
+      
+# *********************************************************************
+      
+- id: open_east_blinds_after_azimuth_automation
+  alias: 'Open east blinds when sun has moved overhead'
+  trigger:
+    - platform: numeric_state
+      entity_id: sun.sun
+      value_template: "{{ states.sun.sun.attributes.azimuth }}"
+      above: 191
+      # El 46.6
+  condition:
+    - condition: state
+      entity_id: 'group.presence'
+      state: 'not_home'
+    - condition: state
+      entity_id: input_boolean.east_blinds_azimuth
+      state: 'on'
+  action:
+    - service: cover.open_cover
+      data:
+        entity_id: 
+          - cover.bedroom_blind_door
+          - cover.bedroom_blind_east_window
+          - cover.guest_room_blind_window
+          - cover.living_room_blind_right_door
+          - cover.living_room_blind_left_window
+          - cover.living_room_blind_right_window
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.east_blinds_azimuth
+    - service: notify.gmail
+      data:
+        title: "{{ now().strftime('%a - %H:%M') }}: Auto Opened East Blinds Now Sun Has Moved Overhead"
+        message: "Azimuth When Triggered: {{ states.sun.sun.attributes.azimuth }}°"
+    - service: notify.pushbullet
+      data:
+        message: "{{ now().strftime('%a - %H:%M') }}: East Blinds Auto Opened Now Sun Has Moved Overhead"
+      
+# *********************************************************************
+
+- id: close_dining_room_blinds_if_nobody_home_and_sun_is_hot
+  alias: 'close dining room blinds if nobody home and sun is hot'
+  trigger:
+    - platform: numeric_state
+      entity_id: sun.sun
+      value_template: "{{ states.sun.sun.attributes.azimuth }}"
+      above: 267
+      # El 25
+      below: 275
+      # El 5
+    - platform: numeric_state
+      entity_id: sensor.temperature_dining_room_window
+      above: 85
+    - platform: state
+      entity_id: 'group.presence'
+      to: 'not_home'
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.temperature_dining_room_window
+      above: 85
+    - condition: state
+      entity_id: 'group.presence'
+      state: 'not_home'
+  action:
+    - service: automation.turn_off
+      entity_id: automation.close_dining_room_blinds_if_nobody_home_and_sun_is_hot
+    - service: cover.close_cover
+      data:
+        entity_id: cover.dining_room_blind_window
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.dining_room_blind_azimuth
+    - service: notify.gmail
+      data:
+        title: "{{ now().strftime('%a - %H:%M') }}: Auto Closed Dining Room Blinds to Keep Apartment Cool"
+        message: "Azimuth Triggered at: {{ states.sun.sun.attributes.azimuth }}°"
+    - service: notify.pushbullet
+      data:
+        message: "{{ now().strftime('%a - %H:%M') }}: Dining Room Blind Auto Closed to Keep Apartment Cool"
+        
+# *************************************************************************************
+
+- id: open_dining_room_blind_after_azimuth_automation
+  alias: 'Open dining room blind once sun has dipped lower'
+  trigger:
+    - platform: numeric_state
+      entity_id: sun.sun
+      value_template: "{{ states.sun.sun.attributes.azimuth }}"
+      above: 276
+      # El 46.6
+  condition:
+    - condition: state
+      entity_id: 'group.presence'
+      state: 'not_home'
+    - condition: state
+      entity_id: input_boolean.dining_room_blind_azimuth
+      state: 'on'
+  action:
+    - service: cover.open_cover
+      data:
+        entity_id: cover.dining_room_blind_window
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.dining_room_blind_azimuth
+    - service: notify.gmail
+      data:
+        title: "{{ now().strftime('%a - %H:%M') }}: Auto Opened Dining Room Blind Now Sun Has Dipped Lower"
+        message: "Azimuth When Triggered: {{ states.sun.sun.attributes.azimuth }}°"
+    - service: notify.pushbullet
+      data:
+        message: "{{ now().strftime('%a - %H:%M') }}: Dining Room Blind Auto Opened Now Sun Has Dipped Lower"
+        
+# *************************************************************************************
+
+- id: reenable_azimuth_automations
+  alias: 'Re-enable Azimuth Automations'
+  trigger:
+    - platform: time
+      at: '22:00:00'
+  action:
+    - service: automation.turn_on
+      entity_id: 
+        - automation.close_dining_room_blinds_if_nobody_home_and_sun_is_hot
+        - automation.close_east_blinds_if_nobody_home_and_sun_is_hot
+    - service: input_boolean.turn_off
+      entity_id: 
+        - input_boolean.east_blinds_azimuth
+        - input_boolean.dining_room_blind_azimuth

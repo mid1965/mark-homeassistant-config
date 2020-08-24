@@ -1,0 +1,92 @@
+wakeup:
+  name: 'Enable wakeup light'
+  icon: mdi:power
+  initial: off
+wakeup_weekends:
+  name: 'Wakeup weekends'
+  icon: mdi:power
+  initial: off
+kitchen_lights_auto_on:
+  name: "Automatically turned on Kitchen Lights"
+  icon: mdi:auto-fix
+  initial: off
+bedroom_lights_auto_on:
+  name: "Automatically turned on Bedroom Lights"
+  icon: mdi:auto-fix
+  initial: off
+bathroom_lights_auto_on:
+  name: "Automatically turned on Bathroom Lights"
+  icon: mdi:auto-fix
+  initial: off
+guest_bathroom_lights_auto_on:
+  name: "Automatically turned on Guest Bathroom Lights"
+  icon: mdi:auto-fix
+  initial: off
+guest_room_lights_auto_on:
+  name: "Automatically turned on Guest Room Lights"
+  icon: mdi:auto-fix
+  initial: off
+east_blinds_azimuth:
+  name: "Automatically closed east blinds"
+  icon: mdi:auto-fix
+  initial: off
+dining_room_blind_azimuth:
+  name: "Automatically closed dining room blinds"
+  icon: mdi:auto-fix
+  initial: off
+vacation:
+  name: "Vacation"
+  icon: mdi:beach
+balcony_door_status:
+  name: "Balcony Door Status"
+  icon: mdi:auto-fix
+bedroom_balcony_door_status:
+  name: "Bedroom Balcony Door Status"
+  icon: mdi:auto-fix
+bedroom_east_window_status:
+  name: "Bedroom East Window Status"
+  icon: mdi:auto-fix
+bedroom_north_window_status:
+  name: "Bedroom North Window Status"
+  icon: mdi:auto-fix
+guest_room_window_status:
+  name: "Guest Room Window Status"
+  icon: mdi:auto-fix
+daylight:
+  name: "Daylight"
+  icon: mdi:white-balance-sunny
+lg_tv_switch:
+  name: "LG TV Switch"
+  icon: mdi:television-classic
+sony_tv_switch:
+  name: "Sony TV Switch"
+  icon: mdi:television-classic
+denon_switch:
+  name: "Denon Switch"
+  icon: mdi:speaker
+ps3_switch:
+  name: "PS3 Switch"
+  icon: mdi:playstation
+xbox_switch:
+  name: "Xbox Switch"
+  icon: mdi:xbox
+hvac_was_on_previously:
+  name: "HVAC Was On Previously"
+  icon: mdi:auto-fix
+  initial: on
+vizzini_auto_off:
+  name: "Vizzini Auto Off"
+  icon: mdi:toggle-switch
+  initial: on
+bathroom_extractor_auto_on:
+  name: "Bathroom Extractor Auto"
+  icon: mdi:auto-fix
+  initial: off
+guest_bathroom_extractor_auto_on:
+  name: "Guest Bathroom Extractor Auto"
+  icon: mdi:auto-fix
+  initial: off
+laundry_extractor_auto_on:
+  name: "Laundry Extractor Auto"
+  icon: mdi:auto-fix
+  initial: off

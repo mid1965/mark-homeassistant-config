@@ -1,0 +1,9 @@
+name: Front Door is still open!!
+done_message: Front Door is now closed
+entity_id: binary_sensor.contact_front_door_contact
+state: 'on'
+repeat: 5
+can_acknowledge: True
+skip_first: True
+notifiers:
+  - pushbullet

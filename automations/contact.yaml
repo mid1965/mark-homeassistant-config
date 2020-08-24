@@ -1,0 +1,446 @@
+# **************************************************************
+   
+- id: garage_door_opened
+  alias: Garage Door Has Opened
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.contact_garage_door_contact
+    to: 'on'
+  action:
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }} : The Garage Door Has been Opened"
+  - service: notify.tv_notification_group
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }} : The Garage Door Has been Opened"
+      
+# **************************************************************
+      
+- id: garage_door_closed
+  alias: Garage Door Has Closed
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.contact_garage_door_contact
+    to: 'off'
+  action:
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }} : The Garage Door Has been Closed"
+  - service: notify.tv_notification_group
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }} : The Garage Door Has been Closed"
+      
+# **************************************************************
+# **************************************************************
+
+- id: garage_door_opened_no_one_home
+  alias: Garage Door Has Opened and No One's Home
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.contact_garage_door_contact
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: group.presence
+    state: 'not_home'
+  action:
+  - service: notify.telegram
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: *The Garage Door Has been Opened*\n The Garage Door Has been opened - but no one is home!"
+      
+# **************************************************************
+
+- id: front_door_opened
+  alias: Front Door Has Opened
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.contact_front_door_contact
+    to: 'on'
+  action:
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }} : The Front Door Has been Opened"
+      
+# **************************************************************
+      
+- id: front_door_closed
+  alias: Front Door Has Closed
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.contact_front_door_contact
+    to: 'off'
+  action:
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }} : The Front Door Has been Closed"
+      
+# **************************************************************
+# **************************************************************
+
+- id: front_door_opened_no_one_home
+  alias: Front Door Has Opened with No One Home
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.contact_front_door_contact
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: group.presence
+    state: 'not_home'
+  action:
+  - service: script.turn_on
+    data:
+      entity_id: script.play_the_eye  
+  - service: notify.telegram
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: *ALERT!!! The Front Door Has Been Opened!!*\nThe Front door has been opened - but no one is home."
+  - service: notify.gmail
+    data:
+      title: ALERT!!! The Front Door has been Opened!!
+      message: The Front Door has been Opened, but there is no one detected at home!
+      
+# **************************************************************
+# **************************************************************
+# - id: balcony_door_opened
+  # alias: Balcony Door Has Opened
+  # trigger:
+  # - platform: state
+    # entity_id: binary_sensor.contact_balcony_door_contact
+    # to: 'on'
+  # action:
+  # - service: notify.pushbullet
+    # data:
+      # message: "{{ now().strftime('%a - %H:%M') }} : The Balcony Door Has been Opened"
+      
+# **************************************************************
+      
+# - id: balcony_door_closed
+  # alias: Balcony Door Has Closed
+  # trigger:
+  # - platform: state
+    # entity_id: binary_sensor.contact_balcony_door_contact
+    # to: 'off'
+  # action:
+  # - service: notify.pushbullet
+    # data:
+      # message: "{{ now().strftime('%a - %H:%M') }} : The Balcony Door Has been Closed"
+      
+# **************************************************************
+# **************************************************************
+      
+# - id: bedroom_balcony_door_opened
+  # alias: Bedroom Balcony Door Has Opened
+  # trigger:
+  # - platform: state
+    # entity_id: binary_sensor.contact_bedroom_balcony_door_contact
+    # to: 'on'
+  # action:
+  # - service: notify.pushbullet
+    # data:
+      # message: "{{ now().strftime('%a - %H:%M') }} : The Bedroom Balcony Door Has been Opened"
+
+# **************************************************************
+      
+# - id: bedroom_balcony_door_closed
+  # alias: Bedroom Balcony Door Has Closed
+  # trigger:
+  # - platform: state
+    # entity_id: binary_sensor.contact_bedroom_balcony_door_contact
+    # to: 'off'
+  # action:
+  # - service: notify.pushbullet
+    # data:
+      # message: "{{ now().strftime('%a - %H:%M') }} : The Bedroom Balcony Door Has been Closed"
+      
+# **************************************************************
+# **************************************************************
+      
+- id: dining_room_window_opened
+  alias: Dining Room Window Has Opened
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.contact_dining_room_window_contact
+    to: 'on'
+  action:
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }} : The Dining Room Window Has been Opened"
+      
+# **************************************************************
+      
+- id: dining_room_window_closed
+  alias: Dining Room Window Has Closed
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.contact_dining_room_window_contact
+    to: 'off'
+  action:
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }} : The Dining Room Window Has been Closed"
+      
+# **************************************************************
+# **************************************************************
+- id: dining_room_window_opened_no_one_home
+  alias: Dining Room Window Has Opened with No One Home
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.contact_dining_room_window_contact
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: group.presence
+    state: 'not_home'
+  action:
+  - service: notify.telegram
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: *ALERT!!! The Dining Room Window Has Been Opened!!*\nThe Dining Room Window has been opened - but no one is home."
+  - service: notify.gmail
+    data:
+      title: ALERT!!! The Dining Room Window has been Opened!!
+      message: The Dining Room Window has been Opened, but there is no one detected at home!
+      
+# **************************************************************
+# **************************************************************
+
+# - id: guest_room_window_opened
+  # alias: Guest Room Window Has Opened
+  # trigger:
+  # - platform: state
+    # entity_id: binary_sensor.contact_guest_room_window_contact
+    # to: 'on'
+  # action:
+  # - service: notify.pushbullet
+    # data:
+      # message: "{{ now().strftime('%a - %H:%M') }} : The Guest Room Window Has been Opened"
+      
+# **************************************************************
+      
+# - id: guest_room_window_closed
+  # alias: Guest Room Window Has Closed
+  # trigger:
+  # - platform: state
+    # entity_id: binary_sensor.contact_guest_room_window_contact
+    # to: 'off'
+  # action:
+  # - service: notify.pushbullet
+    # data:
+      # message: "{{ now().strftime('%a - %H:%M') }} : The Guest Room Window Has been Closed"
+      
+# **************************************************************
+# **************************************************************
+
+# - id: bedroom_east_window_opened
+  # alias: Bedroom East Window Has Opened
+  # trigger:
+  # - platform: state
+    # entity_id: binary_sensor.contact_bedroom_east_window_contact
+    # to: 'on'
+  # action:
+  # - service: notify.pushbullet
+    # data:
+      # message: "{{ now().strftime('%a - %H:%M') }} : The Bedroom East Window Has been Opened"
+      
+# **************************************************************
+      
+# - id: bedroom_east_window_closed
+  # alias: Bedroom East Window Has Closed
+  # trigger:
+  # - platform: state
+    # entity_id: binary_sensor.contact_bedroom_east_window_contact
+    # to: 'off'
+  # action:
+  # - service: notify.pushbullet
+    # data:
+      # message: "{{ now().strftime('%a - %H:%M') }} : The Bedroom East Window Has been Closed"
+      
+# **************************************************************
+# **************************************************************
+      
+# - id: bedroom_north_window_opened
+  # alias: Bedroom North Window Has Opened
+  # trigger:
+  # - platform: state
+    # entity_id: binary_sensor.contact_bedroom_north_window_contact
+    # to: 'on'
+  # action:
+  # - service: notify.pushbullet
+    # data:
+      # message: "{{ now().strftime('%a - %H:%M') }} : The Bedroom North Window Has been Opened"
+      
+# **************************************************************
+      
+# - id: bedroom_north_window_closed
+  # alias: Bedroom North Window Has Closed
+  # trigger:
+  # - platform: state
+    # entity_id: binary_sensor.contact_bedroom_north_window_contact
+    # to: 'off'
+  # action:
+  # - service: notify.pushbullet
+    # data:
+      # message: "{{ now().strftime('%a - %H:%M') }} : The Bedroom North Window Has been Closed"
+      
+# **************************************************************
+# **************************************************************
+      
+- id: turn_on_balcony_lights
+  alias: Turn On Balcony Lights
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.contact_balcony_door_contact
+    to: 'on'
+  condition:
+  - condition: sun
+    after: sunset
+    after_offset: '-1:00:00'
+  action:
+  - service: light.turn_on
+    data:
+      entity_id: light.balcony
+      brightness: 90
+    
+    
+# **************************************************************
+# **************************************************************
+ ### GUESTS   
+- id: guest_room_closet_door_opened
+  alias: Guest Room Closet Door Has Opened
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.contact_guest_closet_door_contact
+    to: 'on'
+  action:
+  - service: homeassistant.turn_on
+    data:
+      entity_id: light.guest_closet
+      rgb_color: [255,211,130]
+      brightness: 255
+    
+# **************************************************************
+    
+- id: guest_room_closet_door_closed
+  alias: Guest Room Closet Door Has Closed
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.contact_guest_closet_door_contact
+    to: 'off'
+  action:
+  - service_template: light.turn_off
+    entity_id: light.guest_closet
+    
+# **************************************************************
+# **************************************************************
+    
+- id: utility_closet_door_opened
+  alias: Utility Closet Door Has Opened
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.contact_utility_closet_door_contact
+    to: 'on'
+  action:
+  - service_template: light.turn_on
+    entity_id: light.utility_light
+    
+# **************************************************************
+    
+- id: utility_closet_door_closed
+  alias: Utility Closet Door Has Closed
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.contact_utility_closet_door_contact
+    to: 'off'
+  action:
+  - service_template: light.turn_off
+    entity_id: light.utility_light
+    
+# **************************************************************
+# **************************************************************
+    
+- id: turn_on_entry_light
+  alias: Turn On Front Door Entry Light
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.contact_front_door_contact
+    to: 'on'
+  condition:
+  - condition: sun
+    after: sunset
+    after_offset: '-1:00:00'
+  action:
+  - service_template: light.turn_on
+    entity_id: light.entrance_light
+    
+# **************************************************************
+# *********************************************************************************************
+
+- id: turn_ac_off_when_a_door_or_window_opens
+  alias: Turn off Air Conditioning if a door or window is open for more than 5 minutes
+  trigger:
+  - platform: state
+    entity_id: group.doors_windows
+    from: 'off'
+    to: 'on'
+    for:
+      minutes: 5
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: climate.apartment
+        state: 'heat'
+      - condition: state
+        entity_id: climate.apartment
+        state: 'cool'
+      - condition: state
+        entity_id: climate.apartment
+        state: 'heat_cool'
+  action:
+  - service: climate.set_hvac_mode
+    data:
+      entity_id: climate.apartment
+      hvac_mode: 'off'
+  - service: climate.set_fan_mode
+    data:
+      entity_id: climate.apartment
+      fan_mode: 'auto'
+  - service: input_boolean.turn_on
+    entity_id: input_boolean.hvac_was_on_previously
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }} : HVAC turned off due to door or window being open for more than 5 minutes"
+  - service: notify.tv_notification_group
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }} : HVAC turned off due to door or window being open for more than 5 minutes"
+
+
+# *********************************************************************************************
+
+- id: turn_ac_to_auto_when_all_doors_and_windows_are_closed
+  alias: Turn AC to auto when door or window is closed
+  trigger:
+  - platform: state
+    entity_id: group.doors_windows
+    from: 'on'
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: input_boolean.hvac_was_on_previously
+    state: 'on'
+  action:
+  - service: climate.set_hvac_mode
+    data:
+      entity_id: climate.apartment
+      hvac_mode: 'heat_cool'
+  - service: climate.set_fan_mode
+    data:
+      entity_id: climate.apartment
+      fan_mode: 'auto'
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.hvac_was_on_previously
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }} : HVAC set to auto as all doors and windows now closed"
+  - service: notify.tv_notification_group
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }} : HVAC set to auto as all doors and windows now closed"

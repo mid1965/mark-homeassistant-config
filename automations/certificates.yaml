@@ -1,0 +1,59 @@
+# - id: automatically_renew_ssl_cert
+  # alias: 'Auto Renew SSL Cert'
+  # trigger:
+    # platform: numeric_state
+    # entity_id: sensor.ssl_cert_expiry
+    # below: 25
+  # action:
+  # - service: shell_command.renew_ssl
+  # - service: notify.gmail
+    # data:
+      # title: The HomeAssistant Automation Attempted to Renew the SSL Certificate
+      # message: The Automated task 'Auto Renew SSL Cert' was triggered because the Cron job has not successfully updated the SSL Cert for ha.markdavies.com
+
+# *******************************************************************************************
+
+# - id: warn_the_SSL_certificate_has_not_renewed
+  # alias: 'SSL expiry notification'
+  # trigger:
+    # platform: numeric_state
+    # entity_id: sensor.ssl_cert_expiry
+    # below: 21
+  # action:
+  # - service: notify.pushbullet
+    # data:
+      # message: 'Warning - SSL certificate expires in 21 days and has not been automatically renewed'
+  # - service: notify.gmail
+    # data:
+      # title: The HomeAssistant Site SSL Has not renewed!
+      # message:  The Let's Encrypt SSL Certificate didn't renew at 30 days before Expiry.  There are now 21 days until it expires.
+      
+# *******************************************************************************************
+
+- id: auto_renew_ssl_cert
+  alias: 'Auto Renew SSL Cert'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.ssl_cert_expiry
+    below: 29
+  action:
+  - service: shell_command.renew_ssl
+  - service: notify.pushbullet
+    data:
+      message: The Automated task 'Auto Renew SSL Cert' was triggered because the Cron job has not successfully updated the SSL Cert for ha.markdavies.com
+      
+      
+- id: warn_the_SSL_certificate_has_not_renewed
+  alias: 'SSL expiry notification'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.ssl_cert_expiry
+    below: 10
+  action:
+  - service: notify.telegram
+    data:
+      message: 'Warning - SSL certificate expires in 10 days and has not been automatically renewed'
+  - service: notify.gmail
+    data:
+      title: The HomeAssistant Site SSL Has not renewed!
+      message:  The LetsEncrypt SSL Certificate didn't renew at 30 days before Expiry.  There are now 10 days until it expires.

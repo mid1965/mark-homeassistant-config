@@ -1,0 +1,278 @@
+- alias: Zone 1 Volume (Denon to Slider)
+  trigger:
+    - platform: state
+      entity_id: media_player.denon_avr_x4200w
+  condition:
+    - condition: template
+      value_template: >
+        {% set converted = ( trigger.to_state.attributes.volume_level | float ) * 100.0 | round(0.0) %}
+        {{ converted != states('input_number.denon_avr_x4200w') | float }}
+  action:
+     service: input_number.set_value
+     data_template:
+       entity_id: input_number.denon_avr_x4200w
+       value: >
+         {{ ( ( trigger.to_state.attributes.volume_level | float ) * 100.0 ) | round(0.0) }}
+
+- alias: Zone 1 Volume (Slider to Media)
+  trigger:
+    - platform: state
+      entity_id: input_number.denon_avr_x4200w
+  condition:
+    - condition: template
+      value_template: >
+        {% set converted = (trigger.to_state.state | float / 100.0) | round(2) %}
+        {{ converted != state_attr('media_player.denon_avr_x4200w','volume_level') | float }}
+  action:
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.denon_avr_x4200w
+        volume_level: >
+          {{ ( trigger.to_state.state | float / 100.0) | round(2) }}
+
+# - alias: Zone 2 Volume (Media to Slider)
+  # trigger:
+    # - platform: state
+      # entity_id: media_player.denon_avr_x4200w_zone_2
+  # condition:
+    # - condition: template
+      # value_template: >
+        # # convert to decibel.
+        # {% set converted = ( trigger.to_state.attributes.volume_level | float ) * 100.0 | round(0.0) %}
+        # # Removes feedback loop
+        # {{ converted != states('input_number.denon_avr_x4200w_zone_2') | float }}
+  # action:
+     # service: input_number.set_value
+     # data_template:
+       # entity_id: input_number.denon_avr_x4200w_zone_2
+       # value: >
+          # {{ ( ( trigger.to_state.attributes.volume_level | float ) * 100.0 ) | round(0.0) }}
+
+# - alias: Zone 2 Volume (Slider to Media)
+  # trigger:
+    # - platform: state
+      # entity_id: input_number.denon_avr_x4200w_zone_2
+  # condition:
+    # - condition: template
+      # value_template: >
+        # # convert from decibel.
+        # {% set converted = ( trigger.to_state.state | float / 100.0) | round(2) %}
+        # # Removes feedback loop
+        # {{ converted != state_attr('media_player.denon_avr_x4200w_zone_2','volume_level') | float }}
+  # action:
+    # - service: media_player.volume_set
+      # data_template:
+        # entity_id: media_player.denon_avr_x4200w_zone_2
+        # volume_level: >
+          # {{ ( trigger.to_state.state | float / 100.0) | round(2) }}
+
+- alias: LG TV Volume (TV to Slider)
+  trigger:
+    - platform: state
+      entity_id: media_player.living_room_tv
+  condition:
+    - condition: template
+      value_template: >
+        {% set converted = ( trigger.to_state.attributes.volume_level | float ) * 100.0 | round(0.0) %}
+        {{ converted != states('input_number.lg_tv') | float }}
+  action:
+     service: input_number.set_value
+     data_template:
+       entity_id: input_number.lg_tv
+       value: >
+         {{ ( ( trigger.to_state.attributes.volume_level | float ) * 100.0 ) | round(0.0) }}
+
+- alias: LG TV Volume (Slider to TV)
+  trigger:
+    - platform: state
+      entity_id: input_number.lg_tv
+  condition:
+    - condition: template
+      value_template: >
+        {% set converted = (trigger.to_state.state | float / 100.0) | round(2) %}
+        {{ converted != state_attr('media_player.living_room_tv','volume_level') | float }}
+  action:
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.living_room_tv
+        volume_level: >
+          {{ ( trigger.to_state.state | float / 100.0) | round(2) }}
+
+- alias: Sony TV Volume (TV to Slider)
+  trigger:
+    - platform: state
+      entity_id: media_player.guest_tv
+  # condition:
+    # - condition: template
+      # value_template: >
+        # {% set converted = ( trigger.to_state.attributes.volume_level | float ) * 100.0 | round(0.0) %}
+        # {{ converted != states('input_number.sony_tv') | float }}
+  action:
+     service: input_number.set_value
+     data_template:
+       entity_id: input_number.sony_tv
+       value: >
+         {{ ( ( trigger.to_state.attributes.volume_level | float ) * 100.0 ) | round(0.0) }}
+
+- alias: Sony TV Volume (Slider to TV)
+  trigger:
+    - platform: state
+      entity_id: input_number.sony_tv
+  # condition:
+    # - condition: template
+      # value_template: >
+        # {% set converted = (trigger.to_state.state | float / 100.0) | round(2) %}
+        # {{ converted != state_attr('media_player.guest_tv','volume_level') | float }}
+  action:
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.guest_tv
+        volume_level: >
+          {{ ( trigger.to_state.state | float / 100.0) | round(2) }}
+
+- alias: 'LG TV Switch'
+  id: lg_tv_switch
+  trigger:
+    platform: state
+    entity_id: input_boolean.lg_tv_switch
+  action:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: 60994799
+      command: >
+        {% if is_state(trigger.entity_id, 'on') %}
+          PowerOn
+        {% else %}
+          PowerOff
+        {% endif %}
+
+# - alias: 'LG TV Switch On'
+  # trigger:
+    # - platform: state
+      # entity_id: input_boolean.lg_tv_switch
+      # to: 'on'
+  # action:
+    # - service: remote.send_command
+      # data_template:
+        # entity_id: remote.harmonyhub
+        # device: 60994799
+        # command:
+          # PowerOn
+
+# - alias: 'LG TV Switch Off'
+  # trigger:
+    # - platform: state
+      # entity_id: input_boolean.lg_tv_switch
+      # to: 'off'
+  # action:
+    # - service: remote.send_command
+      # data_template:
+        # entity_id: remote.harmonyhub
+        # device: 60994799
+        # command:
+          # PowerOff
+
+# - alias: 'Sony TV Switch On'
+  # trigger:
+    # - platform: state
+      # entity_id: input_boolean.sony_tv_switch
+      # to: 'on'
+  # action:
+    # - service: remote.send_command
+      # data_template:
+        # entity_id: remote.harmonyhub
+        # device: 63228131
+        # command:
+          # PowerOn
+
+# - alias: 'Sony TV Switch Off'
+  # trigger:
+    # - platform: state
+      # entity_id: input_boolean.sony_tv_switch
+      # to: 'off'
+  # action:
+    # - service: remote.send_command
+      # data_template:
+        # entity_id: remote.harmonyhub
+        # device: 63228131
+        # command:
+          # PowerOff
+
+- alias: 'Denon Switch On'
+  trigger:
+    - platform: state
+      entity_id: input_boolean.denon_switch
+      to: 'on'
+  action:
+    - service: remote.send_command
+      data_template:
+        entity_id: remote.harmonyhub
+        device: 60994798
+        command:
+          PowerOn
+
+- alias: 'Denon Switch Off'
+  trigger:
+    - platform: state
+      entity_id: input_boolean.denon_switch
+      to: 'off'
+  action:
+    - service: remote.send_command
+      data_template:
+        entity_id: remote.harmonyhub
+        device: 60994798
+        command:
+          PowerOff
+
+- alias: 'PS3 Switch On'
+  trigger:
+    - platform: state
+      entity_id: input_boolean.ps3_switch
+      to: 'on'
+  action:
+    - service: remote.send_command
+      data_template:
+        entity_id: remote.harmonyhub
+        device: 61819122
+        command:
+          PowerOn
+
+- alias: 'PS3 Switch Off'
+  trigger:
+    - platform: state
+      entity_id: input_boolean.ps3_switch
+      to: 'off'
+  action:
+    - service: remote.send_command
+      data_template:
+        entity_id: remote.harmonyhub
+        device: 61819122
+        command:
+          PowerOff
+
+- alias: 'Xbox Switch On'
+  trigger:
+    - platform: state
+      entity_id: input_boolean.xbox_switch
+      to: 'on'
+  action:
+    - service: remote.send_command
+      data_template:
+        entity_id: remote.harmonyhub
+        device: 61819111
+        command:
+          PowerOn
+
+- alias: 'Xbox Switch Off'
+  trigger:
+    - platform: state
+      entity_id: input_boolean.xbox_switch
+      to: 'off'
+  action:
+    - service: remote.send_command
+      data_template:
+        entity_id: remote.harmonyhub
+        device: 61819111
+        command:
+          PowerOff

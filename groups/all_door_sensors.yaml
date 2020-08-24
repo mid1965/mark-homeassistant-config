@@ -1,0 +1,6 @@
+name: All Door Sensors
+entities:
+  - binary_sensor.contact_balcony_door_contact
+  - binary_sensor.contact_bedroom_balcony_door_contact
+  - binary_sensor.contact_front_door_contact
+  - binary_sensor.contact_garage_door_contact

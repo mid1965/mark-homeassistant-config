@@ -1,0 +1,37 @@
+#####################################################################
+#
+#   WATER LEAK SENSORS
+#
+#####################################################################
+
+- platform: mqtt
+  name: "Moisture Guest Bathroom"
+  state_topic: "smartthings/Moisture Guest Bathroom/water/state"
+  payload_on: "wet"
+  payload_off: "dry"
+  device_class: moisture
+  
+  
+- platform: mqtt
+  name: "Moisture Kitchen"
+  state_topic: "smartthings/Moisture Kitchen/water/state"
+  payload_on: "wet"
+  payload_off: "dry"
+  device_class: moisture
+  
+  
+- platform: mqtt
+  name: "Moisture Laundry"
+  state_topic: "smartthings/Moisture Laundry/water/state"
+  payload_on: "wet"
+  payload_off: "dry"
+  device_class: moisture
+  
+  
+- platform: mqtt
+  name: "Moisture Bathroom"
+  state_topic: "smartthings/Moisture Bathroom/water/state"
+  payload_on: "wet"
+  payload_off: "dry"
+  device_class: moisture
+  

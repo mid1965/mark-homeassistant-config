@@ -1,0 +1,30 @@
+include:
+  domains:
+    - automation
+    - binary_sensor
+    - script
+    - sensor
+    - switch
+    - media_player
+  entities:
+    - fan.bedroom_fan
+    - fan.living_room_fan
+    - person.mandy
+    - person.mark
+    - light.all_hue_lights
+    - light.kitchen
+    - light.vent_bedroom
+    - light.vent_guest_room
+    - lock.front_door
+
+exclude:
+  entities:
+    - sensor.date_time
+    - sensor.internet_time
+    - sensor.time_date
+    - sensor.time
+    - sensor.time_utc
+    - sensor.vent_bedroom_temperature_measurement
+    - sensor.vent_guest_room_temperature_measurement
+    
+  

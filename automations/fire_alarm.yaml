@@ -1,0 +1,240 @@
+- id: smoke_detected
+  alias: Fire Alarm Detected Smoke!
+  trigger:
+    platform: state
+    entity_id: group.x_alarms
+    to: 'on'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.all_hue_lights
+  #      xy_color: [0.7006,0.2993]
+        color_name: red
+        brightness: 255
+    - service: lock.unlock
+      data:
+        entity_id: lock.front_door
+    - service: climate.set_hvac_mode
+      data:
+        entity_id: climate.apartment
+        hvac_mode: 'off'
+    - service: climate.set_fan_mode
+      data:
+        entity_id: climate.apartment
+        fan_mode: "auto"
+    - service: climate.ecobee_set_fan_min_on_time
+      data:
+        entity_id: climate.apartment
+        fan_min_on_time: "0"
+    - service: script.turn_on
+      data:
+        entity_id:
+          - script.flash_balcony_lights_1
+          - script.flash_landing_light_1
+    - service: notify.telegram
+      data:
+        message: "{{ now().strftime('%a - %H:%M') }}: *POSSIBLE FIRE!!*\nThe {% for entity_id in states.group.x_alarms.attributes.entity_id if states(entity_id) == 'on' %} {{ (entity_id) | replace ('binary_sensor.alarm_','') | replace ('_',' ') | title() }} {% endfor %} Sensor has been triggered!"
+    - service: notify.gmail
+      data:
+        title: <template> POSSIBLE FIRE!!
+        message: "The {% for entity_id in states.group.x_alarms.attributes.entity_id if states(entity_id) == 'on' %} {{ (entity_id) | replace ('binary_sensor.alarm_','') | replace ('_',' ') | title() }} {% endfor %} Sensor has been triggered!"
+
+- id: bedroom_smoke_alarm
+  alias: Smoke Detected in the Bedroom!
+  trigger:
+    platform: state
+    entity_id: sensor.smoke_alarm_bedroom_smoke_detector
+    to: 'on'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.all_hue_lights
+  #      xy_color: [0.7006,0.2993]
+        color_name: red
+        brightness: 255
+    - service: lock.unlock
+      data:
+        entity_id: lock.front_door
+    - service: climate.set_hvac_mode
+      data:
+        entity_id: climate.apartment
+        hvac_mode: 'off'
+    - service: climate.set_fan_mode
+      data:
+        entity_id: climate.apartment
+        fan_mode: "auto"
+    - service: climate.ecobee_set_fan_min_on_time
+      data:
+        entity_id: climate.apartment
+        fan_min_on_time: "0"
+    - service: script.turn_on
+      entity_id: script.flash_balcony_lights_1
+    - service: notify.telegram
+      data:
+        message: "{{ now().strftime('%a - %H:%M') }}: *POSSIBLE FIRE!!*/nBedroom Smoke Alarm has detected smoke"
+    - service: notify.gmail
+      data:
+        title: POSSIBLE FIRE!!
+        message: Bedroom Smoke Alarm has detected smoke!
+      
+# *********************************************************************
+
+- id: bedroom_smoke_co_alarm
+  alias: Smoke Detected in the Bedroom!
+  trigger:
+    platform: state
+    entity_id: sensor.smoke_co_alarm_bedroom_smoke_detector
+    to: 'on'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.all_hue_lights
+  #      xy_color: [0.7006,0.2993]
+        color_name: red
+        brightness: 255
+    - service: lock.unlock
+      data:
+        entity_id: lock.front_door
+    - service: climate.set_hvac_mode
+      data:
+        entity_id: climate.apartment
+        hvac_mode: 'off'
+    - service: climate.set_fan_mode
+      data:
+        entity_id: climate.apartment
+        fan_mode: "auto"
+    - service: climate.ecobee_set_fan_min_on_time
+      data:
+        entity_id: climate.apartment
+        fan_min_on_time: "0"
+    - service: script.turn_on
+      entity_id: script.flash_balcony_lights_1
+    - service: notify.telegram
+      data:
+        message: "{{ now().strftime('%a - %H:%M') }}: *POSSIBLE FIRE!!*/nBedroom Carbon Monoxide Alarm has detected SMOKE"
+    - service: notify.gmail
+      data:
+        title: POSSIBLE FIRE!!
+        message: Bedroom Carbon Monoxide Alarm has detected SMOKE!
+      
+# *********************************************************************
+
+- id: bedroom_carbon_monixide_alarm
+  alias: Carbon Monoxide Detected in the Bedroom!
+  trigger:
+    platform: state
+    entity_id: sensor.smoke_co_alarm_bedroom_carbon_monoxide_detector
+    to: 'on'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.all_hue_lights
+  #      xy_color: [0.7006,0.2993]
+        color_name: red
+        brightness: 255
+    - service: lock.unlock
+      data:
+        entity_id: lock.front_door
+    - service: climate.set_hvac_mode
+      data:
+        entity_id: climate.apartment
+        hvac_mode: 'off'
+    - service: climate.set_fan_mode
+      data:
+        entity_id: climate.apartment
+        fan_mode: "auto"
+    - service: climate.ecobee_set_fan_min_on_time
+      data:
+        entity_id: climate.apartment
+        fan_min_on_time: "0"
+    - service: script.turn_on
+      entity_id: script.flash_balcony_lights_1
+    - service: notify.telegram
+      data:
+        message: "{{ now().strftime('%a - %H:%M') }}: *POSSIBLE GAS LEAK!!*/nBedroom Carbon Monoxide Alarm has detected gas"
+    - service: notify.gmail
+      data:
+        title: POSSIBLE GAS LEAK!!
+        message: Bedroom Carbon Monoxide Alarm has detected gas!
+      
+# *********************************************************************
+
+- id: kitchen_smoke_alarm
+  alias: Smoke Detected in the Kitchen!
+  trigger:
+    platform: state
+    entity_id: sensor.smoke_alarm_kitchen_utility_smoke_detector
+    to: 'on'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.all_hue_lights
+  #      xy_color: [0.7006,0.2993]
+        color_name: red
+        brightness: 255
+    - service: lock.unlock
+      data:
+        entity_id: lock.front_door
+    - service: climate.set_hvac_mode
+      data:
+        entity_id: climate.apartment
+        hvac_mode: 'off'
+    - service: climate.set_fan_mode
+      data:
+        entity_id: climate.apartment
+        fan_mode: "auto"
+    - service: climate.ecobee_set_fan_min_on_time
+      data:
+        entity_id: climate.apartment
+        fan_min_on_time: "0"
+    - service: script.turn_on
+      entity_id: script.flash_balcony_lights_1
+    - service: notify.telegram
+      data:
+        message: "{{ now().strftime('%a - %H:%M') }}: *POSSIBLE FIRE!!*/nKitchen Smoke Alarm has detected smoke"
+    - service: notify.gmail
+      data:
+        title: POSSIBLE FIRE!!
+        message: Kitchen Smoke Alarm has detected smoke!
+      
+# *********************************************************************
+
+- id: front_door_smoke_alarm
+  alias: Smoke Detected near the Front Door!
+  trigger:
+    platform: state
+    entity_id: sensor.smoke_alarm_front_door_smoke_detector
+    to: 'on'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.all_hue_lights
+  #      xy_color: [0.7006,0.2993]
+        color_name: red
+        brightness: 255
+    - service: lock.unlock
+      data:
+        entity_id: lock.front_door
+    - service: climate.set_hvac_mode
+      data:
+        entity_id: climate.apartment
+        hvac_mode: 'off'
+    - service: climate.set_fan_mode
+      data:
+        entity_id: climate.apartment
+        fan_mode: "auto"
+    - service: climate.ecobee_set_fan_min_on_time
+      data:
+        entity_id: climate.apartment
+        fan_min_on_time: "0"
+    - service: script.turn_on
+      entity_id: script.flash_balcony_lights_1
+    - service: notify.telegram
+      data:
+        message: "{{ now().strftime('%a - %H:%M') }}: *POSSIBLE FIRE!!*/nSmoke Alarm by the Front Door has detected smoke"
+    - service: notify.gmail
+      data:
+        title: POSSIBLE FIRE!!
+        message: Smoke Alarm by the Front Door has detected smoke!
+      
+# *********************************************************************

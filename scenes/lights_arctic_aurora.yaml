@@ -1,0 +1,42 @@
+- name: Lights Arctic Aurora
+  entities:
+    light.access_lights: off
+    light.dining_room_square_lamps: off
+    light.reading_lamp: off
+    light.kitchen_ceiling: off
+    light.chandelier: off
+    light.ikea_lamp:
+      state: on
+      transition: 5
+      rgb_color: [80,255,244]
+      brightness: 120
+    light.sofa_right_lamp:
+      state: on
+      transition: 5
+      rgb_color: [179,255,213]
+      brightness: 143
+    light.sofa_left_lamp:
+      state: on
+      transition: 5
+      rgb_color: [179,255,213]
+      brightness: 143
+    light.hugo:
+      state: on
+      transition: 5
+      rgb_color: [82,255,215]
+      brightness: 143
+    light.bloom:
+      state: on
+      transition: 5
+      rgb_color: [128,207,255]
+      brightness: 143
+    light.kitchen_cabinets:
+      state: on
+      transition: 5
+      rgb_color: [82,255,215]
+      brightness: 143
+    light.dining_room_floor_lamps:
+      state: on
+      transition: 5
+      rgb_color: [78,255,245]
+      brightness: 143

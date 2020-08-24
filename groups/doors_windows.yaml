@@ -1,0 +1,9 @@
+name: Doors & Windows
+entities:
+  - binary_sensor.contact_front_door_contact
+  - binary_sensor.contact_balcony_door_contact
+  - binary_sensor.contact_bedroom_balcony_door_contact
+  - binary_sensor.contact_bedroom_east_window_contact
+  - binary_sensor.contact_bedroom_north_window_contact
+  - binary_sensor.contact_guest_room_window_contact
+  - binary_sensor.contact_dining_room_window_contact

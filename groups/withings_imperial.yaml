@@ -1,0 +1,8 @@
+name: Withings (Imperial)
+entities:
+  - sensor.withings_weight_lbs_mark
+  - sensor.withings_bmi_mark
+  - sensor.withings_fat_free_mass_lbs_mark
+  - sensor.withings_fat_mass_lbs_mark
+  - sensor.withings_bone_mass_lbs_mark
+  - sensor.withings_muscle_mass_lbs_mark

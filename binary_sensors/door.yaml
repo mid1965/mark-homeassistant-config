@@ -1,0 +1,66 @@
+#####################################################################
+#
+#   DOOR SENSORS
+#
+#####################################################################
+- platform: mqtt
+  name: "Contact Garage Door"
+  state_topic: "smartthings/Contact Garage Door/contact/state"
+  payload_on: "open"
+  payload_off: "closed"
+  device_class: opening
+  
+
+  
+- platform: mqtt
+  name: "Contact Front Door"
+  state_topic: "smartthings/Contact Front Door/contact/state"
+  payload_on: "open"
+  payload_off: "closed"
+  device_class: opening
+  
+
+  
+- platform: mqtt
+  name: "Contact Bedroom Balcony Door"
+  state_topic: "smartthings/Contact Bedroom Balcony Door/contact/state"
+  payload_on: "open"
+  payload_off: "closed"
+  device_class: opening
+  
+  
+  
+- platform: mqtt
+  name: "Contact Guest Room Closet Door"
+  state_topic: "smartthings/Contact Guest Closet Door/contact/state"
+  payload_on: "open"
+  payload_off: "closed"
+  device_class: opening
+  
+  
+  
+- platform: mqtt
+  name: "Contact Utility Closet Door"
+  state_topic: "smartthings/Contact Utility Closet Door/contact/state"
+  payload_on: "open"
+  payload_off: "closed"
+  device_class: opening
+  
+  
+- platform: mqtt
+  name: "Contact Balcony Door"
+  state_topic: "smartthings/Contact Balcony Door/contact/state"
+  payload_on: "open"
+  payload_off: "closed"
+  device_class: opening
+  
+  
+#####################################################################
+#
+#   DOORBELL SENSORS
+#
+#####################################################################
+- platform: ring
+  monitored_conditions:
+    - ding
+    - motion

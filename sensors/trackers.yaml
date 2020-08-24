@@ -1,0 +1,35 @@
+#####################################################################
+#
+#   TRACKING SENSORS
+#
+#####################################################################
+
+- platform: google_geocode
+  name: mark
+  origin: device_tracker.life360_mark_davies
+  options: street, city
+  display_zone: hide
+  gravatar: !secret gravatar
+  api_key: !secret google_maps
+  
+- platform: google_geocode
+  name: mandy
+  origin: device_tracker.life360_mandy_davies
+  options: street, city
+  display_zone: hide
+  api_key: !secret google_maps
+  
+# GUESTS #  
+# - platform: google_geocode
+  # name: guests
+  # origin: device_tracker.life360_Guests
+  # options: street, city
+  # display_zone: hide
+  # api_key: !secret google_maps
+  
+# - platform: google_geocode
+  # name: nikki
+  # origin: device_tracker.tesla_model_3_5yj3e1ea5jf124936_location_tracker
+  # options: street, city
+  # display_zone: hide
+  # api_key: !secret google_maps

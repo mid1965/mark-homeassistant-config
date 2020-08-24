@@ -1,0 +1,500 @@
+#####################################################################
+#
+#   HOUSE PLANT SENSORS
+#
+#####################################################################
+
+#Spider Plant
+#############
+- platform: mqtt
+  name: spider_plant_moisture
+  state_topic: "miflora/Guest Room/Spider Plant"
+  value_template: '{{ value_json.moisture }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: spider_plant_battery
+  state_topic: "miflora/Guest Room/Spider Plant"
+  value_template: '{{ value_json.battery }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: spider_plant_temperature
+  state_topic: "miflora/Guest Room/Spider Plant"
+  value_template: '{{ value_json.temperature }}'
+  unit_of_measurement: "°F"
+- platform: mqtt
+  name: spider_plant_conductivity
+  state_topic: "miflora/Guest Room/Spider Plant"
+  value_template: '{{ value_json.conductivity }}'
+  unit_of_measurement: "µS/cm"
+- platform: mqtt
+  name: spider_plant_light_intensity
+  state_topic: "miflora/Guest Room/Spider Plant"
+  value_template: '{{ value_json.brightness }}'
+  unit_of_measurement: "lux"
+- platform: template
+  sensors:
+    spider_plant_temperature_f:
+      value_template: "{{ ((float(states('sensor.spider_plant_temperature')) * 9 / 5 )  +  32) | round(1) }}"
+      unit_of_measurement: "°F"
+
+# Climbing Jasmine
+##################
+- platform: mqtt
+  name: climbing_jasmine_moisture
+  state_topic: "miflora/Living Room/Climbing Jasmine"
+  value_template: '{{ value_json.moisture }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: climbing_jasmine_battery
+  state_topic: "miflora/Living Room/Climbing Jasmine"
+  value_template: '{{ value_json.battery }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: climbing_jasmine_temperature
+  state_topic: "miflora/Living Room/Climbing Jasmine"
+  value_template: '{{ value_json.temperature }}'
+  unit_of_measurement: "°F"
+- platform: mqtt
+  name: climbing_jasmine_conductivity
+  state_topic: "miflora/Living Room/Climbing Jasmine"
+  value_template: '{{ value_json.conductivity }}'
+  unit_of_measurement: "µS/cm"
+- platform: mqtt
+  name: climbing_jasmine_light_intensity
+  state_topic: "miflora/Living Room/Climbing Jasmine"
+  value_template: '{{ value_json.brightness }}'
+  unit_of_measurement: "lux"
+- platform: template
+  sensors:
+    climbing_jasmine_temperature_f:
+      value_template: "{{ ((float(states('sensor.climbing_jasmine_temperature')) * 9 / 5 )  +  32) | round(1) }}"
+      unit_of_measurement: "°F"
+  
+# Jasmine Shrub
+###############
+- platform: mqtt
+  name: jasmine_shrub_moisture
+  state_topic: "miflora/Bedroom/Jasmine Shrub"
+  value_template: '{{ value_json.moisture }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: jasmine_shrub_battery
+  state_topic: "miflora/Bedroom/Jasmine Shrub"
+  value_template: '{{ value_json.battery }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: jasmine_shrub_temperature
+  state_topic: "miflora/Bedroom/Jasmine Shrub"
+  value_template: '{{ value_json.temperature }}'
+  unit_of_measurement: "°F"
+- platform: mqtt
+  name: jasmine_shrub_conductivity
+  state_topic: "miflora/Bedroom/Jasmine Shrub"
+  value_template: '{{ value_json.conductivity }}'
+  unit_of_measurement: "µS/cm"
+- platform: mqtt
+  name: jasmine_shrub_light_intensity
+  state_topic: "miflora/Bedroom/Jasmine Shrub"
+  value_template: '{{ value_json.brightness }}'
+  unit_of_measurement: "lux"
+- platform: template
+  sensors:
+    jasmine_shrub_temperature_f:
+      value_template: "{{ ((float(states('sensor.jasmine_shrub_temperature')) * 9 / 5 )  +  32) | round(1) }}"
+      unit_of_measurement: "°F"
+  
+# Dragon Tree Bathroom
+######################
+- platform: mqtt
+  name: dragon_tree_bathroom_moisture
+  state_topic: "miflora/Bedroom/Dragon Tree Bathroom"
+  value_template: '{{ value_json.moisture }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: dragon_tree_bathroom_battery
+  state_topic: "miflora/Bedroom/Dragon Tree Bathroom"
+  value_template: '{{ value_json.battery }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: dragon_tree_bathroom_temperature
+  state_topic: "miflora/Bedroom/Dragon Tree Bathroom"
+  value_template: '{{ value_json.temperature }}'
+  unit_of_measurement: "°F"
+- platform: mqtt
+  name: dragon_tree_bathroom_conductivity
+  state_topic: "miflora/Bedroom/Dragon Tree Bathroom"
+  value_template: '{{ value_json.conductivity }}'
+  unit_of_measurement: "µS/cm"
+- platform: mqtt
+  name: dragon_tree_bathroom_light_intensity
+  state_topic: "miflora/Bedroom/Dragon Tree Bathroom"
+  value_template: '{{ value_json.brightness }}'
+  unit_of_measurement: "lux"
+- platform: template
+  sensors:
+    dragon_tree_bathroom_temperature_f:
+      value_template: "{{ ((float(states('sensor.dragon_tree_bathroom_temperature')) * 9 / 5 )  +  32) | round(1) }}"
+      unit_of_measurement: "°F"
+  
+# Sun Parasol
+#############
+- platform: mqtt
+  name: sun_parasol_moisture
+  state_topic: "miflora/Bedroom/Sun Parasol"
+  value_template: '{{ value_json.moisture }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: sun_parasol_battery
+  state_topic: "miflora/Bedroom/Sun Parasol"
+  value_template: '{{ value_json.battery }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: sun_parasol_temperature
+  state_topic: "miflora/Bedroom/Sun Parasol"
+  value_template: '{{ value_json.temperature }}'
+  unit_of_measurement: "°F"
+- platform: mqtt
+  name: sun_parasol_conductivity
+  state_topic: "miflora/Bedroom/Sun Parasol"
+  value_template: '{{ value_json.conductivity }}'
+  unit_of_measurement: "µS/cm"
+- platform: mqtt
+  name: sun_parasol_light_intensity
+  state_topic: "miflora/Bedroom/Sun Parasol"
+  value_template: '{{ value_json.brightness }}'
+  unit_of_measurement: "lux"
+- platform: template
+  sensors:
+    sun_parasol_temperature_f:
+      value_template: "{{ ((float(states('sensor.sun_parasol_temperature')) * 9 / 5 )  +  32) | round(1) }}"
+      unit_of_measurement: "°F"
+ 
+# Echeveria (Succulent)
+########################
+- platform: mqtt
+  name: echeveria_moisture
+  state_topic: "miflora/Living Room/Echeveria"
+  value_template: '{{ value_json.moisture }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: echeveria_battery
+  state_topic: "miflora/Living Room/Echeveria"
+  value_template: '{{ value_json.battery }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: echeveria_temperature
+  state_topic: "miflora/Living Room/Echeveria"
+  value_template: '{{ value_json.temperature }}'
+  unit_of_measurement: "°F"
+- platform: mqtt
+  name: echeveria_conductivity
+  state_topic: "miflora/Living Room/Echeveria"
+  value_template: '{{ value_json.conductivity }}'
+  unit_of_measurement: "µS/cm"
+- platform: mqtt
+  name: echeveria_light_intensity
+  state_topic: "miflora/Living Room/Echeveria"
+  value_template: '{{ value_json.brightness }}'
+  unit_of_measurement: "lux"
+- platform: template
+  sensors:
+    echeveria_temperature_f:
+      value_template: "{{ ((float(states('sensor.echeveria_temperature')) * 9 / 5 )  +  32) | round(1) }}"
+      unit_of_measurement: "°F"
+
+# Lavender
+###############
+- platform: mqtt
+  name: lavender_moisture
+  state_topic: "miflora/Living Room/Lavender"
+  value_template: '{{ value_json.moisture }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: lavender_battery
+  state_topic: "miflora/Living Room/Lavender"
+  value_template: '{{ value_json.battery }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: lavender_temperature
+  state_topic: "miflora/Living Room/Lavender"
+  value_template: '{{ value_json.temperature }}'
+  unit_of_measurement: "°F"
+- platform: mqtt
+  name: lavender_conductivity
+  state_topic: "miflora/Living Room/Lavender"
+  value_template: '{{ value_json.conductivity }}'
+  unit_of_measurement: "µS/cm"
+- platform: mqtt
+  name: lavender_light_intensity
+  state_topic: "miflora/Living Room/Lavender"
+  value_template: '{{ value_json.brightness }}'
+  unit_of_measurement: "lux"
+- platform: template
+  sensors:
+    lavender_temperature_f:
+      value_template: "{{ ((float(states('sensor.lavender_temperature')) * 9 / 5 )  +  32) | round(1) }}"
+      unit_of_measurement: "°F"
+
+# Dragon Tree Large
+###############
+- platform: mqtt
+  name: dragon_tree_large_moisture
+  state_topic: "miflora/Living Room/Dragon Tree Large"
+  value_template: '{{ value_json.moisture }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: dragon_tree_large_battery
+  state_topic: "miflora/Living Room/Dragon Tree Large"
+  value_template: '{{ value_json.battery }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: dragon_tree_large_temperature
+  state_topic: "miflora/Living Room/Dragon Tree Large"
+  value_template: '{{ value_json.temperature }}'
+  unit_of_measurement: "°F"
+- platform: mqtt
+  name: dragon_tree_large_conductivity
+  state_topic: "miflora/Living Room/Dragon Tree Large"
+  value_template: '{{ value_json.conductivity }}'
+  unit_of_measurement: "µS/cm"
+- platform: mqtt
+  name: dragon_tree_large_light_intensity
+  state_topic: "miflora/Living Room/Dragon Tree Large"
+  value_template: '{{ value_json.brightness }}'
+  unit_of_measurement: "lux"
+- platform: template
+  sensors:
+    dragon_tree_large_temperature_f:
+      value_template: "{{ ((float(states('sensor.dragon_tree_large_temperature')) * 9 / 5 )  +  32) | round(1) }}"
+      unit_of_measurement: "°F"
+    
+# Swiss Cheese
+###############
+- platform: mqtt
+  name: swiss_cheese_moisture
+  state_topic: "miflora/Living Room/Swiss Cheese"
+  value_template: '{{ value_json.moisture }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: swiss_cheese_battery
+  state_topic: "miflora/Living Room/Swiss Cheese"
+  value_template: '{{ value_json.battery }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: swiss_cheese_temperature
+  state_topic: "miflora/Living Room/Swiss Cheese"
+  value_template: '{{ value_json.temperature }}'
+  unit_of_measurement: "°F"
+- platform: mqtt
+  name: swiss_cheese_conductivity
+  state_topic: "miflora/Living Room/Swiss Cheese"
+  value_template: '{{ value_json.conductivity }}'
+  unit_of_measurement: "µS/cm"
+- platform: mqtt
+  name: swiss_cheese_light_intensity
+  state_topic: "miflora/Living Room/Swiss Cheese"
+  value_template: '{{ value_json.brightness }}'
+  unit_of_measurement: "lux"
+- platform: template
+  sensors:
+    swiss_cheese_temperature_f:
+      value_template: "{{ ((float(states('sensor.swiss_cheese_temperature')) * 9 / 5 )  +  32) | round(1) }}"
+      unit_of_measurement: "°F"
+
+# Lime Tree
+###############
+- platform: mqtt
+  name: lime_tree_moisture
+  state_topic: "miflora/Bedroom/Lime Tree"
+  value_template: '{{ value_json.moisture }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: lime_tree_battery
+  state_topic: "miflora/Bedroom/Lime Tree"
+  value_template: '{{ value_json.battery }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: lime_tree_temperature
+  state_topic: "miflora/Bedroom/Lime Tree"
+  value_template: '{{ value_json.temperature }}'
+  unit_of_measurement: "°F"
+- platform: mqtt
+  name: lime_tree_conductivity
+  state_topic: "miflora/Bedroom/Lime Tree"
+  value_template: '{{ value_json.conductivity }}'
+  unit_of_measurement: "µS/cm"
+- platform: mqtt
+  name: lime_tree_light_intensity
+  state_topic: "miflora/Bedroom/Lime Tree"
+  value_template: '{{ value_json.brightness }}'
+  unit_of_measurement: "lux"
+- platform: template
+  sensors:
+    lime_tree_temperature_f:
+      value_template: "{{ ((float(states('sensor.lime_tree_temperature')) * 9 / 5 )  +  32) | round(1) }}"
+      unit_of_measurement: "°F"
+
+# Prayer Plant
+###############
+- platform: mqtt
+  name: prayer_plant_moisture
+  state_topic: "miflora/Living Room/Prayer Plant"
+  value_template: '{{ value_json.moisture }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: prayer_plant_battery
+  state_topic: "miflora/Living Room/Prayer Plant"
+  value_template: '{{ value_json.battery }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: prayer_plant_temperature
+  state_topic: "miflora/Living Room/Prayer Plant"
+  value_template: '{{ value_json.temperature }}'
+  unit_of_measurement: "°F"
+- platform: mqtt
+  name: prayer_plant_conductivity
+  state_topic: "miflora/Living Room/Prayer Plant"
+  value_template: '{{ value_json.conductivity }}'
+  unit_of_measurement: "µS/cm"
+- platform: mqtt
+  name: prayer_plant_light_intensity
+  state_topic: "miflora/Living Room/Prayer Plant"
+  value_template: '{{ value_json.brightness }}'
+  unit_of_measurement: "lux"
+- platform: template
+  sensors:
+    prayer_plant_temperature_f:
+      value_template: "{{ ((float(states('sensor.prayer_plant_temperature')) * 9 / 5 )  +  32) | round(1) }}"
+      unit_of_measurement: "°F"
+
+# Corn Plant
+###############
+- platform: mqtt
+  name: corn_plant_moisture
+  state_topic: "miflora/Living Room/Corn Plant"
+  value_template: '{{ value_json.moisture }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: corn_plant_battery
+  state_topic: "miflora/Living Room/Corn Plant"
+  value_template: '{{ value_json.battery }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: corn_plant_temperature
+  state_topic: "miflora/Living Room/Corn Plant"
+  value_template: '{{ value_json.temperature }}'
+  unit_of_measurement: "°F"
+- platform: mqtt
+  name: corn_plant_conductivity
+  state_topic: "miflora/Living Room/Corn Plant"
+  value_template: '{{ value_json.conductivity }}'
+  unit_of_measurement: "µS/cm"
+- platform: mqtt
+  name: corn_plant_light_intensity
+  state_topic: "miflora/Living Room/Corn Plant"
+  value_template: '{{ value_json.brightness }}'
+  unit_of_measurement: "lux"
+- platform: template
+  sensors:
+    corn_plant_temperature_f:
+      value_template: "{{ ((float(states('sensor.corn_plant_temperature')) * 9 / 5 )  +  32) | round(1) }}"
+      unit_of_measurement: "°F"
+
+# Geranium
+###############
+- platform: mqtt
+  name: geranium_moisture
+  state_topic: "miflora/Bedroom/Geranium"
+  value_template: '{{ value_json.moisture }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: geranium_battery
+  state_topic: "miflora/Bedroom/Geranium"
+  value_template: '{{ value_json.battery }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: geranium_temperature
+  state_topic: "miflora/Bedroom/Geranium"
+  value_template: '{{ value_json.temperature }}'
+  unit_of_measurement: "°F"
+- platform: mqtt
+  name: geranium_conductivity
+  state_topic: "miflora/Bedroom/Geranium"
+  value_template: '{{ value_json.conductivity }}'
+  unit_of_measurement: "µS/cm"
+- platform: mqtt
+  name: geranium_light_intensity
+  state_topic: "miflora/Bedroom/Geranium"
+  value_template: '{{ value_json.brightness }}'
+  unit_of_measurement: "lux"
+- platform: template
+  sensors:
+    geranium_temperature_f:
+      value_template: "{{ ((float(states('sensor.geranium_temperature')) * 9 / 5 )  +  32) | round(1) }}"
+      unit_of_measurement: "°F"
+
+# Umbrella Plant
+################
+- platform: mqtt
+  name: umbrella_plant_moisture
+  state_topic: "miflora/Bedroom/Umbrella Plant"
+  value_template: '{{ value_json.moisture }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: umbrella_plant_battery
+  state_topic: "miflora/Bedroom/Umbrella Plant"
+  value_template: '{{ value_json.battery }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: umbrella_plant_temperature
+  state_topic: "miflora/Bedroom/Umbrella Plant"
+  value_template: '{{ value_json.temperature }}'
+  unit_of_measurement: "°F"
+- platform: mqtt
+  name: umbrella_plant_conductivity
+  state_topic: "miflora/Bedroom/Umbrella Plant"
+  value_template: '{{ value_json.conductivity }}'
+  unit_of_measurement: "µS/cm"
+- platform: mqtt
+  name: umbrella_plant_light_intensity
+  state_topic: "miflora/Bedroom/Umbrella Plant"
+  value_template: '{{ value_json.brightness }}'
+  unit_of_measurement: "lux"
+- platform: template
+  sensors:
+    umbrella_plant_temperature_f:
+      value_template: "{{ ((float(states('sensor.umbrella_plant_temperature')) * 9 / 5 )  +  32) | round(1) }}"
+      unit_of_measurement: "°F"
+
+# Dragon Tree Guest
+###################
+- platform: mqtt
+  name: dragon_tree_guest_moisture
+  state_topic: "miflora/Guest Room/Dragon Tree Guest"
+  value_template: '{{ value_json.moisture }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: dragon_tree_guest_battery
+  state_topic: "miflora/Guest Room/Dragon Tree Guest"
+  value_template: '{{ value_json.battery }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: dragon_tree_guest_temperature
+  state_topic: "miflora/Guest Room/Dragon Tree Guest"
+  value_template: '{{ value_json.temperature }}'
+  unit_of_measurement: "°F"
+- platform: mqtt
+  name: dragon_tree_guest_conductivity
+  state_topic: "miflora/Guest Room/Dragon Tree Guest"
+  value_template: '{{ value_json.conductivity }}'
+  unit_of_measurement: "µS/cm"
+- platform: mqtt
+  name: dragon_tree_guest_light_intensity
+  state_topic: "miflora/Guest Room/Dragon Tree Guest"
+  value_template: '{{ value_json.brightness }}'
+  unit_of_measurement: "lux"
+- platform: template
+  sensors:
+    dragon_tree_guest_temperature_f:
+      value_template: "{{ ((float(states('sensor.dragon_tree_guest_temperature')) * 9 / 5 )  +  32) | round(1) }}"
+      unit_of_measurement: "°F"

@@ -1,0 +1,6 @@
+- name: Good Night
+  entities:
+    group.all_lights: off
+    # group.all_shades: closed
+    # lock.front_door: locked
+    # alarm_control_panel.marks_apartment: armed_away

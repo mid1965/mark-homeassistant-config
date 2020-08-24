@@ -1,0 +1,4 @@
+name: Presence
+entities:
+  - person.mandy
+  - person.mark

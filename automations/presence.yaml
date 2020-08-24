@@ -1,0 +1,250 @@
+- id: welcome_home
+  alias: Welcome Home
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: not_home
+    to: home
+  condition:
+    condition: time
+    after: '08:00'
+    before: '23:00'
+  action:
+    - service: switch.turn_on
+      entity_id: switch.mfi_lg_television
+    - service: switch.turn_on
+      entity_id: switch.mfi_firetv
+    - service: switch.turn_on
+      entity_id: switch.mfi_denon_amplifier
+    - service: climate.set_hvac_mode
+      data:
+        entity_id: climate.apartment
+        hvac_mode: 'heat_cool'
+    - service: climate.set_fan_mode
+      data:
+        entity_id: climate.apartment
+        fan_mode: 'auto'
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.apartment
+        target_temp_high: 76
+    - service: dyson.set_auto_mode
+      data:
+        entity_id: fan.living_room_fan
+        auto_mode: true
+    - service: notify.pushbullet
+      data:
+        message: Welcome Home
+
+        
+# ************************************************************************
+        
+- id: welcome_home_light
+  alias: Welcome Home
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: not_home
+    to: home
+  condition:
+    - condition: sun
+      after: sunset
+      after_offset: '-0:30:00'
+  action:
+  - service: light.turn_on
+    data:
+      entity_id: light.entrance_light
+      rgb_color: [255,211,130]
+      brightness: 255
+
+# **************************************************************
+
+- id: welcome_home_guest
+  alias: Welcome Home Guest
+  trigger:
+    platform: state
+    entity_id: device_tracker.marksiphone5
+    from: not_home
+    to: home
+  action:
+    - wait_template: "{{ is_state('binary_sensor.contact_front_door_contact', 'on') }}"
+      timeout: '00:05:00'
+      continue_on_timeout: false
+    - service: script.turn_on
+      entity_id: script.play_home_assistant_playlist
+
+
+# **************************************************************
+
+- id: goodbye_everyone
+  alias: Goodbye Everyone
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: home
+    to: not_home
+  action:
+    - service: notify.pushbullet
+      data:
+        message: Goodbye Everyone!
+    - service: script.turn_on
+      entity_id: script.turn_off_everything
+    - service: fan.turn_off
+      data:
+        entity_id: fan.living_room_fan
+
+# **************************************************************
+
+- id: goodbye_mark
+  alias: Goodbye Mark
+  trigger:
+    platform: state
+    entity_id: sensor.mark_presence
+    from: home
+    to: not_home
+  action:
+    - service: notify.pushbullet
+      data:
+        message: Goodbye Mark!
+    - service: switch.turn_off
+      data:
+        entity_id:
+          - switch.fireswamp
+          - switch.buttercup
+
+# **************************************************************
+
+- id: goodbye_mark_vizzini
+  alias: Goodbye Mark (Vizzini)
+  trigger:
+    platform: state
+    entity_id: sensor.mark_presence
+    from: home
+    to: not_home
+  condition:
+    condition: state
+    entity_id: input_boolean.vizzini_auto_off
+    state: 'on'
+  action:
+    - service: switch.turn_off
+      entity_id: switch.vizzini
+    - service: notify.pushbullet
+      data:
+        message: Shutting Down Vizzini!
+
+# **************************************************************
+
+- id: arm_arlo_when_leaving
+  alias: Arm Arlo cameras when leaving
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: 'home'
+    to: 'not_home'
+  action:
+  - service: alarm_control_panel.alarm_arm_away
+    entity_id: alarm_control_panel.aarlo_apartment
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: Arlo set to 'away' mode"
+
+# **************************************************************
+
+- id: disarm_arlo_when_arriving
+  alias: Set Arlo cameras to Home mode when arriving
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: 'not_home'
+    to: 'home'
+  action:
+  - service: alarm_control_panel.alarm_arm_home
+    entity_id: alarm_control_panel.aarlo_apartment
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: Arlo set to 'home' mode"
+
+      
+# **************************************************************
+
+- id: unlock_front_door_when_arriving
+  alias: Unlock the Front Door when Arriving
+  trigger:
+    - platform: state
+      entity_id: person.mandy
+      to: 'home'
+    - platform: state
+      entity_id: person.mark
+      to: 'home'
+  action:
+    - service: notify.pushbullet
+      data:
+        message: The front door has been unlocked!
+    - service: lock.unlock
+      entity_id: lock.front_door
+
+# **************************************************************
+
+- id: marks_coming_home
+  alias: Mark's Coming Home
+  trigger:
+    platform: state
+    entity_id: device_tracker.life360_mark_davies
+    from: "Work-Bio-Rad"
+    to: "moving"
+  condition:
+    condition: time
+    after: '15:00'
+  action:
+    - service: notify.pushbullet
+      data:
+        message: Mark's Coming Home Triggered!
+    - service: notify.gmail2verizon
+      data:
+#        title: "{{ now().strftime('%a - %H:%M') }}: Mark Just Left Work"
+        message: "{{ now().strftime('%a - %H:%M') }}: Mark Just Left Work"
+        
+# **************************************************************
+
+- id: turn_off_hvac_when_not_home
+  alias: Turn Off the HVAC When No One Home
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: 'home'
+    to: 'not_home'
+  condition:
+    - condition: time
+      weekday:
+       - mon
+       - thu
+  action:
+  - service: climate.set_away_mode
+    data:
+      entity_id: climate.apartment
+      away_mode: 'on'
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: HVAC set to away mode as no one is home"
+      
+# *****************************************************************
+
+- id: turn_on_hvac_when_heading_home
+  alias: Turn On the HVAC When Someone is Heading Home
+  trigger:
+    platform: state
+    entity_id: device_tracker.life360_mandy_davies
+    from: "Work-BARA"
+    to: "moving"
+  condition:
+    - condition: time
+      after: '15:00:00'
+      weekday: thu
+  action:
+  - service: climate.set_hvac_mode
+    data:
+      entity_id: climate.apartment
+      hvac_mode: 'heat_cool'
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: HVAC turned on as someone is headed home"

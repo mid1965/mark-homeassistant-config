@@ -1,0 +1,9 @@
+- platform: switch
+  name: "Dining Room Cabinet"
+  entity_id: switch.light_cabinet_led
+  
+- platform: group
+  name: Balcony Lights
+  entities:
+    - light.balcony
+    - light.light_balcony_string_lights

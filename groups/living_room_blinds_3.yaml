@@ -1,0 +1,5 @@
+name: Three Living Room Blinds
+entities:
+  - cover.living_room_blind_left_window
+  - cover.living_room_blind_right_window
+  - cover.living_room_blind_right_door

@@ -1,0 +1,633 @@
+- id: apartment_motion_but_no_one_home
+  alias: Motion Detected but No One Home
+  trigger:
+  - platform: state
+    entity_id: group.x_motion
+    to: 'on'
+    for:
+      seconds: 15
+  condition:
+  - condition: state
+    entity_id: group.presence
+    state: 'not_home'
+  action:
+  - service: script.turn_on
+    data:
+      entity_id: script.play_the_eye
+  - service: notify.telegram
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: *MOTION DETECTED AT HOME!!*/nMotion has been detected in the {% for entity_id in states.group.x_motion.attributes.entity_id if states(entity_id) == 'on' %} {{ (entity_id) | replace ('sensor.motion_','') | replace ('_',' ') | title() }} {% endfor %}, but no one is home"
+  - service: notify.gmail
+    data:
+      title: MOTION DETECTED AT HOME!!
+      message: Motion has been detected in the {% for entity_id in states.group.x_motion.attributes.entity_id if states(entity_id) == 'on' %} {{ (entity_id) | replace ("sensor.motion_","") | replace ("_"," ") | title() }} {% endfor %}, but no one is home!
+
+# **************************************************************
+# **************************************************************
+
+- id: bedroom_closet_motion
+  alias: Turn On Closet Light
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.motion_bedroom_closet_motion
+    to: 'on'
+  action:
+  - service: light.turn_on
+    data:
+      entity_id: light.bedroom_closet
+      rgb_color: [255,211,130]
+      brightness: 255
+
+# **************************************************************
+
+- id: bedroom_closet_no_motion
+  alias: Turn Off Closet Light
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.motion_bedroom_closet_motion
+    to: 'off'
+    for:
+      minutes: 5
+  action:
+  - service_template: light.turn_off
+    entity_id: light.bedroom_closet
+
+# **************************************************************
+
+- id: guest_bathroom_motion_night
+  alias: Turn On Guest Bathroom Lights Nighttime
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.motion_guest_bathroom_motion
+    to: 'on'
+  condition:
+  - condition: time
+    after: '23:00'
+    before: '05:59'
+  - condition: state
+    entity_id: light.guest_bathroom
+    state: 'off'
+  action:
+  - service: hue.hue_activate_scene
+    data:
+      group_name: "Guest Bathroom"
+      scene_name: "Guest Bathroom Nighttime"
+  - service: input_boolean.turn_on
+    entity_id: input_boolean.guest_bathroom_lights_auto_on
+  - delay:
+      minutes: 5
+  - service_template: light.turn_off
+    entity_id: light.guest_bathroom
+  - service: switch.turn_off
+    entity_id: switch.guest_bathroom_extractor
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.guest_bathroom_lights_auto_on  
+
+# **************************************************************
+
+- id: guest_bathroom_motion_day
+  alias: Turn On Guest Bathroom Lights Energize
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.motion_guest_bathroom_motion
+    to: 'on'
+  condition:
+  # - condition: state
+    # entity_id: input_boolean.daylight
+    # state: 'off'
+  - condition: time
+    after: '06:00'
+    before: '19:59'
+  - condition: state
+    entity_id: light.guest_bathroom
+    state: 'off'
+  mode: restart
+  action:
+  - service: hue.hue_activate_scene
+    data:
+      group_name: "Guest Bathroom"
+      scene_name: "Guest Bathroom Energize"
+  - service: input_boolean.turn_on
+    entity_id: input_boolean.guest_bathroom_lights_auto_on
+  - delay:
+      minutes: 5
+  - service_template: light.turn_off
+    entity_id: light.guest_bathroom
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.guest_bathroom_lights_auto_on
+
+
+# **************************************************************
+
+- id: guest_bathroom_motion_extractor
+  alias: Turn On Guest Bathroom Extractor
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.motion_guest_bathroom_motion
+    to: 'on'
+  condition:
+  - condition: time
+    after: '06:00'
+    before: '23:00'
+  mode: restart
+  action:
+  - service: switch.turn_on
+    entity_id: switch.guest_bathroom_extractor
+  - delay:
+      minutes: 10
+  - service: switch.turn_off
+    entity_id: switch.guest_bathroom_extractor
+
+
+# **************************************************************
+
+- id: guest_bathroom_motion_evening
+  alias: Turn On Guest Bathroom Lights Relax
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.motion_guest_bathroom_motion
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: input_boolean.daylight
+    state: 'off'
+  - condition: time
+    after: '20:00'
+    before: '22:59'
+  - condition: state
+    entity_id: light.guest_bathroom
+    state: 'off'
+  mode: restart
+  action:
+  - service: hue.hue_activate_scene
+    data:
+      group_name: "Guest Bathroom"
+      scene_name: "Guest Bathroom Relax"
+  - service: input_boolean.turn_on
+    entity_id: input_boolean.guest_bathroom_lights_auto_on
+  - delay:
+      minutes: 5
+  - service_template: light.turn_off
+    entity_id: light.guest_bathroom
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.guest_bathroom_lights_auto_on
+
+
+# **************************************************************
+    
+# - id: guest_bathroom_no_motion
+  # alias: Turn Off Guest Bathroom Lights
+  # trigger:
+  # - platform: state
+    # entity_id: binary_sensor.motion_guest_bathroom_motion
+    # to: 'off'
+    # for:
+      # minutes: 2
+  # condition:
+  # - condition: state
+    # entity_id: light.guest_bathroom
+    # state: 'on'
+  # - condition: state
+    # entity_id: input_boolean.guest_bathroom_lights_auto_on
+    # state: 'on'
+  # mode: restart
+  # action:
+  # - service_template: light.turn_off
+    # entity_id: light.guest_bathroom
+  # - service: input_boolean.turn_off
+    # entity_id: input_boolean.guest_bathroom_lights_auto_on
+    
+# **************************************************************
+
+# - id: guest_bathroom_turn_off_extractor
+  # alias: Turn Off Guest Bathroom Extractor
+  # trigger:
+  # - platform: state
+    # entity_id: binary_sensor.motion_guest_bathroom_motion
+    # to: 'off'
+    # for:
+      # minutes: 15
+  # action:
+  # - service: switch.turn_off
+    # entity_id: switch.guest_bathroom_extractor
+
+# **************************************************************
+
+- id: guest_bathroom_remote_press
+  alias: Turn Off Input Boolean When Guest Bathroom Button Pressed
+  trigger:
+  - platform: state
+    entity_id: sensor.guest_bathroom_switch
+    to: "1_click"
+  action:
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.guest_bathroom_lights_auto_on
+    
+
+# **************************************************************
+# **************************************************************
+    
+- id: kitchen_motion_night
+  alias: Turn On Kitchen Lights Nighttime
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.motion_kitchen_motion
+    to: 'on'
+  condition:
+  - condition: time
+    after: '23:00'
+    before: '05:59'
+  - condition: state
+    entity_id: light.kitchen
+    state: 'off'
+  action:
+  - service: hue.hue_activate_scene
+    data:
+      group_name: "Kitchen"
+      scene_name: "Kitchen Nighttime"
+  - service: input_boolean.turn_on
+    entity_id: input_boolean.kitchen_lights_auto_on
+
+# **************************************************************
+
+- id: kitchen_motion_day
+  alias: Turn On Kitchen Lights Energize
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.motion_kitchen_motion
+    to: 'on'
+  condition:
+  - condition: time
+    after: '06:00'
+    before: '19:59'
+  - condition: state
+    entity_id: light.kitchen
+    state: 'off'
+  action:
+  - service: hue.hue_activate_scene
+    data:
+      group_name: "Kitchen"
+      scene_name: "Kitchen Energize"
+  - service: input_boolean.turn_on
+    entity_id: input_boolean.kitchen_lights_auto_on
+
+# **************************************************************
+
+- id: kitchen_motion_evening
+  alias: Turn On Kitchen Lights Relax
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.motion_kitchen_motion
+    to: 'on'
+  condition:
+  - condition: time
+    after: '20:00'
+    before: '22:59'
+  - condition: state
+    entity_id: light.kitchen
+    state: 'off'
+  action:
+  - service: hue.hue_activate_scene
+    data:
+      group_name: "Kitchen"
+      scene_name: "Kitchen Relax"
+  - service: input_boolean.turn_on
+    entity_id: input_boolean.kitchen_lights_auto_on
+    
+# **************************************************************
+    
+- id: kitchen_no_motion
+  alias: Turn Off Kitchen Lights
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.kitchen_occupancy
+    to: 'off'
+    for:
+      minutes: 1
+  condition:
+  - condition: state
+    entity_id: light.kitchen
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.kitchen_lights_auto_on
+    state: 'on'
+  action:
+  - service_template: light.turn_off
+    entity_id: light.kitchen
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.kitchen_lights_auto_on
+    
+# **************************************************************
+
+- id: kitchen_remote_press
+  alias: Turn Off Input Boolean When Kitchen Button Pressed
+  trigger:
+  - platform: state
+    entity_id: sensor.kitchen_switch
+    to: "1_click"
+  action:
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.kitchen_lights_auto_on
+    
+# **************************************************************
+# **************************************************************
+    
+- id: bathroom_motion_night
+  alias: Turn On Bathroom Lights Nighttime
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.motion_bathroom_motion
+    to: 'on'
+  condition:
+  - condition: time
+    after: '20:00'
+    before: '05:59'
+  - condition: state
+    entity_id: light.bathroom
+    state: 'off'
+  action:
+  - service: hue.hue_activate_scene
+    data:
+      group_name: "Bathroom"
+      scene_name: "Bathroom Nighttime"
+  - service: input_boolean.turn_on
+    entity_id: input_boolean.bathroom_lights_auto_on
+
+# **************************************************************
+
+- id: bathroom_motion_day
+  alias: Turn On Bathroom Lights Energize
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.motion_bathroom_motion
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: input_boolean.daylight
+    state: 'off'
+  - condition: time
+    after: '06:00'
+    before: '19:59'
+  - condition: state
+    entity_id: light.bathroom
+    state: 'off'
+  action:
+  - service: hue.hue_activate_scene
+    data:
+      group_name: "Bathroom"
+      scene_name: "Bathroom Energize"
+  - service: switch.turn_on
+    entity_id: switch.bathroom_extractor
+  - service: input_boolean.turn_on
+    entity_id: input_boolean.bathroom_lights_auto_on
+
+# **************************************************************
+
+- id: bathroom_motion_evening
+  alias: Turn On Bathroom Lights Relax
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.motion_bathroom_motion
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: input_boolean.daylight
+    state: 'off'
+  - condition: time
+    after: '20:00'
+    before: '23:59'
+  - condition: state
+    entity_id: light.bathroom
+    state: 'off'
+  action:
+  - service: hue.hue_activate_scene
+    data:
+      group_name: "Bathroom"
+      scene_name: "Bathroom Relax"
+  - service: switch.turn_on
+    entity_id: switch.bathroom_extractor
+  - service: input_boolean.turn_on
+    entity_id: input_boolean.bathroom_lights_auto_on
+
+# **************************************************************
+
+- id: bathroom_no_motion
+  alias: Turn Off Bathroom Lights
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.motion_bathroom_motion
+    to: 'off'
+    for:
+      minutes: 30
+  condition:
+  - condition: state
+    entity_id: light.bathroom
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.bathroom_lights_auto_on
+    state: 'on'
+  action:
+  - service_template: light.turn_off
+    entity_id: light.bathroom
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.bathroom_lights_auto_on
+    
+# **************************************************************
+
+- id: bathroom_remote_press
+  alias: Turn Off Input Boolean When Bathroom Button Pressed
+  trigger:
+  - platform: state
+    entity_id: sensor.bathroom_switch
+    to: "1_click"
+  action:
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.bathroom_lights_auto_on
+
+# **************************************************************
+
+- id: bathroom_turn_off_extractor
+  alias: Turn Off Bathroom Extractor
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.bathroom_occupancy
+    to: 'off'
+    for:
+      minutes: 10
+  action:
+  - service: switch.turn_off
+    entity_id: switch.bathroom_extractor
+
+# **************************************************************
+# **************************************************************
+
+- id: bedroom_motion
+  alias: Turn On Bedroom Lights
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.motion_bedroom_motion
+    to: 'on'
+  condition:
+  - condition: sun
+    after: sunset
+    after_offset: "-1:00:00"
+  - condition: time
+    before: '21:00'
+  - condition: state
+    entity_id: light.bedroom
+    state: 'off'
+  action:
+  - service: hue.hue_activate_scene
+    data:
+      group_name: "Bedroom"
+      scene_name: "Bedroom Relax"
+  - service: input_boolean.turn_on
+    entity_id: input_boolean.bedroom_lights_auto_on
+    
+# **************************************************************
+
+- id: bedroom_no_motion
+  alias: Turn Off Bedroom Lights
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.bedroom_occupancy
+    to: 'off'
+    for:
+      minutes: 1
+  condition:
+  - condition: state
+    entity_id: light.bedroom
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.bedroom_lights_auto_on
+    state: 'on'
+  action:
+  - service_template: light.turn_off
+    entity_id: light.bedroom
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.bedroom_lights_auto_on
+    
+# **************************************************************
+
+- id: bedroom_remote_press
+  alias: Turn Off Input Boolean When Bedroom Button Pressed
+  trigger:
+  - platform: state
+    entity_id: sensor.bedroom_switch
+    to: "1_click"
+  action:
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.bedroom_lights_auto_on
+    
+# **************************************************************
+### GUESTS
+- id: guest_room_motion_and_blind_closed
+  alias: Turn On Guest Room Lights During the Day if Blind Closed
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.motion_guest_room_motion
+    to: 'on'
+  condition:
+  - condition: time
+    after: '10:00'
+  - condition: sun
+    before: sunset
+    before_offset: "-1:00:00"
+  - condition: state
+    entity_id: cover.guest_room_blind_window
+    state: 'closed'
+  - condition: state
+    entity_id: light.guest_room
+    state: 'off'
+  action:
+  - service: hue.hue_activate_scene
+    data:
+      group_name: "Guest Room"
+      scene_name: "Guest Room Concentrate"
+  - service: input_boolean.turn_on
+    entity_id: input_boolean.guest_room_lights_auto_on
+
+# **************************************************************
+
+- id: guest_room_motion
+  alias: Turn On Guest Room Lights
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.motion_guest_room_motion
+      to: 'on'
+  condition:
+    - condition: sun
+      after: sunset
+      after_offset: '-1:00:00'
+    - condition: time
+      before: '23:00'
+    - condition: state
+      entity_id: light.guest_room
+      state: 'off'
+  mode: restart
+  action:
+    - service: hue.hue_activate_scene
+      data:
+        group_name: "Guest Room"
+        scene_name: "Guest Room Read"
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.guest_room_lights_auto_on
+    - delay:
+        minutes: 5
+    - service_template: light.turn_off
+      entity_id: light.guest_room
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.guest_room_lights_auto_on 
+
+# **************************************************************
+
+- id: guest_room_no_motion
+  alias: Turn Off Guest Room Lights
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.guest_room_occupancy
+    to: 'off'
+    for:
+      minutes: 30
+  condition:
+  - condition: state
+    entity_id: light.guest_room
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.guest_room_lights_auto_on
+    state: 'on'
+  action:
+  - service_template: light.turn_off
+    entity_id: light.guest_room
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.guest_room_lights_auto_on
+    
+# **************************************************************
+
+- id: guest_room_remote_press
+  alias: Turn Off Input Boolean When Guest Room Button Pressed
+  trigger:
+  - platform: state
+    entity_id: sensor.guest_room_switch
+    to: "1_click"
+  action:
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.guest_room_lights_auto_on
+
+# **************************************************************
+
+- id: play_flash_briefing
+  alias: Play Flash Briefing
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.motion_guest_bathroom_motion
+    to: 'on'
+  condition:
+  - condition: time
+    after: '23:00'
+    before: '23:59'
+  action:
+  - service: rest_command.ask_alexa
+    data:
+      message: "Play my flash briefing in the Guest Bathroom"
+  

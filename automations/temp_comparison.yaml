@@ -1,0 +1,116 @@
+- id: let_the_cool_balcony_air_in
+  alias: Open the Balcony Door
+#  initial_state: False
+  trigger:
+  - platform: template
+    value_template: '{{ states.sensor.temperature_ecobee.state | round > states.sensor.motion_balcony_temperature_measurement.state | round + 3 }}'
+  condition:
+  - condition: state
+    entity_id: binary_sensor.contact_balcony_door_contact
+    state: 'off'
+  action:
+  - service: persistent_notification.create
+    data:
+      title: "{{ now().strftime('%a - %H:%M') }}: Open the Balcony Door"
+      message: "**It's Cooler Outside:** Open the Balcony Door and let some cool air in! \n **Outside:** {{ states.sensor.motion_balcony_temperature_measurement.state | round }} \n **Inside:** {{ states.sensor.temperature_ecobee.state | round }}"
+      notification_id: "1111"
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: It's Cooler Outside: Open the Balcony Door and let some cool air in!"
+  - service: notify.gmail
+    data:
+      title: "{{ now().strftime('%a - %H:%M') }}: It's Cooler Outside: Open the Balcony Door and let some cool air in!"
+      message: "It's Cooler Outside: Open the Balcony Door and let some cool air in! \n Outside: {{ states.sensor.motion_balcony_temperature_measurement.state | round }} \n Inside: {{ states.sensor.temperature_ecobee.state | round }}"
+  - service: notify.living_room_tv
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: It's Cooler Outside: Open the Balcony Door and let some cool air in! \n **Outside Temp:** {{ states.sensor.motion_balcony_temperature_measurement.state | round }}"
+      
+# # *********************************************************************************************
+      
+- id: keep_the_warm_balcony_air_out
+  alias: Close the Balcony Door
+#  initial_state: False
+  trigger:
+  - platform: template
+    value_template: '{{ states.sensor.temperature_ecobee.state | round < states.sensor.motion_balcony_temperature_measurement.state | round + 2 }}'
+  condition:
+  - condition: state
+    entity_id: binary_sensor.contact_balcony_door_contact
+    state: 'on'
+  action:
+  - service: persistent_notification.create
+    data:
+      title: "{{ now().strftime('%a - %H:%M') }}: Close the Balcony Door"
+      message: "**It's Hot Outside:** Close the Balcony Door and keep the cool air in! \n **Outside:** {{ states.sensor.motion_balcony_temperature_measurement.state | round }} \n **Inside:** {{ states.sensor.temperature_ecobee.state | round }}"
+      notification_id: "1111"
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: It's Hot Outside: Close the Balcony Door and keep the cool air in!"
+  - service: notify.gmail
+    data:
+      title: "{{ now().strftime('%a - %H:%M') }}: It's Hot Outside: Close the Balcony Door and keep the cool air in!"
+      message: "It's Hot Outside: Close the Balcony Door and keep the cool air in! \n Outside: {{ states.sensor.motion_balcony_temperature_measurement.state | round }} \n Inside: {{ states.sensor.temperature_ecobee.state | round }}"
+  - service: notify.living_room_tv
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: It's Hot Outside: Close the Balcony Door and keep the cool air in! \n **Outside:** {{ states.sensor.motion_balcony_temperature_measurement.state | round }}"
+      
+# # *********************************************************************************************
+
+- id: let_the_cool_porch_air_in
+  alias: Open the Front Door
+#  initial_state: False
+  trigger:
+  - platform: template
+    value_template: '{{ states.sensor.temperature_ecobee.state | round > states.sensor.motion_front_porch_temperature_measurement.state | round + 3 }}'
+  condition:
+  - condition: state
+    entity_id: binary_sensor.contact_front_door_contact
+    state: 'off'
+  action:
+  - service: persistent_notification.create
+    data:
+      title: "{{ now().strftime('%a - %H:%M') }}: Open the Balcony Door"
+      message: "**It's Cooler Outside:** Open the Balcony Door and let some cool air in! \n **Outside:** {{ states.sensor.motion_front_porch_temperature_measurement.state | round }} \n **Inside:** {{ states.sensor.temperature_ecobee.state | round }}"
+      notification_id: "1111"
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: It's Cooler Outside: Open the Balcony Door and let some cool air in!"
+  - service: notify.gmail
+    data:
+      title: "{{ now().strftime('%a - %H:%M') }}: It's Cooler Outside: Open the Balcony Door and let some cool air in!"
+      message: "It's Cooler Outside: Open the Balcony Door and let some cool air in! \n Outside: {{ states.sensor.motion_front_porch_temperature_measurement.state | round }} \n Inside: {{ states.sensor.temperature_ecobee.state | round }}"
+  - service: notify.living_room_tv
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: It's Cooler Outside: Open the Balcony Door and let some cool air in! \n **Outside:** {{ states.sensor.motion_front_porch_temperature_measurement.state | round }}"
+
+# # *********************************************************************************************
+
+- id: keep_the_warm_porch_air_out
+  alias: Close the Front Door
+#  initial_state: False
+  trigger:
+  - platform: template
+    value_template: '{{ states.sensor.temperature_ecobee.state | round < states.sensor.temperature_front_porch.state | round + 2 }}'
+  condition:
+  - condition: state
+    entity_id: binary_sensor.contact_front_door_contact
+    state: 'on'
+  action:
+  - service: persistent_notification.create
+    data:
+      title: "{{ now().strftime('%a - %H:%M') }}: Close the Front Door"
+      message: "**It's Hot Outside:** Close the Front Door and keep the cool air in! \n **Outside:** {{ states.sensor.temperature_front_porch.state | round }} \n **Inside:** {{ states.sensor.temperature_ecobee.state | round }}"
+      notification_id: "2222"
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: It's Hot Outside: Close the Front Door and keep the cool air in!"
+  - service: notify.gmail
+    data:
+      title: "{{ now().strftime('%a - %H:%M') }}: It's Hot Outside: Close the Front Door and keep the cool air in!"
+      message: "It's Hot Outside: Close the Front Door and keep the cool air in! \n Outside: {{ states.sensor.temperature_front_porch.state | round }} \n Inside: {{ states.sensor.temperature_ecobee.state | round }}"
+  - service: notify.living_room_tv
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: It's Hot Outside: Close the Front Door and keep the cool air in! \n **Outside:** {{ states.sensor.motion_front_porch_temperature_measurement.state | round }}"
+
+
+# # *********************************************************************************************

@@ -1,0 +1,22 @@
+# **************************************************************
+    
+- id: hvac_off_if_door_open_at_ha_restart
+  alias: If door is open at ha restart, turn off hvac
+  trigger:
+  - platform: homeassistant
+    event: start
+  condition:
+  - condition: state
+    entity_id: group.doors_windows
+    state: 'on'
+  action:
+  - service: climate.set_hvac_mode
+    data:
+      entity_id: climate.apartment
+      hvac_mode: 'off'
+  - service: climate.set_fan_mode
+    data:
+      entity_id: climate.apartment
+      fan_mode: 'auto'
+    
+# **************************************************************

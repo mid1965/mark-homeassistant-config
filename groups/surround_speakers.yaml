@@ -1,0 +1,5 @@
+name: Surround Speakers
+entities:
+  - switch.mfi_surround_sender
+  - switch.mfi_surround_speaker_left
+  - switch.mfi_surround_speaker_right

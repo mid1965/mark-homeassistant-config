@@ -1,0 +1,25 @@
+- platform: group
+  name: All Blinds
+  entities:
+    - cover.bedroom_blind_east_window
+    - cover.bedroom_blind_north_window
+    - cover.dining_room_blind_window
+    - cover.guest_room_blind_window
+    - cover.living_room_blind_left_door
+    - cover.living_room_blind_right_door
+    - cover.living_room_blind_left_window
+    - cover.living_room_blind_right_window
+- platform: group
+  name: Living Room Blinds
+  entities:
+    - cover.living_room_blind_left_door
+    - cover.living_room_blind_right_door
+    - cover.living_room_blind_left_window
+    - cover.living_room_blind_right_window
+    - cover.dining_room_blind_window
+- platform: group
+  name: Bedroom Blinds
+  entities:
+    - cover.bedroom_blind_east_window
+    - cover.bedroom_blind_north_window
+  

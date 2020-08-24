@@ -1,0 +1,144 @@
+# - id: turn_off_guest_bathroom_extractor_when_cool
+  # alias: 'Turn Off Guest Bathroom Extractor When Cool'
+  # trigger:
+  # - platform: numeric_state
+    # entity_id: sensor.guest_bathroom_temperature
+    # below: '78'
+  # condition:
+  # - condition: state
+    # entity_id: input_boolean.guest_bathroom_extractor_auto_on
+    # state: 'on'
+  # action:
+  # - service: switch.turn_off
+    # entity_id: switch.guest_bathroom_extractor
+  # - service: input_boolean.turn_off
+    # entity_id: input_boolean.guest_bathroom_extractor_auto_on
+  # - service: notify.pushbullet
+    # data:
+      # message: "{{ now().strftime('%a - %H:%M') }}: Turned off the guest bathroom extractor as the temperature is now below 78 degrees"
+  # - service: notify.gmail
+    # data:
+      # title: "{{ now().strftime('%a - %H:%M') }}: Turned off the guest bathroom extractor"
+      # message: "Turned off the guest bathroom extractor as the temperature is now below 78 degrees"
+        
+        
+- id: turn_on_guest_bathroom_extractor_when_hot
+  alias: 'Turn On Guest Bathroom Extractor When Hot'
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.guest_bathroom_temperature
+    above: '78'
+  condition:
+  - condition: state
+    entity_id: switch.guest_bathroom_extractor
+    state: 'off'
+  action:
+  - service: switch.turn_on
+    entity_id: switch.guest_bathroom_extractor
+  - service: input_boolean.turn_on
+    entity_id: input_boolean.guest_bathroom_extractor_auto_on
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: Turned on the guest bathroom extractor as the temperature is above 78 degrees"
+  - service: notify.gmail
+    data:
+      title: "{{ now().strftime('%a - %H:%M') }}: Turned on the guest bathroom extractor"
+      message: "Turned on the guest bathroom extractor as the temperature is above 78 degrees"
+      
+# # *********************************************************************************************
+      
+- id: turn_off_bathroom_extractor_when_cool
+  alias: 'Turn Off Bathroom Extractor When Cool'
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.bathroom_temperature
+    below: '78'
+  condition:
+  - condition: state
+    entity_id: input_boolean.bathroom_extractor_auto_on
+    state: 'on'
+  action:
+  - service: switch.turn_off
+    entity_id: switch.bathroom_extractor
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.bathroom_extractor_auto_on
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: Turned off the bathroom extractor as the temperature is now below 78 degrees"
+  - service: notify.gmail
+    data:
+      title: "{{ now().strftime('%a - %H:%M') }}: Turned off the bathroom extractor"
+      message: "Turned off the bathroom extractor as the temperature is now below 78 degrees"
+        
+        
+- id: turn_on_bathroom_extractor_when_hot
+  alias: 'Turn On Bathroom Extractor When Hot'
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.bathroom_temperature
+    above: '78'
+  condition:
+  - condition: state
+    entity_id: switch.bathroom_extractor
+    state: 'off'
+  action:
+  - service: switch.turn_on
+    entity_id: switch.bathroom_extractor
+  - service: input_boolean.turn_on
+    entity_id: input_boolean.bathroom_extractor_auto_on
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: Turned on the bathroom extractor as the temperature is above 78 degrees"
+  - service: notify.gmail
+    data:
+      title: "{{ now().strftime('%a - %H:%M') }}: Turned on the bathroom extractor"
+      message: "Turned on the bathroom extractor as the temperature is above 78 degrees"
+
+# # *********************************************************************************************
+      
+- id: turn_off_laundry_extractor_when_cool
+  alias: 'Turn Off Laundry Extractor When Cool'
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.kitchen_temperature
+    below: '78'
+  condition:
+  - condition: state
+    entity_id: input_boolean.laundry_extractor_auto_on
+    state: 'on'
+  action:
+  - service: switch.turn_off
+    entity_id: switch.laundry_extractor
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.laundry_extractor_auto_on
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: Turned off the laundry extractor as the temperature is now below 78 degrees"
+  - service: notify.gmail
+    data:
+      title: "{{ now().strftime('%a - %H:%M') }}: Turned off the laundry extractor"
+      message: "Turned off the laundry extractor as the temperature is now below 78 degrees"
+        
+        
+- id: turn_on_laundry_room_extractor_when_hot
+  alias: 'Turn On Laundry Extractor When Hot'
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.kitchen_temperature
+    above: '78'
+  condition:
+  - condition: state
+    entity_id: switch.bathroom_extractor
+    state: 'off'  
+  action:
+  - service: switch.turn_on
+    entity_id: switch.laundry_extractor
+  - service: input_boolean.turn_on
+    entity_id: input_boolean.laundry_extractor_auto_on
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: Turned on the laundry extractor as the temperature is above 78 degrees"
+  - service: notify.gmail
+    data:
+      title: "{{ now().strftime('%a - %H:%M') }}: Turned on the laundry extractor"
+      message: "Turned on the laundry extractor as the temperature is above 78 degrees"

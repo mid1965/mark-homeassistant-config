@@ -1,0 +1,24 @@
+house_mode:
+  name: House Mode
+  options:
+    - Day
+    - Night
+  icon: mdi:weather-sunny
+presence:
+  name: Presence
+  options:
+    - Home
+    - Away
+    - Vacation
+daylight:
+  name: Natural Light
+  options:
+    - Daylight
+    - Dusk
+    - Twilight
+    - Darkness
+guest:
+  name: Guests
+  options:
+    - Guests Present
+    - No Guests Present

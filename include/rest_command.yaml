@@ -1,0 +1,2 @@
+ask_alexa:
+  url: https://virtual-device.bespoken.io/process?message="{{ message }}"&user_id=alexa-24ec84c0-0059-49a9-865c-7126f13f22a4'

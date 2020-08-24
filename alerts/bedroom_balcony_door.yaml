@@ -1,0 +1,9 @@
+name: Bedroom Balcony Door is still open!!
+done_message: Bedroom Balcony Door is now closed
+entity_id: input_boolean.bedroom_balcony_door_status
+state: 'on'
+repeat: 15
+can_acknowledge: True
+skip_first: True
+notifiers:
+  - pushbullet

@@ -1,0 +1,57 @@
+- name: pushbullet
+  platform: pushbullet
+  api_key: !secret pushbullet_api
+
+- name: gmail
+  platform: smtp
+  server: smtp.gmail.com
+  port: 587
+  timeout: 15
+  sender: !secret gmail_sender
+  encryption: starttls
+  username: !secret gmail_username
+  password: !secret gmail_password
+  recipient:
+    - !secret gmail_recipient
+  sender_name: My Home Assistant
+  
+- name: gmail2verizon
+  platform: smtp
+  server: smtp.gmail.com
+  port: 587
+  timeout: 15
+  sender: !secret gmail_sender
+  encryption: starttls
+  username: !secret gmail_username
+  password: !secret gmail_password
+  recipient:
+    - !secret verizon_recipient
+  sender_name: My Home Assistant
+  
+- name: NotifyMe
+  platform: rest
+  message_param_name: notification
+  resource: https://api.notifymyecho.com/v1/NotifyMe
+  data:
+    accessCode: !secret notifyme_access_code
+
+- name: telegram
+  platform: telegram
+  chat_id: !secret telegram_id
+  
+- name: firetv
+  platform: nfandroidtv
+  host: !secret firetv_host
+  color: cyan
+  
+- name: guest_tv
+  platform: nfandroidtv
+  host: !secret guest_tv_host
+  color: cyan
+  
+- name: tv_notification_group
+  platform: group
+  services:
+    - service: firetv
+    - service: guest_tv
+    - service: living_room_tv

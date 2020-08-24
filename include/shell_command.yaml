@@ -1,0 +1,5 @@
+turn_off_vizzini: ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=1 -o ServerAliveCountMax=1 -i /home/homeassistant/.ssh/id_rsa ha@vizzini shutdown /h
+
+turn_off_fireswamp: ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=1 -o ServerAliveCountMax=1 -i /home/homeassistant/.ssh/id_rsa ha@fireswamp shutdown /h
+
+renew_ssl: certbot renew --quiet --no-self-upgrade --standalone --preferred-challenges http-01

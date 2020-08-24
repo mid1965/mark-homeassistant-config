@@ -1,0 +1,268 @@
+# 100% - Fully Open
+# 0%   - Fully Close
+- id: close_guest_room_vent_if_colder_than_apartment
+  alias: 'Close the Guest Room Vent'
+  trigger:
+  - platform: state
+    entity_id: sensor.ecobee_fan
+    to: 'on'
+  condition:
+    condition: template
+    value_template: "{{ (states('sensor.apartment_temperature')) | float > (states('sensor.guest_room_temperature')) | float }}"
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.vent_guest_room
+        brightness: 50
+    - service: notify.gmail
+      data:
+        title: "{{ now().strftime('%a - %H:%M') }}: Closed Guest Room Vent"
+        message: "Closed the Guest Room Vent as it's cooler in there than the rest of the apartment. \n Apartment: {{ float(states.sensor.apartment_temperature.state) }} \n Guest Room: {{ float(states.sensor.guest_room_temperature.state) }} \n Vent Tilt Possition: {{ (((states.light.vent_guest_room.attributes.brightness)/255*100) | int ) }}%"
+    - service: notify.pushbullet
+      data:
+        message: "{{ now().strftime('%a - %H:%M') }}: Closed Guest Room Vent"
+        
+        
+- id: open_guest_room_vent_if_warmer_than_apartment
+  alias: 'Open the Guest Room Vent'
+  trigger:
+  - platform: state
+    entity_id: sensor.ecobee_fan
+    to: 'on'
+  condition:
+    condition: template
+    value_template: "{{ (states('sensor.apartment_temperature')) | float < (states('sensor.guest_room_temperature')) | float }}"
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.vent_guest_room
+        brightness: 220
+    - service: notify.gmail
+      data:
+        title: "{{ now().strftime('%a - %H:%M') }}: Opened Guest Room Vent"
+        message: "Opened the Guest Room Vent as it's warmer in there than the rest of the apartment. \n Apartment: {{ float(states.sensor.apartment_temperature.state) }} \n Guest Room: {{ float(states.sensor.guest_room_temperature.state) }} \n Vent Tilt Possition: {{ (((states.light.vent_guest_room.attributes.brightness)/255*100) | int ) }}%"
+    - service: notify.pushbullet
+      data:
+        message: "{{ now().strftime('%a - %H:%M') }}: Opened Guest Room Vent"
+        
+        
+- id: close_bedroom_vent_if_colder_than_apartment
+  alias: 'Close the Bedroom Vent'
+  trigger:
+  - platform: state
+    entity_id: sensor.ecobee_fan
+    to: 'on'
+  condition:
+    condition: template
+    value_template: "{{ (states('sensor.apartment_temperature')) | float > (states('sensor.bedroom_temperature')) | float }}"
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.vent_bedroom
+        brightness: 50
+    - service: notify.gmail
+      data:
+        title: "{{ now().strftime('%a - %H:%M') }}: Closed Bedroom Vent"
+        message: "Closed the Bedroom Vent as it's cooler in there than the rest of the apartment. \n Apartment: {{ states.sensor.apartment_temperature.state | round }} \n Bedroom: {{ states.sensor.bedroom_temperature.state | round }} \n Vent Tilt Possition: {{ (((states.light.vent_bedroom.attributes.brightness)/255*100) | int ) }}%"
+    - service: notify.pushbullet
+      data:
+        message: "{{ now().strftime('%a - %H:%M') }}: Closed Bedroom Vent"
+        
+
+- id: open_bedroom_vent_if_warmer_than_apartment
+  alias: 'Open the Bedroom Vent'
+  trigger:
+  - platform: state
+    entity_id: sensor.ecobee_fan
+    to: 'on'
+  condition:
+    condition: template
+    value_template: "{{ (states('sensor.apartment_temperature')) | float < (states('sensor.bedroom_temperature')) | float }}"
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.vent_bedroom
+        brightness: 220
+    - service: notify.gmail
+      data:
+        title: "{{ now().strftime('%a - %H:%M') }}: Opened Bedroom Vent"
+        message: "Opened the Bedroom Vent as it's warmer in the Bedroom than the rest of the apartment. \n Apartment: {{ states.sensor.apartment_temperature.state | round }} \n Bedroom: {{ states.sensor.bedroom_temperature.state | round }} \n Vent Tilt Possition: {{ (((states.light.vent_bedroom.attributes.brightness)/255*100) | int ) }}%"
+    - service: notify.pushbullet
+      data:
+        message: "{{ now().strftime('%a - %H:%M') }}: Opened Bedroom Vent"
+
+# *********************************************************************************************
+
+- id: high_temperature_in_apartment
+  alias: High temperature in the Apartment
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.max_temp
+    above: '82'
+  action:
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: The Temperature In the Apartment just topped 80 degrees!"
+  - service: notify.gmail
+    data:
+      title: "{{ now().strftime('%a - %H:%M') }}: The Temperature in the Apartment just topped 80 degrees!"
+      message: "Check the Air Conditioner - The temperature in the apartment is very high!"
+
+# *********************************************************************************************
+
+- id: low_temperature_in_apartment
+  alias: Low temperature in the Apartment
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.min_temp
+    below: '62'
+  action:
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: The Temperature In the Apartment just dropped below 62 degrees!"
+  - service: notify.gmail
+    data:
+      title: "{{ now().strftime('%a - %H:%M') }}: The Temperature in the Apartment just dropped below 62 degrees!"
+      message: "Check the Heating - The temperature in the apartment just dropped below 62!"
+
+# *********************************************************************************************
+
+
+# Previous setting as Cover entity, before Smartthings integration turned them into lights!
+
+# 100% - Fully Open
+# 0%   - Fully Close
+# - id: close_guest_room_vent_if_colder_than_apartment
+  # alias: 'Close the Guest Room Vent'
+  # trigger:
+  # - platform: state
+    # entity_id: sensor.ecobee_fan
+    # to: 'on'
+  # condition:
+    # condition: and
+    # conditions:
+      # - condition: template
+        # value_template: '{{ float(states.sensor.apartment_temperature.state) > float(states.sensor.guest_room_temperature.state) }}'
+      # - condition: or
+        # conditions:
+          # - condition: numeric_state
+            # entity_id: sensor.vent_guest_room_tilt
+        # #    value_template: "{{ states.sensor.vent_guest_room_tilt.state }}"
+            # above: 10
+          # - condition: state
+            # entity_id: sensor.vent_guest_room_tilt
+            # state: 'unknown'
+  # action:
+    # - service: cover.set_cover_tilt_position
+      # data:
+        # entity_id: cover.guest_room_vent
+        # tilt_position: 10
+    # - service: notify.gmail
+      # data:
+        # title: "{{ now().strftime('%a - %H:%M') }}: Closed Guest Room Vent"
+        # message: "Closed the Guest Room Vent as it's cooler in there than the rest of the apartment. \n Apartment: {{ float(states.sensor.apartment_temperature.state) }} \n Guest Room: {{ float(states.sensor.guest_room_temperature.state) }} \n Vent Tilt Possition: {{ float(states.sensor.vent_guest_room_tilt.state) }}"
+    # - service: notify.pushbullet
+      # data:
+        # message: "{{ now().strftime('%a - %H:%M') }}: Closed Guest Room Vent"
+        
+        
+# - id: open_guest_room_vent_if_warmer_than_apartment
+  # alias: 'Open the Guest Room Vent'
+  # trigger:
+  # - platform: state
+    # entity_id: sensor.ecobee_fan
+    # to: 'on'
+  # condition:
+    # condition: and
+    # conditions:
+      # - condition: template
+        # value_template: '{{ float(states.sensor.apartment_temperature.state) < float(states.sensor.guest_room_temperature.state) }}'
+      # - condition: or
+        # conditions:
+          # - condition: numeric_state
+            # entity_id: sensor.vent_guest_room_tilt
+        # #    value_template: "{{ states.sensor.vent_guest_room_tilt.state }}"
+            # below: 90
+          # - condition: state
+            # entity_id: sensor.vent_guest_room_tilt
+            # state: 'unknown'
+  # action:
+    # - service: cover.set_cover_tilt_position
+      # data:
+        # entity_id: cover.guest_room_vent
+        # tilt_position: 90
+    # - service: notify.gmail
+      # data:
+        # title: "{{ now().strftime('%a - %H:%M') }}: Opened Guest Room Vent"
+        # message: "Opened the Guest Room Vent as it's warmer in there than the rest of the apartment. \n Apartment: {{ float(states.sensor.apartment_temperature.state) }} \n Guest Room: {{ float(states.sensor.guest_room_temperature.state) }} \n Vent Tilt Possition: {{ float(states.sensor.vent_guest_room_tilt.state) }}"
+    # - service: notify.pushbullet
+      # data:
+        # message: "{{ now().strftime('%a - %H:%M') }}: Opened Guest Room Vent"
+        
+        
+# - id: close_bedroom_vent_if_colder_than_apartment
+  # alias: 'Close the Bedroom Vent'
+  # trigger:
+  # - platform: state
+    # entity_id: sensor.ecobee_fan
+    # to: 'on'
+  # condition:
+    # condition: and
+    # conditions:
+      # - condition: template
+        # value_template: '{{ float(states.sensor.apartment_temperature.state) > float(states.sensor.bedroom_temperature.state) }}'
+      # - condition: or
+        # conditions:
+          # - condition: numeric_state
+            # entity_id: sensor.vent_bedroom_tilt
+        # #    value_template: "{{ states.sensor.vent_bedroom_tilt.state }}"
+            # above: 10
+          # - condition: state
+            # entity_id: sensor.vent_bedroom_tilt
+            # state: 'unknown'
+  # action:
+    # - service: cover.set_cover_tilt_position
+      # data:
+        # entity_id: cover.bedroom_vent
+        # tilt_position: 10
+    # - service: notify.gmail
+      # data:
+        # title: "{{ now().strftime('%a - %H:%M') }}: Closed Bedroom Vent"
+        # message: "Closed the Bedroom Vent as it's cooler in there than the rest of the apartment. \n Apartment: {{ states.sensor.apartment_temperature.state | round }} \n Bedroom: {{ states.sensor.bedroom_temperature.state | round }} \n Vent Tilt Possition: {{ states.sensor.vent_bedroom_tilt.state | round }}"
+    # - service: notify.pushbullet
+      # data:
+        # message: "{{ now().strftime('%a - %H:%M') }}: Closed Bedroom Vent"
+        
+
+# - id: open_bedroom_vent_if_warmer_than_apartment
+  # alias: 'Open the Bedroom Vent'
+  # trigger:
+  # - platform: state
+    # entity_id: sensor.ecobee_fan
+    # to: 'on'
+  # condition:
+    # condition: and
+    # conditions:
+      # - condition: template
+        # value_template: '{{ float(states.sensor.apartment_temperature.state) < float(states.sensor.bedroom_temperature.state) }}'
+      # - condition: or
+        # conditions:
+          # - condition: numeric_state
+            # entity_id: sensor.vent_bedroom_tilt
+        # #    value_template: "{{ states.sensor.vent_bedroom_tilt.state }}"
+            # below: 90
+          # - condition: state
+            # entity_id: sensor.vent_bedroom_tilt
+            # state: 'unknown'
+  # action:
+    # - service: cover.set_cover_tilt_position
+      # data:
+        # entity_id: cover.bedroom_vent
+        # tilt_position: 90
+    # - service: notify.gmail
+      # data:
+        # title: "{{ now().strftime('%a - %H:%M') }}: Opened Bedroom Vent"
+        # message: "Opened the Bedroom Vent as it's warmer in the Bedroom than the rest of the apartment. \n Apartment: {{ states.sensor.apartment_temperature.state | round }} \n Bedroom: {{ states.sensor.bedroom_temperature.state | round }} \n Vent Tilt Possition: {{ states.sensor.vent_bedroom_tilt.state | round }}"
+    # - service: notify.pushbullet
+      # data:
+        # message: "{{ now().strftime('%a - %H:%M') }}: Opened Bedroom Vent"

@@ -1,0 +1,67 @@
+- id: water_leak_in_kitchen
+  alias: Water Leak in Kitchen
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.moisture_kitchen_water
+    to: 'on'
+  action:
+  - service: notify.telegram
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: *ALERT!!! There's a water leak!!*\nThere is water detected under the Kitchen Sink."
+  - service: notify.gmail
+    data:
+      title: ALERT!!! There's a water leak under the Kitchen Sink!!
+      message: The moisture sensor under the Kitchen Sink has detected water!
+
+# *******************************************************************************************
+
+- id: water_leak_in_laundry
+  alias: Water Leak in Laundry Closet
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.moisture_laundry_water
+    to: 'on'
+  action:
+  - service: notify.telegram
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: *ALERT!!! There's a water leak!!*\nThere is water detected in the Laundry Closet."
+  - service: notify.gmail
+    data:
+      title: ALERT!!! There's a water leak in the Laundry Closet!!
+      message: The moisture sensor under the Washing Machine has detected water!
+
+# *******************************************************************************************
+
+- id: water_leak_in_bathroom
+  alias: Water Leak in Bathroom
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.moisture_bathroom_water
+    to: 'on'
+  action:
+  - service: notify.telegram
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: *ALERT!!! There's a water leak!!*\nThere is water detected in the Bathroom."
+  - service: notify.gmail
+    data:
+      title: ALERT!!! There's a water leak in the Bathroom!!
+      message: The moisture sensor by the bath in the Bathroom has detected water!
+
+# *******************************************************************************************
+
+- id: water_leak_in_guest_bathroom
+  alias: Water Leak in Guest Bathroom
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.moisture_guest_bathroom_water
+    to: 'on'
+  action:
+  - service: notify.telegram
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: *ALERT!!! There's a water leak!!*\nThere is water detected in the Guest Bathroom."
+  - service: notify.gmail
+    data:
+      title: ALERT!!! There's a water leak in the Guest Bathroom!!
+      message: The moisture sensor by the bath in the Guest Bathroom has detected water!
+
+# *********************************************************************************************

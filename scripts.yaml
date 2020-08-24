@@ -1,0 +1,1476 @@
+#####################################################################
+#
+#   ENVIRONMENT
+#
+#####################################################################
+
+goodnight:
+  alias: Goodnight
+  sequence:
+  - service: script.turn_on
+    data:
+      entity_id:
+        - script.turn_off_all_lights_ex_bedroom
+        - script.shutdown_media
+  - service: lock.lock
+    data:
+      entity_id:
+        - lock.front_door
+  - service: scene.turn_on
+    data:
+      entity_id:
+        - scene.close_all_shades
+
+turn_off_everything:
+  alias: Turn Off Everything
+  sequence:
+    service: script.turn_on
+    data:
+      entity_id:
+        - script.turn_off_every_light
+        - script.shutdown_media
+        - script.turn_off_mfi
+
+      
+turn_off_mfi:
+  alias: Turn off Everything Attached to mFi MultiGang
+  sequence:
+    service: switch.turn_off
+    data:
+      entity_id:
+        - switch.mfi_denon_amplifier
+        - switch.mfi_firetv
+        - switch.mfi_led_screen
+        - switch.mfi_lg_television
+        - switch.mfi_ps3
+        - switch.mfi_surround_sender
+        - switch.mfi_surround_speaker_left
+        - switch.mfi_surround_speaker_right
+        - switch.mfi_tivo
+        - switch.mfi_xbox
+
+  
+wake_up_pcs:
+  alias: Wake up the Computers
+  sequence:
+    service: switch.turn_on
+    data:
+      entity_id:
+        - switch.vizzini
+        - switch.fireswamp
+  
+  
+turn_on_mfi:
+  alias: Turn Power on for Daily Used Items Attached to mfi MultiGang
+  sequence:
+    - alias: Turn on mFi Sockets
+      service: switch.turn_on
+      data:
+        entity_id:
+          - switch.mfi_denon_amplifier
+          - switch.mfi_lg_television
+          - switch.mfi_firetv
+
+power_on_denon:
+  alias: Power on Denon
+  sequence:
+    - condition: state
+      entity_id: switch.mfi_denon_amplifier
+      state: 'off'
+    - service: switch.turn_on
+      entity_id: switch.mfi_denon_amplifier
+        
+power_on_lg_television:
+  alias: Power on LG TV
+  sequence:
+    - condition: state
+      entity_id: switch.mfi_lg_television
+      state: 'off'
+    - service: switch.turn_on
+      entity_id: switch.mfi_lg_television
+        
+power_on_firetv:
+  alias: Power on FireTV
+  sequence:
+    - condition: state
+      entity_id: switch.mfi_firetv
+      state: 'off'
+    - service: switch.turn_on
+      entity_id: switch.mfi_firetv
+
+light_colorloop_slow_1:
+  alias: Light Colorloop 1
+  sequence:
+    - service: scene.turn_on
+      entity_id: scene.lights_mauve
+    - delay: 00:05:00
+    - service: scene.turn_on
+      entity_id: scene.lights_purple
+    - delay: 00:05:00
+    - service: scene.turn_on
+      entity_id: scene.lights_blue
+    - delay: 00:05:00
+    - service: scene.turn_on
+      entity_id: scene.lights_green
+    - delay: 00:05:00
+    - service: scene.turn_on
+      entity_id: scene.lights_yellow
+    - delay: 00:05:00
+    - service: scene.turn_on
+      entity_id: scene.lights_orange
+    - delay: 00:05:00
+    - service: scene.turn_on
+      entity_id: scene.lights_red
+    - delay: 00:05:00
+    - service: scene.turn_on
+      entity_id: scene.lights_pink
+    - delay: 00:05:00
+    - service: script.turn_on
+      entity_id: script.light_colorloop_slow_2
+
+light_colorloop_slow_2:
+  alias: Light Colorloop 2
+  sequence:
+    - service: scene.turn_on
+      entity_id: scene.lights_mauve
+    - delay: 00:05:00
+    - service: scene.turn_on
+      entity_id: scene.lights_purple
+    - delay: 00:05:00
+    - service: scene.turn_on
+      entity_id: scene.lights_blue
+    - delay: 00:05:00
+    - service: scene.turn_on
+      entity_id: scene.lights_green
+    - delay: 00:05:00
+    - service: scene.turn_on
+      entity_id: scene.lights_yellow
+    - delay: 00:05:00
+    - service: scene.turn_on
+      entity_id: scene.lights_orange
+    - delay: 00:05:00
+    - service: scene.turn_on
+      entity_id: scene.lights_red
+    - delay: 00:05:00
+    - service: scene.turn_on
+      entity_id: scene.lights_pink
+    - delay: 00:05:00
+    - service: script.turn_on
+      entity_id: script.light_colorloop_slow_1
+
+light_colorloop_fast_1:
+  alias: Light Colorloop 1
+  sequence:
+    - service: scene.turn_on
+      entity_id: scene.lights_mauve
+    - delay: 00:00:15
+    - service: scene.turn_on
+      entity_id: scene.lights_purple
+    - delay: 00:00:15
+    - service: scene.turn_on
+      entity_id: scene.lights_blue
+    - delay: 00:00:15
+    - service: scene.turn_on
+      entity_id: scene.lights_green
+    - delay: 00:00:15
+    - service: scene.turn_on
+      entity_id: scene.lights_yellow
+    - delay: 00:00:15
+    - service: scene.turn_on
+      entity_id: scene.lights_orange
+    - delay: 00:00:15
+    - service: scene.turn_on
+      entity_id: scene.lights_red
+    - delay: 00:00:15
+    - service: scene.turn_on
+      entity_id: scene.lights_pink
+    - delay: 00:00:15
+    - service: script.turn_on
+      entity_id: script.light_colorloop_fast_2
+
+light_colorloop_fast_2:
+  alias: Light Colorloop 2
+  sequence:
+    - service: scene.turn_on
+      entity_id: scene.lights_mauve
+    - delay: 00:00:15
+    - service: scene.turn_on
+      entity_id: scene.lights_purple
+    - delay: 00:00:15
+    - service: scene.turn_on
+      entity_id: scene.lights_blue
+    - delay: 00:00:15
+    - service: scene.turn_on
+      entity_id: scene.lights_green
+    - delay: 00:00:15
+    - service: scene.turn_on
+      entity_id: scene.lights_yellow
+    - delay: 00:00:15
+    - service: scene.turn_on
+      entity_id: scene.lights_orange
+    - delay: 00:00:15
+    - service: scene.turn_on
+      entity_id: scene.lights_red
+    - delay: 00:00:15
+    - service: scene.turn_on
+      entity_id: scene.lights_pink
+    - delay: 00:00:15
+    - service: script.turn_on
+      entity_id: script.light_colorloop_fast_1
+
+    
+business_time:
+  alias: Business Time
+  sequence:
+    - alias: Close the Blinds
+      service: scene.turn_on
+      data:
+        entity_id:
+          - scene.close_all_shades
+    - alias: Select Everywhere Group
+      service: media_player.select_source
+      data:
+        entity_id: media_player.spotify
+        source: Everywhere
+    - alias: Set Spotify Volume
+      service: media_player.volume_set
+      data:
+        entity_id: media_player.spotify
+        volume_level: 0.4
+    - alias: Turn Off Living Room TV
+      service: media_player.turn_off
+      data:
+        entity_id: media_player.living_room_tv
+    - alias: Turn On Denon
+      service: media_player.turn_on
+      data:
+        entity_id: media_player.denon_avr_x4200w
+    - alias: Switch Denon to Echo Input
+      service: media_player.select_source
+      data:
+        entity_id: media_player.denon_avr_x4200w
+        source: FireTV
+    - alias: Set Denon Volume
+      service: media_player.volume_set
+      data:
+        entity_id: media_player.denon_avr_x4200w
+        volume_level: 0.4
+    - alias: Launch Spotify
+      service: media_player.play_media
+      data:
+        entity_id: media_player.spotify
+        media_content_id: spotify:user:unkieherb65:playlist:1yYQEU6zgN89A7tX7mS4fu
+        media_content_type: playlist
+    - alias: Turn Off Reading Lamp
+      service: light.turn_off
+      data:
+        entity_id: light.reading_lamp
+    - alias: Turn Off Access Lights
+      service: light.turn_off
+      data:
+        entity_id: light.access_lights
+    - alias: Turn Off Dining Room Lights
+      service: light.turn_off
+      data:
+        entity_id: light.dining_room
+    - alias: Set Living Room Lights
+      service: hue.hue_activate_scene
+      data:
+        group_name: Living Room
+        scene_name: Living Room Business Time
+    - alias: Set Bedroom Lights
+      service: hue.hue_activate_scene
+      data:
+        group_name: Bedroom
+        scene_name: Bedroom Business Time
+        transition: 30
+      
+reset_all_lights:
+  alias: Reset All Lights
+  sequence:
+    - alias: Turn On All Lights
+      service: light.turn_on
+      entity_id:
+        - light.all_lights
+    - alias: Reset Living Room Lights
+      service: hue.hue_activate_scene
+      data:
+        group_name: Living Room
+        scene_name: Living Room Relax
+    - alias: Reset Kitchen Lights
+      service: hue.hue_activate_scene
+      data:
+        group_name: Kitchen
+        scene_name: Kitchen Relax
+    - alias: Reset Dining Room Lights
+      service: hue.hue_activate_scene
+      data:
+        group_name: Dining Room
+        scene_name: Dining Room Relax
+    - alias: Reset Bedroom Lights
+      service: hue.hue_activate_scene
+      data:
+        group_name: Bedroom
+        scene_name: Bedroom Relax
+    - alias: Reset Guest Room Lights
+      service: hue.hue_activate_scene
+      data:
+        group_name: Guest Room
+        scene_name: Guest Room Relax
+    - alias: Reset Bathroom Lights
+      service: hue.hue_activate_scene
+      data:
+        group_name: Bathroom
+        scene_name: Bathroom Relax
+    - alias: Reset Guest Bathroom Lights
+      service: hue.hue_activate_scene
+      data:
+        group_name: Guest Bathroom
+        scene_name: Guest Bathroom Relax
+    - alias: Reset Access Lights
+      service: hue.hue_activate_scene
+      data:
+        group_name: Access Lights
+        scene_name: Access Lights Read
+    - alias: Reset Balcony Lights
+      service: hue.hue_activate_scene
+      data:
+        group_name: Balcony
+        scene_name: Balcony Relax
+    - alias: Reset Closet Lights
+      service: hue.hue_activate_scene
+      data:
+        entity_id: light.closet_lights
+        scene_name: Closet Lights Relax
+    - alias: Reset Landing Lights
+      service: hue.hue_activate_scene
+      data:
+        group_name: Landing
+        scene_name: Landing Relax
+    - alias: Cancel Looping Light Scripts
+      service: script.turn_off
+      entity_id:
+        - script.flash_balcony_lights_1
+        - script.flash_balcony_lights_2
+        - script.flash_landing_light_1
+        - script.flash_landing_light_2
+        - script.light_colorloop_fast_1
+        - script.light_colorloop_fast_2
+        - script.light_colorloop_slow_1
+        - script.light_colorloop_slow_2
+    - alias: Turn Off All Lights
+      service: light.turn_off
+      entity_id:
+        - light.all_hue_lights
+
+reset_scene_lights:
+  alias: Reset All Scene Lights
+  sequence:
+    - alias: Turn On Scene Lights
+      service: scene.turn_on
+      entity_id: scene.lights_read
+    - alias: Reset Living Room Lights
+      service: hue.hue_activate_scene
+      data:
+        group_name: Living Room
+        scene_name: Living Room Relax
+    - alias: Reset Kitchen Lights
+      service: hue.hue_activate_scene
+      data:
+        group_name: Kitchen
+        scene_name: Kitchen Relax
+    - alias: Reset Dining Room Lights
+      service: hue.hue_activate_scene
+      data:
+        group_name: Dining Room
+        scene_name: Dining Room Relax
+    - alias: Cancel Looping Light Scripts
+      service: script.turn_off
+      entity_id:
+        - script.light_colorloop_slow_1
+        - script.light_colorloop_slow_2
+        - script.light_colorloop_fast_1
+        - script.light_colorloop_fast_2        
+    - alias: Turn Off All Lights
+      service: light.turn_off
+      entity_id:
+        - light.all_hue_lights
+        
+cancel_fire_alarm:
+  alias: Alarm Over
+  sequence:
+  - service: script.turn_on
+    data:
+      entity_id: script.reset_all_lights
+  - service: script.turn_off
+    data:
+      entity_id:
+        - script.flash_balcony_lights_1
+        - script.flash_balcony_lights_2
+        - script.flash_landing_light_1
+        - script.flash_landing_light_2
+      
+living_room_moodlight:
+  alias: Moodlighting For Living Room
+  sequence:
+    service: light.turn_on
+    data:
+      entity_id: group.moodlights
+      effect: colorloop
+      brightness: 254
+      transition: 5
+      
+turn_off_all_guest_lights:
+  alias: Turn off all Guest Lights
+  sequence:
+    service: light.turn_off
+    data:
+      entity_id:
+        - light.guest_room
+        - light.guest_bathroom
+        - light.guest_closet
+      
+turn_off_all_dining_room_lights:
+  alias: Turn off all Dining Room Lights
+  sequence:
+    - service: light.turn_off
+      data:
+        entity_id:
+          - light.dining_room
+          - light.chandelier
+    - service: switch.turn_off
+      data:
+        entity_id:
+          - switch.light_cabinet_led
+
+turn_off_all_living_room_lights:
+  alias: Turn off all Living Room Lights
+  sequence:
+    service: light.turn_off
+    data:
+      entity_id:
+        - light.living_room
+      
+turn_off_all_balcony_lights:
+  alias: Turn off all Balcony Lights
+  sequence:
+    service: light.turn_off
+    data:
+      entity_id:
+        - light.balcony
+        - light.light_balcony_string_lights
+      
+turn_off_all_bedroom_lights:
+  alias: Turn off all Bedroom Lights
+  sequence:
+    service: light.turn_off
+    data:
+      entity_id:
+        - light.bedroom
+        - light.bathroom
+        - light.closet_lights
+      
+turn_off_all_lights_ex_bedroom:
+  alias: Turn off all lights except the Bedroom
+  sequence:
+    - service: script.turn_on
+      data:
+        entity_id:
+          - script.turn_off_all_guest_lights
+          - script.turn_off_all_balcony_lights
+          - script.turn_off_all_dining_room_lights
+    - service: light.turn_off
+      data:
+        entity_id:
+          - light.access_lights
+          - light.living_room
+          - light.kitchen
+      
+turn_off_every_light:
+  alias: Turn off every light
+  sequence:
+    service: script.turn_on
+    data:
+      entity_id:
+        - script.turn_off_all_lights_ex_bedroom
+        - script.turn_off_all_bedroom_lights
+      
+turn_on_every_light:
+  alias: Turn on every light
+  sequence:
+    service: light.turn_on
+    data:
+      entity_id:
+        - light.living_room
+        - light.dining_room
+        - light.chandelier
+        - light.kitchen
+        - light.guest_room
+        - light.guest_bathroom
+        - light.guest_closet
+        - light.balcony
+        - light.light_balcony_string_lights
+        - light.bedroom
+        - light.bathroom
+        - light.closet_lights
+
+#####################################################################
+#
+#   MEDIA
+#
+#####################################################################
+
+shutdown_media:
+  sequence:
+    service: media_player.turn_off
+    data:
+      entity_id: 
+        - media_player.denon_avr_x4200w
+        - media_player.living_room_tv
+    
+turn_off_sony_tv:
+  alias: Turn Off Guest Room TV
+  sequence:
+    service: media_player.turn_off
+    data:
+      entity_id: media_player.guest_room_tv
+
+turn_on_media:
+  alias: Turn On Media
+  sequence:
+  - alias: Turn On Living Room TV
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: 60994799
+      command: PowerOn
+  - alias: Turn On Denon
+    data:
+      entity_id: media_player.denon_avr_x4200w
+    service: media_player.turn_on
+    
+turn_on_media_sequence:
+  alias: Turn On Media Sequence
+  sequence:
+    - service: switch.turn_on
+      entity_id:
+        - switch.mfi_lg_television
+        - switch.mfi_denon_amplifier
+    - delay: '00:00:03'
+    - service: remote.send_command
+      data_template:
+        entity_id: remote.harmonyhub
+        device: 60994798
+        command: PowerOn
+    - service: remote.send_command
+      data_template:
+        entity_id: remote.harmonyhub
+        device: 60994799
+        command: PowerOn
+        
+turn_off_media_sequence:
+  alias: Turn Off Media Sequence
+  sequence:
+    - service: remote.send_command
+      data_template:
+        entity_id: remote.harmonyhub
+        device: 60994798
+        command: PowerOff
+    - service: remote.send_command
+      data_template:
+        entity_id: remote.harmonyhub
+        device: 60994799
+        command: PowerOff
+    - delay: '00:00:02'
+    - service: switch.turn_off
+      entity_id:
+        - switch.mfi_lg_television
+        - switch.mfi_denon_amplifier
+    
+watch_hulu:
+  alias: Watch Hulu
+  sequence:
+  - alias: Switch TV to Hulu App
+    service: media_player.select_source
+    data:
+      entity_id: media_player.living_room_tv
+      source: Hulu
+
+watch_netflix:
+  alias: Watch Netflix
+  sequence:
+  - alias: Turn On Outlets
+    service: switch.turn_on
+    data:
+      entity_id: 
+        - switch.mfi_lg_television
+  - alias: Turn On Living Room TV
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: 60994799
+      command: PowerOn
+  - wait_template: "{{ is_state('media_player.living_room_tv', 'playing') }}"
+  - alias: Switch TV to Netflix App
+    service: media_player.select_source
+    data:
+      entity_id: media_player.living_room_tv
+      source: Netflix
+
+watch_plex:
+  alias: Watch Plex
+  sequence:
+  - alias: Turn On Outlets
+    service: switch.turn_on
+    data:
+      entity_id: 
+        - switch.mfi_lg_television
+  - alias: Turn On Living Room TV
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: 60994799
+      command: PowerOn
+  - wait_template: "{{ is_state('media_player.living_room_tv', 'playing') }}"
+  - alias: Switch TV to Plex App
+    service: media_player.select_source
+    data:
+      entity_id: media_player.living_room_tv
+      source: Plex
+
+watch_youtube:
+  alias: Watch YouTube
+  sequence:
+  - alias: Turn On Outlets
+    service: switch.turn_on
+    data:
+      entity_id: 
+        - switch.mfi_lg_television
+  - alias: Turn On Living Room TV
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: 60994799
+      command: PowerOn
+  - wait_template: "{{ is_state('media_player.living_room_tv', 'playing') }}"
+  - alias: Switch TV to YouTube App
+    service: media_player.select_source
+    data:
+      entity_id: media_player.living_room_tv
+      source: YouTube
+
+watch_bbc:
+  alias: Watch BBC
+  sequence:
+  - alias: Turn On Outlets
+    service: switch.turn_on
+    data:
+      entity_id: 
+        - switch.mfi_lg_television
+        - switch.mfi_denon_amplifier
+  - alias: Turn On Living Room TV
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: 60994799
+      command: PowerOn
+  - alias: Switch TV to Denon Source
+    service: media_player.select_source
+    data:
+      entity_id: media_player.living_room_tv
+      source: DENON
+  - alias: Turn On Denon
+    service: media_player.turn_on
+    data:
+      entity_id: media_player.denon_avr_x4200w
+  - alias: Switch Denon to Roku3 Source
+    service: media_player.select_source
+    data:
+      entity_id: media_player.denon_avr_x4200w
+      source: Roku3
+  - alias: Select BBC iPlayer on Roku3
+    service: media_player.select_source
+    data:
+      entity_id: media_player.ukroku
+      source: 'BBC iPlayer'
+
+watch_jwbroadcasting:
+  alias: Watch JW Broadcasting
+  sequence:
+  - alias: Turn On Outlets
+    service: switch.turn_on
+    data:
+      entity_id: 
+        - switch.mfi_lg_television
+        - switch.mfi_denon_amplifier
+  - alias: Turn On Living Room TV
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: 60994799
+      command: PowerOn
+  - alias: Turn On Denon
+    service: media_player.turn_on
+    data:
+      entity_id: media_player.denon_avr_x4200w
+  - alias: Switch TV to Denon Source
+    service: media_player.select_source
+    data:
+      entity_id: media_player.living_room_tv
+      source: DENON
+  - alias: Switch Denon to Roku3 Source
+    service: media_player.select_source
+    data:
+      entity_id: media_player.denon_avr_x4200w
+      source: Roku3
+  - alias: Select JW Broadcasting on Roku3
+    service: media_player.select_source
+    data:
+      entity_id: media_player.ukroku
+      source: 'JW Broadcasting'
+
+watch_cable:
+  alias: Watch Cable TV
+  sequence:
+  - alias: Turn On Outlets
+    service: switch.turn_on
+    data:
+      entity_id: 
+        - switch.mfi_lg_television
+        - switch.mfi_denon_amplifier
+  - alias: Turn On Living Room TV
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: 60994799
+      command: PowerOn
+  - alias: Switch TV to Denon Source
+    service: media_player.select_source
+    data:
+      entity_id: media_player.living_room_tv
+      source: DENON
+  - alias: Turn On Denon
+    service: media_player.turn_on
+    data:
+      entity_id: media_player.denon_avr_x4200w
+  - alias: Switch Denon to Tivo Source
+    service: media_player.select_source
+    data:
+      entity_id: media_player.denon_avr_x4200w
+      source: TIVO
+
+
+watch_firetv:
+  alias: Watch Amazon Fire TV
+  sequence:
+  - alias: Turn On Outlets
+    service: switch.turn_on
+    data:
+      entity_id: 
+        - switch.mfi_lg_television
+        - switch.mfi_denon_amplifier
+        - switch.mfi_firetv
+  - alias: Turn On Living Room TV
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: 60994799
+      command: PowerOn
+  - alias: Switch TV to Denon Source
+    service: media_player.select_source
+    data:
+      entity_id: media_player.living_room_tv
+      source: DENON
+  - alias: Turn On Denon
+    service: media_player.turn_on
+    data:
+      entity_id: media_player.denon_avr_x4200w
+  - alias: Switch Denon to FireTV Source
+    service: media_player.select_source
+    data:
+      entity_id: media_player.denon_avr_x4200w
+      source: 'FIRE TV'
+
+play_ps3:
+  alias: Switch to PS3
+  sequence:
+  - alias: Turn On Outlets
+    service: switch.turn_on
+    data:
+      entity_id: 
+        - switch.mfi_lg_television
+        - switch.mfi_denon_amplifier
+        - switch.mfi_ps3
+  - alias: Turn On Living Room TV
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: 60994799
+      command: PowerOn
+  - alias: Turn on PS3
+    service: remote.turn_on
+    entity_id: remote.harmonyhub
+    data:
+      activity: "Play PS3"
+  - alias: Turn On Denon
+    service: media_player.turn_on
+    data:
+      entity_id: media_player.denon_avr_x4200w
+  - alias: Switch Denon to TV Audio
+    service: media_player.select_source
+    data:
+      entity_id: media_player.denon_avr_x4200w
+      source: PS3
+
+play_xbox:
+  alias: Switch to XBOX
+  sequence:
+  - alias: Turn On Outlets
+    service: switch.turn_on
+    data:
+      entity_id: 
+        - switch.mfi_lg_television
+        - switch.mfi_denon_amplifier
+        - switch.mfi_xbox
+  - alias: Turn On Living Room TV
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: 60994799
+      command: PowerOn
+  - alias: Turn on XBox
+    service: remote.turn_on
+    entity_id: remote.harmonyhub
+    data:
+      activity: "Play Xbox One"
+  - alias: Turn On Denon
+    service: media_player.turn_on
+    data:
+      entity_id: media_player.denon_avr_x4200w
+  - alias: Switch Denon to XBox input
+    service: media_player.select_source
+    data:
+      entity_id: media_player.denon_avr_x4200w
+      source: XBOX
+      
+play_spotify:
+  alias: Play Business Time Playlist
+  sequence:
+  - alias: Select Everywhere Group
+    service: media_player.select_source
+    data:
+      entity_id: media_player.spotify
+      source: Everywhere
+  - alias: Launch Spotify
+    service: media_player.play_media
+    data:
+      entity_id: media_player.spotify
+      media_content_id: spotify:user:unkieherb65:playlist:1yYQEU6zgN89A7tX7mS4fu
+      media_content_type: playlist
+      
+play_home_assistant_playlist:
+  alias: Play Home Assistant Playlist
+  sequence:
+  - alias: Select Everywhere Group
+    service: media_player.select_source
+    data:
+      entity_id: media_player.spotify
+      source: Everywhere
+  - alias: Launch Spotify
+    service: media_player.play_media
+    data:
+      entity_id: media_player.spotify
+      media_content_id: spotify:user:unkieherb65:playlist:6tiE0QuJ5OFqaD9YTr7VNX
+      media_content_type: playlist
+
+tv_up:
+  alias: Send direction up command to TV
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "60994799"
+      command: "DirectionUp"
+tv_down:
+  alias: Send direction down command to TV
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "60994799"
+      command: "DirectionDown"
+tv_left:
+  alias: Send direction left command to TV
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "60994799"
+      command: "DirectionLeft"
+tv_right:
+  alias: Send direction right command to TV
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "60994799"
+      command: "DirectionRight"
+tv_ok:
+  alias: Send OK (Enter) command to TV
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "60994799"
+      command: "OK"
+tv_back:
+  alias: Send Back command to TV
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "60994799"
+      command: "Back"
+tv_pause:
+  alias: Send Pause command to TV
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "60994799"
+      command: "Pause"
+tv_play:
+  alias: Send Play command to TV
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "60994799"
+      command: "Play"
+tv_exit:
+  alias: Send Exit command to TV
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "60994799"
+      command: "Exit"
+      
+      
+roku_up:
+  alias: Send direction up command to Roku
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "60994700"
+      command: "DirectionUp"
+roku_down:
+  alias: Send direction down command to Roku
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "60994700"
+      command: "DirectionDown"
+roku_left:
+  alias: Send direction left command to Roku
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "60994700"
+      command: "DirectionLeft"
+roku_right:
+  alias: Send direction right command to Roku
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "60994700"
+      command: "DirectionRight"
+roku_ok:
+  alias: Send OK (Enter) command to Roku
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "60994700"
+      command: "OK"
+roku_back:
+  alias: Send Back command to Roku
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "60994700"
+      command: "Back"
+roku_pause:
+  alias: Send Pause command to Roku
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "60994700"
+      command: "Pause"
+roku_play:
+  alias: Send Play command to Roku
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "60994700"
+      command: "Play"
+roku_exit:
+  alias: Send Exit command to Roku
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "60994700"
+      command: "Exit"
+    
+    
+firetv_up:
+  alias: Send direction up command to FireTV
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "60994699"
+      command: "DirectionUp"
+firetv_down:
+  alias: Send direction down command to FireTV
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "60994699"
+      command: "DirectionDown"
+firetv_left:
+  alias: Send direction left command to FireTV
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "60994699"
+      command: "DirectionLeft"
+firetv_right:
+  alias: Send direction right command to FireTV
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "60994699"
+      command: "DirectionRight"
+firetv_ok:
+  alias: Send OK (Enter) command to FireTV
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "60994699"
+      command: "OK"
+firetv_back:
+  alias: Send Back command to FireTV
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "60994699"
+      command: "Back"
+firetv_pause:
+  alias: Send Pause command to FireTV
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "60994699"
+      command: "Pause"
+firetv_play:
+  alias: Send Play command to FireTV
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "60994699"
+      command: "Play"
+firetv_exit:
+  alias: Send Exit command to FireTV
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "60994699"
+      command: "Exit"
+      
+      
+tivo_up:
+  alias: Send direction up command to Tivo
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "61819278"
+      command: "DirectionUp"
+tivo_down:
+  alias: Send direction down command to Tivo
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "61819278"
+      command: "DirectionDown"
+tivo_left:
+  alias: Send direction left command to Tivo
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "61819278"
+      command: "DirectionLeft"
+tivo_right:
+  alias: Send direction right command to Tivo
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "61819278"
+      command: "DirectionRight"
+tivo_ok:
+  alias: Send OK (Enter) command to Tivo
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "61819278"
+      command: "OK"
+tivo_back:
+  alias: Send Back command to Tivo
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "61819278"
+      command: "Back"
+tivo_pause:
+  alias: Send Pause command to Tivo
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "61819278"
+      command: "Pause"
+tivo_play:
+  alias: Send Play command to Tivo
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "61819278"
+      command: "Play"
+tivo_exit:
+  alias: Send Exit command to Tivo
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "61819278"
+      command: "Exit"
+     
+ps3_up:
+  alias: Send direction up command to PS3
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "61819122"
+      command: "DirectionUp"
+ps3_down:
+  alias: Send direction down command to PS3
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "61819122"
+      command: "DirectionDown"
+ps3_left:
+  alias: Send direction left command to PS3
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "61819122"
+      command: "DirectionLeft"
+ps3_right:
+  alias: Send direction right command to PS3
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "61819122"
+      command: "DirectionRight"
+ps3_ok:
+  alias: Send OK (Enter) command to PS3
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "61819122"
+      command: "OK"
+ps3_back:
+  alias: Send Back command to PS3
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "61819122"
+      command: "Return"
+ps3_pause:
+  alias: Send Pause command to PS3
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "61819122"
+      command: "Pause"
+ps3_play:
+  alias: Send Play command to PS3
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "61819122"
+      command: "Play"
+ps3_exit:
+  alias: Send Exit command to PS3
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "61819122"
+      command: "Exit"
+      
+xbox_up:
+  alias: Send direction up command to Xbox
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "61819111"
+      command: "DirectionUp"
+xbox_down:
+  alias: Send direction down command to Xbox
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "61819111"
+      command: "DirectionDown"
+xbox_left:
+  alias: Send direction left command to Xbox
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "61819111"
+      command: "DirectionLeft"
+xbox_right:
+  alias: Send direction right command to Xbox
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "61819111"
+      command: "DirectionRight"
+xbox_ok:
+  alias: Send OK (Enter) command to Xbox
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "61819111"
+      command: "OK"
+xbox_back:
+  alias: Send Back command to Xbox
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "61819111"
+      command: "Back"
+xbox_pause:
+  alias: Send Pause command to Xbox
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "61819111"
+      command: "Pause"
+xbox_play:
+  alias: Send Play command to Xbox
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "61819111"
+      command: "Play"
+xbox_exit:
+  alias: Send Exit command to Xbox
+  sequence:
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: "61819111"
+      command: "Exit"
+
+play_the_eye:
+  alias: The Eye
+  sequence:
+  - alias: Turn On Outlets
+    service: switch.turn_on
+    data:
+      entity_id: 
+        - switch.mfi_lg_television
+        - switch.mfi_denon_amplifier
+  - alias: Turn On Living Room TV
+    service: remote.send_command
+    data_template:
+      entity_id: remote.harmonyhub
+      device: 60994799
+      command: PowerOn
+  - alias: Turn On Denon
+    service: media_player.turn_on
+    data:
+      entity_id: media_player.denon_avr_x4200w
+  - delay:
+      seconds: 10
+  - alias: Switch Denon to TV Audio
+    service: media_player.select_source
+    data:
+      entity_id: media_player.denon_avr_x4200w
+      source: 'TV Audio'
+  - delay:
+      seconds: 30
+  - alias: Switch TV to Chromecast Source
+    service: media_player.select_source
+    data:
+      entity_id: media_player.living_room_tv
+      source: HDMI1
+  - delay:
+      seconds: 5
+  - alias: Play Video
+    service: media_extractor.play_media
+    data:
+      entity_id: media_player.guildercast
+      media_content_type: video/youtube
+      media_content_id: https://youtu.be/FhwRunMCNAo
+# SLAYER - Eyes of the Insane: https://youtu.be/FhwRunMCNAo
+
+
+
+
+#####################################################################
+#
+#   SECURITY
+#
+#####################################################################
+
+lock_door:
+  alias: Lock The Front Door (30 sec delay)
+  sequence:
+  - delay:
+      seconds: 30
+  - service: lock.lock
+    data:
+      entity_id: lock.front_door
+      
+flash_balcony_lights_1:
+  alias: Flash Balcony Lights 1
+  sequence:
+  - alias: Balcony Lights On
+    service: light.turn_on
+    data:
+      entity_id: light.balcony
+      brightness: 255
+  - delay:
+      seconds: 1
+  - alias: Balcony Light Off
+    service: light.turn_off
+    data:
+      entity_id: light.balcony
+  - delay:
+      seconds: 1
+  - alias: loop_balcony
+    service: script.turn_on
+    data:
+      entity_id: script.flash_balcony_lights_2
+      
+flash_balcony_lights_2:
+  alias: Flash Balcony Lights 2
+  sequence:
+  - alias: Balcony Lights On
+    service: light.turn_on
+    data:
+      entity_id: light.balcony
+      brightness: 255
+  - delay:
+      seconds: 1
+  - alias: Balcony Light Off
+    service: light.turn_off
+    data:
+      entity_id: light.balcony
+  - delay:
+      seconds: 1
+  - alias: loop_balcony
+    service: script.turn_on
+    data:
+      entity_id: script.flash_balcony_lights_1
+      
+flash_landing_light_1:
+  alias: Flash Landing Light 1
+  sequence:
+  - alias: Landing Light Red
+    service: light.turn_on
+    data:
+      entity_id: light.landing
+      color_name: red
+      brightness: 255
+  - delay:
+      milliseconds: 500
+  - alias: Landing Light Blue
+    service: light.turn_on
+    data:
+      entity_id: light.landing
+      color_name: blue
+      brightness: 255
+  - delay:
+      milliseconds: 500
+  - alias: loop_balcony
+    service: script.turn_on
+    data:
+      entity_id: script.flash_landing_light_2
+      
+flash_landing_light_2:
+  alias: Flash Landing Light 2
+  sequence:
+  - alias: Landing Light Red
+    service: light.turn_on
+    data:
+      entity_id: light.landing
+      color_name: red
+      brightness: 255
+  - delay:
+      milliseconds: 500
+  - alias: Landing Light Blue
+    service: light.turn_on
+    data:
+      entity_id: light.landing
+      color_name: blue
+      brightness: 255
+  - delay:
+      milliseconds: 500
+  - alias: loop_balcony
+    service: script.turn_on
+    data:
+      entity_id: script.flash_landing_light_1

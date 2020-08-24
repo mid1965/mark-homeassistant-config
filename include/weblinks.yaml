@@ -1,0 +1,9 @@
+entities:
+  - name: mFi
+    url: !secret weblink_mfi
+  - name: unifi
+    url: !secret weblink_unifi
+  - name: Rpi Monitor
+    url: !secret weblink_rpimonitor
+  - name: Grafana
+    url: !secret weblink_grafana

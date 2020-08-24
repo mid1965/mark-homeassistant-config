@@ -1,0 +1,8 @@
+guest_fan:
+  duration: '00:15:00'
+  
+bathroom_fan:
+  duration: '00:15:00'
+  
+laundry_fan:
+  duration: '00:02:00'

@@ -1,0 +1,9 @@
+name: Dining Room Window is still open!!
+done_message: Dining Room Window is now closed
+entity_id: binary_sensor.contact_dining_room_window_contact
+state: 'on'
+repeat: 5
+can_acknowledge: True
+skip_first: True
+notifiers:
+  - pushbullet

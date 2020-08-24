@@ -1,0 +1,25 @@
+- id: guest_bathroom_fan_timer
+  alias: Turn Off Guest Bathroom Fan after 15 minutes
+  # see include/timers.yaml for times
+  trigger:
+  - platform: state
+    entity_id: switch.guest_bathroom_extractor
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: light.guest_room
+    state: 'off'
+  action:
+  - service: timer.start
+    entity_id: timer.guest_fan
+    
+- id: turn_off_guest_fan
+  alias: Turn Off Guest Fan
+  trigger:
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.guest_fan
+  action:
+  - service: switch.turn_off
+    entity_id: switch.guest_bathroom_extractor

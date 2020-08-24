@@ -1,0 +1,274 @@
+#####################################################################
+#
+#   NORTH GATEWAY
+#
+#####################################################################
+
+spider_plant:
+  sensors:
+    moisture: sensor.spider_plant_moisture
+    battery: sensor.spider_plant_battery
+    temperature: sensor.spider_plant_temperature
+    conductivity: sensor.spider_plant_conductivity
+    brightness: sensor.spider_plant_light_intensity
+  min_battery: 10
+  min_brightness: 1600
+  max_brightness: 2700
+  min_moisture: 15
+  max_moisture: 60
+  min_temperature: 50
+  max_temperature: 89
+  min_conductivity: 350
+  max_conductivity: 1300
+
+climbing_jasmine:
+  sensors:
+    moisture: sensor.climbing_jasmine_moisture
+    battery: sensor.climbing_jasmine_battery
+    temperature: sensor.climbing_jasmine_temperature
+    conductivity: sensor.climbing_jasmine_conductivity
+    brightness: sensor.climbing_jasmine_light_intensity
+  min_battery: 10
+  min_brightness: 2000
+  max_brightness: 4000
+  min_moisture: 15
+  max_moisture: 60
+  min_temperature: 50
+  max_temperature: 86
+  min_conductivity: 350
+  max_conductivity: 2000
+
+jasmine_shrub:
+  sensors:
+    moisture: sensor.jasmine_shrub_moisture
+    battery: sensor.jasmine_shrub_battery
+    temperature: sensor.jasmine_shrub_temperature
+    conductivity: sensor.jasmine_shrub_conductivity
+    brightness: sensor.jasmine_shrub_light_intensity
+  min_battery: 10
+  min_brightness: 2000
+  max_brightness: 4000
+  min_moisture: 15
+  max_moisture: 60
+  min_temperature: 50
+  max_temperature: 86
+  min_conductivity: 350
+  max_conductivity: 2000
+
+dragon_tree_bathroom:
+  sensors:
+    moisture: sensor.dragon_tree_bathroom_moisture
+    battery: sensor.dragon_tree_bathroom_battery
+    temperature: sensor.dragon_tree_bathroom_temperature
+    conductivity: sensor.dragon_tree_bathroom_conductivity
+    brightness: sensor.dragon_tree_bathroom_light_intensity
+  min_battery: 10
+  min_brightness: 1200
+  max_brightness: 2500
+  min_moisture: 15
+  max_moisture: 60
+  min_temperature: 50
+  max_temperature: 89
+  min_conductivity: 350
+  max_conductivity: 2000
+
+sun_parasol:
+  sensors:
+    moisture: sensor.sun_parasol_moisture
+    battery: sensor.sun_parasol_battery
+    temperature: sensor.sun_parasol_temperature
+    conductivity: sensor.sun_parasol_conductivity
+    brightness: sensor.sun_parasol_light_intensity
+  min_battery: 10
+  min_brightness: 2000
+  max_brightness: 4500
+  min_moisture: 15
+  max_moisture: 60
+  min_temperature: 53
+  max_temperature: 95
+  min_conductivity: 350
+  max_conductivity: 2000
+
+echeveria:
+  sensors:
+    moisture: sensor.echeveria_moisture
+    battery: sensor.echeveria_battery
+    temperature: sensor.echeveria_temperature
+    conductivity: sensor.echeveria_conductivity
+    brightness: sensor.echeveria_light_intensity
+  min_battery: 10
+  min_brightness: 2000
+  max_brightness: 4000
+  min_moisture: 15
+  max_moisture: 60
+  min_temperature: 41
+  max_temperature: 89
+  min_conductivity: 350
+  max_conductivity: 2000
+
+
+  #####################################################################
+#
+#   CENTRAL SENSOR
+#
+#####################################################################
+
+lavender:
+  sensors:
+    moisture: sensor.lavender_moisture
+    battery: sensor.lavender_battery
+    temperature: sensor.lavender_temperature
+    conductivity: sensor.lavender_conductivity
+    brightness: sensor.lavender_light_intensity
+  min_battery: 10
+  min_brightness: 4000
+  max_brightness: 8000
+  min_moisture: 15
+  max_moisture: 60
+  min_temperature: 41
+  max_temperature: 95
+  min_conductivity: 350
+  max_conductivity: 2000
+  
+dragon_tree_large:
+  sensors:
+    moisture: sensor.dragon_tree_large_moisture
+    battery: sensor.dragon_tree_large_battery
+    temperature: sensor.dragon_tree_large_temperature
+    conductivity: sensor.dragon_tree_large_conductivity
+    brightness: sensor.dragon_tree_large_light_intensity
+  min_battery: 10
+  min_brightness: 1200
+  max_brightness: 2500
+  min_moisture: 15
+  max_moisture: 60
+  min_temperature: 50
+  max_temperature: 89
+  min_conductivity: 350
+  max_conductivity: 2000
+
+swiss_cheese:
+  sensors:
+    moisture: sensor.swiss_cheese_moisture
+    battery: sensor.swiss_cheese_battery
+    temperature: sensor.swiss_cheese_temperature
+    conductivity: sensor.swiss_cheese_conductivity
+    brightness: sensor.swiss_cheese_light_intensity
+  min_battery: 10
+  min_brightness: 1500
+  max_brightness: 3400
+  min_moisture: 15
+  max_moisture: 60
+  min_temperature: 53
+  max_temperature: 89
+  min_conductivity: 350
+  max_conductivity: 2000
+
+lime_tree:
+  sensors:
+    moisture: sensor.lime_tree_moisture
+    battery: sensor.lime_tree_battery
+    temperature: sensor.lime_tree_temperature
+    conductivity: sensor.lime_tree_conductivity
+    brightness: sensor.lime_tree_light_intensity
+  min_battery: 10
+  min_brightness: 2000
+  max_brightness: 4800
+  min_moisture: 15
+  max_moisture: 60
+  min_temperature: 50
+  max_temperature: 95
+  min_conductivity: 350
+  max_conductivity: 2000
+
+prayer_plant:
+  sensors:
+    moisture: sensor.prayer_plant_moisture
+    battery: sensor.prayer_plant_battery
+    temperature: sensor.prayer_plant_temperature
+    conductivity: sensor.prayer_plant_conductivity
+    brightness: sensor.prayer_plant_light_intensity
+  min_battery: 10
+  min_brightness: 1700
+  max_brightness: 3500
+  min_moisture: 15
+  max_moisture: 65
+  min_temperature: 53
+  max_temperature: 89
+  min_conductivity: 350
+  max_conductivity: 2000
+
+corn_plant:
+  sensors:
+    moisture: sensor.corn_plant_moisture
+    battery: sensor.corn_plant_battery
+    temperature: sensor.corn_plant_temperature
+    conductivity: sensor.corn_plant_conductivity
+    brightness: sensor.corn_plant_light_intensity
+  min_battery: 10
+  min_brightness: 2800
+  max_brightness: 6300
+  min_moisture: 15
+  max_moisture: 60
+  min_temperature: 50
+  max_temperature: 95
+  min_conductivity: 200
+  max_conductivity: 1500
+
+geranium:
+  sensors:
+    moisture: sensor.geranium_moisture
+    battery: sensor.geranium_battery
+    temperature: sensor.geranium_temperature
+    conductivity: sensor.geranium_conductivity
+    brightness: sensor.geranium_light_intensity
+  min_battery: 10
+  min_brightness: 1600
+  max_brightness: 2700
+  min_moisture: 15
+  max_moisture: 60
+  min_temperature: 50
+  max_temperature: 89
+  min_conductivity: 350
+  max_conductivity: 2000
+
+
+#####################################################################
+#
+#   SOUTH GATEWAY
+#
+#####################################################################
+
+umbrella_plant:
+  sensors:
+    moisture: sensor.umbrella_plant_moisture
+    battery: sensor.umbrella_plant_battery
+    temperature: sensor.umbrella_plant_temperature
+    conductivity: sensor.umbrella_plant_conductivity
+    brightness: sensor.umbrella_plant_light_intensity
+  min_battery: 10
+  min_brightness: 2000
+  max_brightness: 4000
+  min_moisture: 15
+  max_moisture: 60
+  min_temperature: 50
+  max_temperature: 89
+  min_conductivity: 350
+  max_conductivity: 2000
+
+dragon_tree_guest:
+  sensors:
+    moisture: sensor.dragon_tree_guest_moisture
+    battery: sensor.dragon_tree_guest_battery
+    temperature: sensor.dragon_tree_guest_temperature
+    conductivity: sensor.dragon_tree_guest_conductivity
+    brightness: sensor.dragon_tree_guest_light_intensity
+  min_battery: 10
+  min_brightness: 1200
+  max_brightness: 2500
+  min_moisture: 15
+  max_moisture: 60
+  min_temperature: 50
+  max_temperature: 89
+  min_conductivity: 350
+  max_conductivity: 2000

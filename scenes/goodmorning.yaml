@@ -1,0 +1,8 @@
+- name: Good Morning
+  entities:
+    light.kitchen: on
+      # state: on
+    # group.all_blinds:
+      # state: open
+    # alarm_control_panel.marks_apartment:
+      # state: armed_home

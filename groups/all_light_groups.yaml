@@ -1,0 +1,5 @@
+name: All Light Groups
+entities:
+  - light.all_hue_lights
+  - light.light_balcony_string_lights
+  - switch.light_cabinet_led

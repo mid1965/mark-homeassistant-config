@@ -1,0 +1,9 @@
+name: Guest Room Window is still open!!
+done_message: Guest Room Window is now closed
+entity_id: input_boolean.guest_room_window_status
+state: 'on'
+repeat: 15
+can_acknowledge: True
+skip_first: True
+notifiers:
+  - pushbullet

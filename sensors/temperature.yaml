@@ -1,0 +1,76 @@
+#####################################################################
+#
+#   TEMPERATURE SENSORS
+#
+#####################################################################
+  
+  # - platform: template
+  # sensors:
+    # sensor.dark_sky_temperature_celsius:
+    # entity_id:
+    # - sensor.dark_sky_temperature:
+    # unit_of_measurement: "°C"
+    # value_template: >
+      # {{ ((float(states('sensor.dark_sky_temperature')) -32) * 5 / 9 ) | round(1) }}
+      
+- platform: template
+  sensors:
+    outside_temperature_celsius:
+      value_template: "{{ ((float(states('sensor.dark_sky_temperature')) -32) * 5 / 9 ) | round(1) }}"
+      unit_of_measurement: "Celsius"
+      
+- platform: template
+  sensors:
+    temperature_balcony_c:
+      friendly_name: "Balcony Temperature (°C)"
+      value_template: "{{ ((float(states('sensor.motion_balcony_temperature_measurement')) -32) * 5 / 9 ) | round(1) }}"
+      unit_of_measurement: "Celsius"
+      
+- platform: template
+  sensors:
+    temperature_front_porch_c:
+      friendly_name: "Front Porch Temperature (°C)"
+      value_template: "{{ ((float(states('sensor.motion_front_porch_temperature_measurement')) -32) * 5 / 9 ) | round(1) }}"
+      unit_of_measurement: "Celsius"
+      
+- platform: min_max
+  name: Max Temp
+  type: max
+  round_digits: 2
+  entity_ids:
+    - sensor.apartment_temperature
+    - sensor.bedroom_temperature
+    - sensor.guest_room_temperature
+
+    
+- platform: min_max
+  name: Min Temp
+  type: min
+  round_digits: 2
+  entity_ids:
+    - sensor.apartment_temperature
+    - sensor.bedroom_temperature
+    - sensor.guest_room_temperature
+    
+# - platform: min_max
+  # name: Average Balcony Temperature F
+  # type: mean
+  # round_digits: 1
+  # entity_ids:
+    # - sensor.climbing_jasmine_temperature_f
+    # - sensor.jasmine_shrub_temperature_f
+    # - sensor.sun_parasol_temperature_f
+    # - sensor.asparagus_fern_left_temperature_f
+    # - sensor.asparagus_fern_right_temperature_f
+    
+# - platform: min_max
+  # name: Average Balcony Temperature C
+  # type: mean
+  # round_digits: 1
+  # entity_ids:
+    # - sensor.climbing_jasmine_temperature
+    # - sensor.jasmine_shrub_temperature
+    # - sensor.sun_parasol_temperature
+    # - sensor.asparagus_fern_left_temperature
+    # - sensor.asparagus_fern_right_temperature
+  

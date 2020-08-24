@@ -1,0 +1,49 @@
+- name: Lights Colorloop
+  entities:
+    light.ikea_lamp:
+      state: on
+      transition: 5
+      rgb_color: [255,98,38]
+      brightness: 150
+      effect: colorloop
+    light.sofa_right_lamp:
+      state: on
+      transition: 5
+      rgb_color: [255,98,38]
+      brightness: 204
+      effect: colorloop
+    light.sofa_left_lamp:
+      state: on
+      transition: 5
+      rgb_color: [255,98,38]
+      brightness: 204
+      effect: colorloop
+    light.hugo:
+      state: on
+      transition: 5
+      rgb_color: [255,98,38]
+      brightness: 204
+      effect: colorloop
+    light.bloom:
+      state: on
+      transition: 5
+      rgb_color: [255,98,38]
+      brightness: 204
+      effect: colorloop
+    light.kitchen_cabinets:
+      state: on
+      transition: 5
+      rgb_color: [255,98,38]
+      brightness: 204
+      effect: colorloop
+    light.dining_room_floor_lamps:
+      state: on
+      transition: 5
+      rgb_color: [255,98,38]
+      brightness: 204
+      effect: colorloop
+    light.access_lights: off
+    light.dining_room_square_lamps: off
+    light.reading_lamp: off
+    light.kitchen_ceiling: off
+    light.chandelier: off

@@ -1,0 +1,9 @@
+name: Bedroom North Window is still open!!
+done_message: Bedroom North Window is now closed
+entity_id: input_boolean.bedroom_north_window_status
+state: 'on'
+repeat: 15
+can_acknowledge: True
+skip_first: True
+notifiers:
+  - pushbullet

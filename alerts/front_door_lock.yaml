@@ -1,0 +1,9 @@
+name: Front Door is still unlocked!!
+done_message: Front Door is now locked
+entity_id: lock.front_door
+state: 'on'
+repeat: 5
+can_acknowledge: True
+skip_first: True
+notifiers:
+  - pushbullet

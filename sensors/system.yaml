@@ -1,0 +1,124 @@
+#####################################################################
+#
+#   SYSTEM SENSORS
+#
+#####################################################################
+    
+- platform: time_date
+  display_options:
+    - 'time'
+    - 'date'
+    - 'date_time'
+    - 'time_date'
+    - 'time_utc'
+    - 'beat'
+
+- platform: command_line
+  name: SSL cert expiry
+  unit_of_measurement: days
+  scan_interval: 10800
+  command: "ssl-cert-check -b -c /etc/letsencrypt/live/ha.markdavies.com/cert.pem | awk '{ print $NF }'"
+
+- platform: systemmonitor
+  resources:
+    - type: processor_use
+    - type: disk_use_percent
+      arg: /home
+    - type: disk_free
+      arg: /
+    - type: memory_free
+    
+# - platform: nut
+  # name: RPi2
+  # host: 192.168.11.5
+  # port: 3493
+  # alias: qnapups
+  # username: admin
+  # password: uPs1500
+  # resources:
+    # - ups.load
+    # - ups.realpower.nominal
+    # - input.voltage
+    # - battery.runtime   
+
+# - platform: nut
+  # name: RPi5
+  # host: 192.168.11.5
+  # port: 3493
+  # alias: guestups
+  # username: admin
+  # password: uPs1300
+  # resources:
+    # - ups.status.display
+    # # - ups.load
+    # # - ups.realpower.nominal
+    # # - input.voltage
+    # # - battery.runtime 
+
+#####################################################################
+#
+#   EMAIL SENSOR
+#
+#####################################################################
+
+- platform: imap
+  server: imappro.zoho.com
+  port: 993
+  name: emails
+  username: !secret zoho_username
+  password: !secret zoho_password
+
+    
+#####################################################################
+#
+#   HISTORY STATS
+#
+#####################################################################
+    
+- platform: history_stats
+  name: TV Today LG
+  entity_id: media_player.living_room_tv
+  state: 'on'
+  type: time
+  start: '{{ now().replace(hour=0, minute=0, second=0) }}'
+  end: '{{ now() }}'
+  
+- platform: history_stats
+  name: HVAC Today
+  entity_id: sensor.ecobee_fan
+  state: 'on'
+  type: time
+  start: '{{ now().replace(hour=0, minute=0, second=0) }}'
+  end: '{{ now() }}'
+  
+- platform: history_stats
+  name: TV Today Sony
+  entity_id: media_player.guest_room_tv
+  state: 'on'
+  type: time
+  start: '{{ now().replace(hour=0, minute=0, second=0) }}'
+  end: '{{ now() }}'
+  
+- platform: history_stats
+  name: Vizzini Today
+  entity_id: switch.vizzini
+  state: 'on'
+  type: time
+  start: '{{ now().replace(hour=0, minute=0, second=0) }}'
+  end: '{{ now() }}'
+  
+- platform: history_stats
+  name: Mark Sleep
+  entity_id: binary_sensor.withings_in_bed_mark
+  state: 'on'
+  type: time
+  start: '{{ now().replace(hour=18, minute=0, second=0) }}'
+  end: '{{ now() }}'
+  
+- platform: history_stats
+  name: Mandy Sleep
+  entity_id: binary_sensor.withings_in_bed_mandy
+  state: 'on'
+  type: time
+  start: '{{ now().replace(hour=18, minute=0, second=0) }}'
+  end: '{{ now() }}'

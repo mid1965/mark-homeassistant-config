@@ -1,0 +1,196 @@
+# **************************************************************
+    
+- id: turn_on_cabinet_leds
+  alias: Turn On Cabinet LEDs
+  trigger:
+  - platform: sun
+    event: sunset
+  condition:
+  - condition: state
+    entity_id: group.presence
+    state: home
+  action:
+  - service: switch.turn_on
+    entity_id: switch.light_cabinet_led
+    
+# **************************************************************
+    
+- id: turn_off_cabinet_leds
+  alias: Turn Off Cabinet LEDs
+  trigger:
+  - platform: time
+    at: '22:00:00'
+  action:
+  - service: switch.turn_off
+    entity_id: switch.light_cabinet_led
+    
+# **************************************************************
+# **************************************************************
+    
+- id: turn_on_security_lights
+  alias: Turn On Security Lights
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: +01:00:00
+  condition:
+  - condition: state
+    entity_id: group.presence
+    state: away
+  action:
+  - service_template: light.turn_on
+    entity_id: light.chandelier
+    
+# **************************************************************
+    
+- id: turn_off_security_lights
+  alias: Turn Off Security Lights
+  trigger:
+  - platform: time
+    at: '23:58:00'
+  condition:
+  - condition: state
+    entity_id: group.presence
+    state: away
+  action:
+  - service_template: light.turn_off
+    entity_id: light.chandelier
+    
+# **************************************************************
+# **************************************************************
+    
+- id: turn_on_balcony_string_lights
+  alias: Turn On Balcony String Lights
+  trigger:
+  - platform: sun
+    event: sunset
+  condition:
+  - condition: state
+    entity_id: group.presence
+    state: home
+  action:
+  - service: light.turn_on
+    data:
+      entity_id: light.light_balcony_string_lights
+      brightness: 90
+    
+# **************************************************************
+    
+- id: turn_off_balcony_string_lights
+  alias: Turn Off Balcony String Lights
+  trigger:
+  - platform: time
+    at: '22:00:00'
+  action:
+  - service: homeassistant.turn_off
+    entity_id: light.light_balcony_string_lights
+    
+# **************************************************************
+
+- id: turn_on_sunday_zoom
+  alias: Turn On Equipment for Zoom on Sunday
+  trigger:
+  - platform: time
+    at: '09:25:00'
+  condition:
+  - condition: time
+    weekday:
+      - sun
+  action:
+  - service: switch.turn_on
+    entity_id: switch.fireswamp
+  - service: script.turn_on
+    entity_id: script.turn_on_mfi
+  - service: media_player.turn_on
+    entity_id:
+      - media_player.living_room_tv
+      - media_player.denon_avr_x4200w
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.denon_avr_x4200w
+      source: "Media PC"
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.living_room_tv
+      source: "DENON"
+  
+# **************************************************************
+
+- id: turn_on_tuesday_zoom
+  alias: Turn On Equipment for Zoom on Tuesday
+  trigger:
+  - platform: time
+    at: '18:25:00'
+  condition:
+  - condition: time
+    weekday:
+      - tue
+  action:
+  - service: switch.turn_on
+    entity_id: switch.fireswamp
+  - service: script.turn_on
+    entity_id: script.turn_on_mfi
+  - service: media_player.turn_on
+    entity_id:
+      - media_player.living_room_tv
+      - media_player.denon_avr_x4200w
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.denon_avr_x4200w
+      source: "Media PC"
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.living_room_tv
+      source: "DENON"
+  
+# **************************************************************
+
+- id: arm_arlo_at_night
+  alias: Set Arlo cameras to night mode at night
+  trigger:
+    platform: time
+    at: '00:00:00'
+  action:
+  - service: alarm_control_panel.alarm_arm_night
+    entity_id: alarm_control_panel.aarlo_apartment_arlo
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: Arlo set to 'night' mode"
+      
+# **************************************************************
+
+- id: disarm_arlo_in_the_morning
+  alias: Set Arlo cameras to home mode in the morning if we're still home
+  trigger:
+    platform: time
+    at: '07:00:00'
+  condition:
+  - condition: state
+    entity_id: group.presence
+    state: home
+  action:
+  - service: alarm_control_panel.alarm_arm_home
+    entity_id: alarm_control_panel.aarlo_apartment_arlo
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: Arlo set to 'home' mode"
+      
+# **************************************************************
+
+# - id: arm_arlo_in_morning_if_no_one_home
+  # alias: Set Arlo cameras to away mode in the morning if no one home
+  # trigger:
+    # platform: time
+    # at: '07:00:00'
+  # condition:
+  # - condition: state
+    # entity_id: group.presence
+    # state: not_home
+  # action:
+  # - service: alarm_control_panel.alarm_arm_away
+    # entity_id: alarm_control_panel.aarlo_apartment
+  # - service: notify.pushbullet
+    # data:
+      # message: "{{ now().strftime('%a - %H:%M') }}: Arlo set to 'away' mode"
+      
+# **************************************************************

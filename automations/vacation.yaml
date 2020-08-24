@@ -1,0 +1,218 @@
+- id: vacation_kitchen_light_on_notification
+  alias: Vacation Kitchen Light Turned On Notification
+  trigger:
+  - platform: state
+    entity_id: light.kitchen
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: input_boolean.vacation
+    state: 'on'
+  action:
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }} : Kitchen Light Turned on by OccuSim"
+  - service: notify.gmail
+    data:
+      title: "{{ now().strftime('%a - %H:%M') }} : Kitchen Light Turned on by OccuSim"
+      message: "{{ now().strftime('%a - %H:%M') }} : Kitchen Light Turned on by OccuSim"
+
+# **************************************************************
+
+- id: vacation_bedroom_light_on_notification
+  alias: Vacation Bedroom Light Turned On Notification
+  trigger:
+  - platform: state
+    entity_id: light.bedroom
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: input_boolean.vacation
+    state: 'on'
+  action:
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }} : Bedroom Light Turned on by OccuSim"
+  - service: notify.gmail
+    data:
+      title: "{{ now().strftime('%a - %H:%M') }} : Bedroom Light Turned on by OccuSim"
+      message: "{{ now().strftime('%a - %H:%M') }} : Bedroom Light Turned on by OccuSim"
+
+# **************************************************************
+
+- id: vacation_guest_room_light_on_notification
+  alias: Vacation Guest Room Light Turned On Notification
+  trigger:
+  - platform: state
+    entity_id: light.guest_room
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: input_boolean.vacation
+    state: 'on'
+  action:
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }} : Guest Room Light Turned on by OccuSim"
+  - service: notify.gmail
+    data:
+      title: "{{ now().strftime('%a - %H:%M') }} : Guest Room Light Turned on by OccuSim"
+      message: "{{ now().strftime('%a - %H:%M') }} : Guest Room Light Turned on by OccuSim"
+
+# **************************************************************
+
+- id: vacation_living_room_light_on_notification
+  alias: Vacation Living Room Light Turned On Notification
+  trigger:
+  - platform: state
+    entity_id: light.living_room
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: input_boolean.vacation
+    state: 'on'
+  action:
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }} : Living Room Light Turned on by OccuSim"
+  - service: notify.gmail
+    data:
+      title: "{{ now().strftime('%a - %H:%M') }} : Living Room Light Turned on by OccuSim"
+      message: "{{ now().strftime('%a - %H:%M') }} : Living Room Light Turned on by OccuSim"
+
+# **************************************************************
+
+- id: vacation_balcony_light_on_notification
+  alias: Vacation Balcony Light Turned On Notification
+  trigger:
+  - platform: state
+    entity_id: light.light_balcony_string_lights
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: input_boolean.vacation
+    state: 'on'
+  action:
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }} : Balcony Light Turned on"
+  - service: notify.gmail
+    data:
+      title: "{{ now().strftime('%a - %H:%M') }} : Balcony Light Turned on"
+      message: "{{ now().strftime('%a - %H:%M') }} : Balcony Light Turned on"
+
+# **************************************************************
+# **************************************************************
+
+- id: vacation_kitchen_light_off_notification
+  alias: Vacation Kitchen Light Turned Off Notification
+  trigger:
+  - platform: state
+    entity_id: light.kitchen
+    from: 'on'
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: input_boolean.vacation
+    state: 'on'
+  action:
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }} : Kitchen Light Turned off by OccuSim"
+  - service: notify.gmail
+    data:
+      title: "{{ now().strftime('%a - %H:%M') }} : Kitchen Light Turned off by OccuSim"
+      message: "{{ now().strftime('%a - %H:%M') }} : Kitchen Light Turned off by OccuSim"
+
+# **************************************************************
+
+- id: vacation_bedroom_light_off_notification
+  alias: Vacation Bedroom Light Turned Off Notification
+  trigger:
+  - platform: state
+    entity_id: light.bedroom
+    from: 'on'
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: input_boolean.vacation
+    state: 'on'
+  action:
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }} : Bedroom Light Turned off by OccuSim"
+  - service: notify.gmail
+    data:
+      title: "{{ now().strftime('%a - %H:%M') }} : Bedroom Light Turned off by OccuSim"
+      message: "{{ now().strftime('%a - %H:%M') }} : Bedroom Light Turned off by OccuSim"
+
+# **************************************************************
+
+- id: vacation_guest_room_light_off_notification
+  alias: Vacation Guest Room Light Turned Off Notification
+  trigger:
+  - platform: state
+    entity_id: light.guest_room
+    from: 'on'
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: input_boolean.vacation
+    state: 'on'
+  action:
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }} : Guest Room Light Turned off by OccuSim"
+  - service: notify.gmail
+    data:
+      title: "{{ now().strftime('%a - %H:%M') }} : Guest Room Light Turned off by OccuSim"
+      message: "{{ now().strftime('%a - %H:%M') }} : Guest Room Light Turned off by OccuSim"
+
+# **************************************************************
+
+- id: vacation_living_room_light_off_notification
+  alias: Vacation Living Room Light Turned Off Notification
+  trigger:
+  - platform: state
+    entity_id: light.living_room
+    from: 'on'
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: input_boolean.vacation
+    state: 'on'
+  action:
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }} : Living Room Light Turned off by OccuSim"
+  - service: notify.gmail
+    data:
+      title: "{{ now().strftime('%a - %H:%M') }} : Living Room Light Turned off by OccuSim"
+      message: "{{ now().strftime('%a - %H:%M') }} : Living Room Light Turned off by OccuSim"
+      
+# **************************************************************
+
+- id: vacation_balcony_light_off_notification
+  alias: Vacation Balcony Light Turned Off Notification
+  trigger:
+  - platform: state
+    entity_id: light.light_balcony_string_lights
+    from: 'on'
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: input_boolean.vacation
+    state: 'on'
+  action:
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }} : Balcony Light Turned off"
+  - service: notify.gmail
+    data:
+      title: "{{ now().strftime('%a - %H:%M') }} : Balcony Light Turned off"
+      message: "{{ now().strftime('%a - %H:%M') }} : Balcony Light Turned off"

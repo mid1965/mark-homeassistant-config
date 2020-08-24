@@ -1,0 +1,12 @@
+- name: Nightlight
+  entities:
+      group.lamp:
+        state: on
+        transition: 2
+        rgb_color: [143,143,143]
+        brightness: 15
+      light.kitchen_main:
+        state: on
+        transition: 2
+        rgb_color: [143,143,143]
+        brightness: 15

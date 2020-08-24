@@ -1,0 +1,7 @@
+- name: Romance
+  entities:
+    light.ikea_lamp: off
+    light.sofa_lamps:
+      state: on
+      color_name: red
+      brightness: 255

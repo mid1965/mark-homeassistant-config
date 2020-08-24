@@ -1,0 +1,398 @@
+# **************************************************************
+
+- id: water_the_dragon_tree_large
+  alias: Alert Me The Large Dragon Tree Needs Watering
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: not_home
+    to: home
+  condition:
+    condition: numeric_state
+    entity_id: sensor.dragon_tree_large_moisture
+    below: 20
+  action:
+  - service: notify.pushbullet
+    data:
+      message: Water the Large Dragon Tree!
+  - service: notify.gmail
+    data:
+      title: The Large Dragon Tree Needs Watering!
+      message: The Large Dragon Tree Moisture Level has dropped below 20%
+  - service: notify.notifyme
+    data:
+      message: Water the Large Dragon Tree!
+
+# *******************************************************************************************
+
+- id: water_the_jasmine
+  alias: Alert Me The Shrub Jasmine Needs Watering
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: not_home
+    to: home
+  condition:
+    condition: numeric_state
+    entity_id: sensor.shrub_jasmine_moisture
+    below: 20
+  action:
+  - service: notify.pushbullet
+    data:
+      message: Water the Shrub Jasmine!
+  - service: notify.gmail
+    data:
+      title: The Shrub Jasmine Needs Watering!
+      message: The Moisture Level for the Shrub Jasmine has dropped below 20%
+  - service: notify.notifyme
+    data:
+      message: Water the Shrub Jasmine!
+      
+# *******************************************************************************************
+      
+- id: water_the_lavender
+  alias: Alert Me The Lavender Needs Watering
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: not_home
+    to: home
+  condition:
+    condition: numeric_state
+    entity_id: sensor.lavender_moisture
+    below: 20
+  action:
+  - service: notify.pushbullet
+    data:
+      message: Water the Lavender!
+  - service: notify.gmail
+    data:
+      title: The Lavender Needs Watering!
+      message: The Moisture Level for the Lavender has dropped below 20%
+  - service: notify.notifyme
+    data:
+      message: Water the Lavender!
+      
+# *******************************************************************************************
+      
+- id: water_the_climbing_jasmine
+  alias: Alert Me The Climbing Jasmine Needs Watering
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: not_home
+    to: home
+  condition:
+    condition: numeric_state
+    entity_id: sensor.climbing_jasmine_moisture
+    below: 20
+  action:
+  - service: notify.pushbullet
+    data:
+      message: The Climbing Jasmine Needs Watering
+  - service: notify.gmail
+    data:
+      title: The Climbing Jasmine Needs Watering!
+      message: The Moisture Level for the Climbing Jasmine has dropped below 20%
+  - service: notify.notifyme
+    data:
+      message: The Climbing Jasmine Needs Watering
+      
+# *******************************************************************************************
+      
+- id: water_the_swiss_cheese
+  alias: Alert Me The Swiss Cheese Plant Needs Watering
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: not_home
+    to: home
+  condition:
+    condition: numeric_state
+    entity_id: sensor.swiss_cheese_moisture
+    below: 20
+  action:
+  - service: notify.pushbullet
+    data:
+      message: Water the Swiss Cheese Plant!
+  - service: notify.gmail
+    data:
+      title: The Swiss Cheese Plant Needs Watering!
+      message: The Moisture Level for the Swiss Cheese Plant has dropped below 20%
+  - service: notify.notifyme
+    data:
+      message: Water the Swiss Cheese Plant!
+
+# *******************************************************************************************
+      
+- id: water_the_sun_parasol
+  alias: Alert Me The Sun Parasol Needs Watering
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: not_home
+    to: home
+  condition:
+    condition: numeric_state
+    entity_id: sensor.sun_parasol_moisture
+    below: 20
+  action:
+  - service: notify.pushbullet
+    data:
+      message: Water the Sun Parasol Plant!
+  - service: notify.gmail
+    data:
+      title: The Sun Parasol Needs Watering!
+      message: The Moisture Level for the Sun Parasol has dropped below 20%
+  - service: notify.notifyme
+    data:
+      message: Water the Sun Parasol Plant!
+      
+# *******************************************************************************************
+      
+- id: water_the_umbrella_plant
+  alias: Alert Me The Umbrella Plant Needs Watering
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: not_home
+    to: home
+  condition:
+    condition: numeric_state
+    entity_id: sensor.umbrella_plant_moisture
+    below: 20
+  action:
+  - service: notify.pushbullet
+    data:
+      message: Water the Umbrella Plant!
+  - service: notify.gmail
+    data:
+      title: The Umbrella Plant Needs Watering!
+      message: The Moisture Level for the Umbrella Plant has dropped below 20%
+  - service: notify.notifyme
+    data:
+      message: Water the Umbrella Plant!
+      
+# *******************************************************************************************
+      
+- id: water_the_dragon_tree_left
+  alias: Alert Me The Dragon Tree on the Left Needs Watering
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: not_home
+    to: home
+  condition:
+    condition: numeric_state
+    entity_id: sensor.dragon_trees_left_moisture
+    below: 20
+  action:
+  - service: notify.pushbullet
+    data:
+      message: Water the Dragon Tree on the Left!
+  - service: notify.gmail
+    data:
+      title: The Dragon Tree on the Left Need Watering!
+      message: The Moisture Level for the Dragon Tree on the Left has dropped below 20%
+  - service: notify.notifyme
+    data:
+      message: Water the Dragon Tree on the Left!
+      
+# *******************************************************************************************
+        
+- id: water_the_asparagus_fern_left
+  alias: Alert Me The Asparagus Fern on the Left Needs Watering
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: not_home
+    to: home
+  condition:
+    condition: numeric_state
+    entity_id: sensor.asparagus_fern_left_moisture
+    below: 20
+  action:
+  - service: notify.pushbullet
+    data:
+      message: Water the Asparagus Fern on the Left!
+  - service: notify.gmail
+    data:
+      title: The Asparagus Fern on the Left Needs Watering!
+      message: The Moisture Level for the Asparagus Fern on the Left has dropped below 20%
+  - service: notify.notifyme
+    data:
+      message: Water the Asparagus Fern on the Left!
+      
+# *******************************************************************************************
+      
+- id: water_the_lime_tree
+  alias: Alert Me The Lime Tree Needs Watering
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: not_home
+    to: home
+  condition:
+    condition: numeric_state
+    entity_id: sensor.lime_tree_moisture
+    below: 20
+  action:
+  - service: notify.pushbullet
+    data:
+      message: Water the Lime Tree!
+  - service: notify.gmail
+    data:
+      title: The Lime Tree Needs Watering!
+      message: The Moisture Level for the Lime Tree has dropped below 20%
+  - service: notify.notifyme
+    data:
+      message: Water the Lime Tree!
+      
+# *******************************************************************************************
+      
+- id: water_the_dragon_tree_right
+  alias: Alert Me The Dragon Tree on the Right Needs Watering
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: not_home
+    to: home
+  condition:
+    condition: numeric_state
+    entity_id: sensor.dragon_trees_right_moisture
+    below: 20
+  action:
+  - service: notify.pushbullet
+    data:
+      message: Water the Dragon Tree on the Right!
+  - service: notify.gmail
+    data:
+      title: The Dragon Tree on the Right Needs Watering!
+      message: The Moisture Level for the Dragon Tree on the Right has dropped below 20%
+  - service: notify.notifyme
+    data:
+      message: Water the Dragon Tree on the Right!
+      
+# *******************************************************************************************
+      
+- id: water_the_asparagus_fern_right
+  alias: Alert Me The Asparagus Fern on the Right Needs Watering
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: not_home
+    to: home
+  condition:
+    condition: numeric_state
+    entity_id: sensor.asparagus_fern_right_moisture
+    below: 20
+  action:
+  - service: notify.pushbullet
+    data:
+      message: Water the Asparagus Fern on the Right!
+  - service: notify.gmail
+    data:
+      title: The Asparagus Fern on the Right Needs Watering!
+      message: The Moisture Level for the Asparagus Fern on the Right has dropped below 20%
+  - service: notify.notifyme
+    data:
+      message: Water the Asparagus Fern on the Right!
+      
+# *******************************************************************************************
+      
+- id: water_the_corn_plant
+  alias: Alert Me The Corn Plant Needs Watering
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: not_home
+    to: home
+  condition:
+    condition: numeric_state
+    entity_id: sensor.corn_plant_moisture
+    below: 20
+  action:
+  - service: notify.pushbullet
+    data:
+      message: Water the Corn Plant!
+  - service: notify.gmail
+    data:
+      title: The Corn Plant Needs Watering!
+      message: The Moisture Level for the Corn Plant has dropped below 20%
+  - service: notify.notifyme
+    data:
+      message: Water the Corn Plant!
+      
+# *******************************************************************************************
+      
+- id: water_the_prayer_plant
+  alias: Alert Me The Prayer Plant Needs Watering
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: not_home
+    to: home
+  condition:
+    condition: numeric_state
+    entity_id: sensor.prayer_plant_moisture
+    below: 20
+  action:
+  - service: notify.pushbullet
+    data:
+      message: Water the Prayer Plant!
+  - service: notify.gmail
+    data:
+      title: The Prayer Plant Needs Watering!
+      message: The Moisture Level for the Prayer Plant has dropped below 20%
+  - service: notify.notifyme
+    data:
+      message: Water the Prayer Plant!
+      
+# *******************************************************************************************
+      
+- id: water_the_spider_plant
+  alias: Alert Me The Spider Plant Needs Watering
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: not_home
+    to: home
+  condition:
+    condition: numeric_state
+    entity_id: sensor.spider_plant_moisture
+    below: 20
+  action:
+  - service: notify.pushbullet
+    data:
+      message: Water the Spider Plant!
+  - service: notify.gmail
+    data:
+      title: The Spider Plant Needs Watering!
+      message: The Moisture Level for the Spider Plant has dropped below 20%
+  - service: notify.notifyme
+    data:
+      message: Water the Spider Plant!
+      
+# *******************************************************************************************
+      
+- id: water_the_geranium
+  alias: Alert Me The Geranium Needs Watering
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: not_home
+    to: home
+  condition:
+    condition: numeric_state
+    entity_id: sensor.geranium_moisture
+    below: 20
+  action:
+  - service: notify.pushbullet
+    data:
+      message: Water the Geranium!
+  - service: notify.gmail
+    data:
+      title: The Geranium Needs Watering!
+      message: The Moisture Level for the Geranium has dropped below 20%
+      
+# *******************************************************************************************

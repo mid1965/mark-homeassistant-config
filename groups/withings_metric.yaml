@@ -1,0 +1,17 @@
+name: Withings (Metric)
+entities:
+  - binary_sensor.withings_in_bed_mark
+  - sensor.withings_temperature_c_mark
+  - sensor.withings_skin_temperature_c_mark
+  - sensor.withings_body_temperature_c_mark
+  - sensor.withings_spo2_pct_mark
+  - sensor.withings_pulse_wave_velocity_mark
+  - sensor.withings_weight_kg_mark
+  - sensor.withings_fat_free_mass_kg_mark
+  - sensor.withings_fat_mass_kg_mark
+  - sensor.withings_fat_ratio_pct_mark
+  - sensor.withings_bone_mass_kg_mark
+  - sensor.withings_muscle_mass_kg_mark
+  - sensor.withings_heart_pulse_bpm_mark
+  - sensor.withings_systolic_blood_pressure_mmhg_mark
+  - sensor.withings_diastolic_blood_pressure_mmhg_mark

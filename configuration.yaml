@@ -1,0 +1,383 @@
+homeassistant:
+  name: Home
+  auth_providers:
+    - type: homeassistant
+    - type: trusted_networks
+      trusted_networks:
+        - 192.168.1.0/24
+  customize: !include include/customize.yaml
+  external_url: !secret external_url
+
+####################################################################
+#
+#                               AAA   
+#                              AAAAA  
+#                             AA   AA 
+#                             AAAAAAA 
+#                             AA   AA 
+#
+####################################################################
+
+aarlo:
+  username: !secret arlo_username
+  password: !secret arlo_password
+  refresh_devices_every: 2
+  stream_timeout: 120
+  reconnect_every: 90
+  
+alarm_control_panel:
+  - platform: aarlo
+    home_mode_name: home
+    away_mode_name: away
+    night_mode_name: night
+    
+alert: !include_dir_named alerts
+
+automation: !include_dir_merge_list automations/
+
+####################################################################
+#
+#                            BBBBB   
+#                            BB   B  
+#                            BBBBBB  
+#                            BB   BB 
+#                            BBBBBB  
+#
+####################################################################
+
+binary_sensor:
+  - platform: aarlo
+    monitored_conditions:
+    - motion
+    - sound
+
+
+####################################################################
+#
+#                             CCCCC  
+#                            CC    C 
+#                            CC      
+#                            CC    C 
+#                             CCCCC  
+#
+####################################################################
+
+camera:
+  - platform: aarlo
+
+cover: !include include/covers.yaml
+
+cloud: !include include/cloud.yaml
+
+
+####################################################################
+#
+#                            DDDDD   
+#                            DD  DD  
+#                            DD   DD 
+#                            DD   DD 
+#                            DDDDDD  
+#
+####################################################################
+
+default_config:
+
+device_tracker:
+
+downloader:
+  download_dir: downloads
+
+dyson:  
+  username: !secret dyson_username
+  password: !secret dyson_password
+  language: US
+  devices:
+    - device_id: VS2-US-KCA0634A
+      device_ip: 192.168.1.72
+    - device_id: RT7-US-HFA2515A
+      device_ip: 192.168.1.75
+
+####################################################################
+#
+#                            EEEEEEE 
+#                            EE      
+#                            EEEEE   
+#                            EE      
+#                            EEEEEEE 
+#
+####################################################################
+
+
+
+
+####################################################################
+#
+#                            FFFFFFF 
+#                            FF      
+#                            FFFF    
+#                            FF      
+#                            FF  
+#
+####################################################################
+
+ffmpeg:
+
+
+####################################################################
+#
+#                              GGGG  
+#                             GG  GG 
+#                            GG      
+#                            GG   GG 
+#                             GGGGGG
+#
+####################################################################
+
+
+group: !include_dir_named groups
+
+
+####################################################################
+#
+#                            HH   HH 
+#                            HH   HH 
+#                            HHHHHHH 
+#                            HH   HH 
+#                            HH   HH 
+#
+####################################################################
+
+http:
+  # base_url: !secret base_url
+  # use_x_forwarded_for: true
+  # trusted_proxies:
+    # - 127.0.0.1
+    # - ::1
+
+####################################################################
+#
+#                              IIIII 
+#                               III  
+#                               III  
+#                               III  
+#                              IIIII 
+#
+####################################################################
+
+influxdb: !include include/influxdb.yaml
+
+input_boolean: !include include/input_boolean.yaml
+
+input_number: !include include/input_number.yaml
+
+input_select: !include include/input_select.yaml
+ 
+####################################################################
+#
+#                              LL      
+#                              LL      
+#                              LL      
+#                              LL      
+#                              LLLLLLL 
+#
+####################################################################
+
+life360:
+  interval_seconds: 10
+  show_as_state: 
+    - driving 
+    - moving
+  max_update_wait:
+    minutes: 30
+  prefix: life360
+  circles:
+    include: M&M
+
+logger:
+  default: warning
+  logs:
+#    homeassistant.core: debug
+#    homeassistant.components.webhook: debug
+    homeassistant.components.ipp: fatal
+    aiounifi.api: fatal
+    hass_nabucasa.cloud_api: error
+    homeassistant.components.media_player: error
+    slixmpp.basexmpp: error
+    slixmpp.stringprep: error
+    homeassistant.helpers.entity: error
+    homeassistant.config_entries: error
+    
+
+
+lutron_caseta:
+  host: !secret lutron_bridge_host
+  keyfile: /home/homeassistant/.homeassistant/caseta.key
+  certfile: /home/homeassistant/.homeassistant/caseta.crt
+  ca_certs: /home/homeassistant/.homeassistant/caseta-bridge.crt
+
+light: !include include/light.yaml
+
+logbook: !include include/logbook.yaml
+
+####################################################################
+#
+#                              MM    MM 
+#                              MMM  MMM 
+#                              MM MM MM 
+#                              MM    MM 
+#                              MM    MM 
+#
+####################################################################
+
+mqtt: !include include/mqtt.yaml
+
+####################################################################
+#
+#                            NN   NN 
+#                            NNN  NN 
+#                            NN N NN 
+#                            NN  NNN 
+#                            NN   NN 
+#
+####################################################################
+
+notify: !include include/notify.yaml
+
+####################################################################
+#
+#                             OOOOO  
+#                            OOO OOO 
+#                            OO   OO 
+#                            OOO OOO 
+#                             OOOOO  
+#
+####################################################################
+
+
+
+
+####################################################################
+#
+#                            PPPPPP  
+#                            PP   PP 
+#                            PPPPPP  
+#                            PP      
+#                            PP  
+#
+####################################################################
+
+plant: !include include/plants.yaml
+
+
+####################################################################
+#
+#                            RRRRRR  
+#                            RR   RR 
+#                            RRRRRR  
+#                            RR  RR  
+#                            RR   RR 
+#
+####################################################################
+
+recorder:
+  db_url: !secret db_url
+  purge_keep_days: 3
+  
+rest_command: !include include/rest_command.yaml
+
+####################################################################
+#
+#                             SSSSS  
+#                            SS      
+#                             SSSSS  
+#                                 SS 
+#                             SSSSS 
+#
+####################################################################
+
+scene: !include_dir_merge_list scenes
+
+script: !include scripts.yaml
+
+sensor: !include_dir_merge_list sensors/
+
+shell_command: !include include/shell_command.yaml
+
+spotify:
+  client_id: !secret spotify_id
+  client_secret: !secret spotify_secret
+
+switch: !include include/switch.yaml
+
+
+####################################################################
+#
+#                            TTTTTTT 
+#                              TTT   
+#                              TTT   
+#                              TTT   
+#                              TTT   
+#
+####################################################################
+
+tts:
+  - platform: google_translate
+  
+telegram_bot:
+  - platform: broadcast
+    api_key: !secret telegram_api
+    allowed_chat_ids:
+      - !secret telegram_id
+  
+timer: !include include/timers.yaml
+####################################################################
+#
+#                            UU   UU 
+#                            UU   UU 
+#                            UU   UU 
+#                            UU   UU 
+#                             UUUUU  
+#
+####################################################################
+
+utility_meter:
+  hvac_daily:
+    source: sensor.hvac_today
+    cycle: daily
+  
+####################################################################
+#
+#                            WW      WW 
+#                            WW      WW 
+#                            WW   W  WW 
+#                             WW WWW WW 
+#                              WW   WW  
+#
+####################################################################
+
+wake_on_lan:
+
+webostv:
+  host: !secret lgtv_host
+  name: Living Room TV
+  turn_on_action:
+    service: wake_on_lan.send_magic_packet
+    data:
+      mac: !secret lgtv_mac
+      broadcast_address: 192.168.1.255
+    
+
+withings:
+  client_id: !secret withings_client_id
+  client_secret: !secret withings_client_secret
+  use_webhook: true
+  
+####################################################################
+#
+#                              ZZZZZ 
+#                                 ZZ 
+#                                ZZ  
+#                               ZZ   
+#                              ZZZZZ 
+#
+####################################################################

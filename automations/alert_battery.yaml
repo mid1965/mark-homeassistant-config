@@ -1,0 +1,128 @@
+- id: change_the_garage_arlo_battery
+  alias: Alert Me The Battery in the Arlo Camera in the Garage Needs Changing
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: not_home
+    to: home
+  condition:
+    condition: numeric_state
+    entity_id: sensor.battery_level_garage
+    below: 20
+  action:
+  - service: notify.pushbullet
+    data:
+      message: Change the Battery in the Garage Arlo Camera!
+  - service: notify.gmail
+    data:
+      title: The Garage Arlo Battery Needs Changing!
+      message: The Battery Level for the Arlo Camera in the Garage has dropped below 20%
+      
+# *******************************************************************************************
+
+- id: change_the_dining_room_arlo_battery
+  alias: Alert Me The Battery in the Arlo Camera in the Dining Room Needs Changing
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: not_home
+    to: home
+  condition:
+    condition: numeric_state
+    entity_id: sensor.battery_level_dining_room
+    below: 20
+  action:
+  - service: notify.pushbullet
+    data:
+      message: Change the Battery in the Dining Room Arlo Camera!
+  - service: notify.gmail
+    data:
+      title: The Dining Room Arlo Battery Needs Changing!
+      message: The Battery Level for the Arlo Camera in the Dining Room has dropped below 20%
+      
+# *******************************************************************************************
+
+- id: change_the_kitchen_arlo_battery
+  alias: Alert Me The Battery in the Arlo Camera in the Kitchen Needs Changing
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: not_home
+    to: home
+  condition:
+    condition: numeric_state
+    entity_id: sensor.battery_level_kitchen
+    below: 20
+  action:
+  - service: notify.pushbullet
+    data:
+      message: Change the Battery in the Garage Arlo Camera!
+  - service: notify.gmail
+    data:
+      title: The Kitchen Arlo Battery Needs Changing!
+      message: The Battery Level for the Arlo Camera in the Kitchen has dropped below 20%
+      
+# *******************************************************************************************
+- id: change_the_front_door_arlo_battery
+  alias: Alert Me The Battery in the Arlo Camera by the Front Door Needs Changing
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: not_home
+    to: home
+  condition:
+    condition: numeric_state
+    entity_id: sensor.battery_level_front_door
+    below: 20
+  action:
+  - service: notify.pushbullet
+    data:
+      message: Change the Battery in the Front Door Arlo Camera!
+  - service: notify.gmail
+    data:
+      title: The Front Door Arlo Battery Needs Changing!
+      message: The Battery Level for the Arlo Camera by the Front Door has dropped below 20%
+      
+# *******************************************************************************************
+
+- id: change_the_living_room_arlo_battery
+  alias: Alert Me The Battery in the Arlo Camera in the Living Room Needs Changing
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: not_home
+    to: home
+  condition:
+    condition: numeric_state
+    entity_id: sensor.battery_level_living_room
+    below: 20
+  action:
+  - service: notify.pushbullet
+    data:
+      message: Change the Battery in the Living Room Arlo Camera!
+  - service: notify.gmail
+    data:
+      title: The Living Room Arlo Battery Needs Changing!
+      message: The Battery Level for the Arlo Camera in the Living Room has dropped below 20%
+      
+# *******************************************************************************************
+
+- id: change_the_front_door_smoke_alarm_battery
+  alias: Alert Me The Battery in the Front Door Smoke Alarm Needs Changing
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: not_home
+    to: home
+  condition:
+    condition: numeric_state
+    entity_id: sensor.smoke_alarm_front_door_battery
+    below: 80
+  action:
+  - service: notify.pushbullet
+    data:
+      message: Change the Battery in the Front Door Smoke Alarm!
+  - service: notify.gmail
+    data:
+      title: The Front Door Smoke Alarm Battery Needs Changing!
+      message: The Battery Level for the Front Door Smoke Alarm has dropped below 20%

@@ -1,0 +1,51 @@
+wakeup_hour:
+  name: Hour
+  icon: mdi:clock-in
+  initial: 7
+  min: 0
+  max: 23
+  step: 1
+wakeup_minutes:
+  name: Minutes
+  icon: mdi:clock-in
+  initial: 00
+  min: 0
+  max: 55
+  step: 5
+wakeup_duration:
+  name: Light fade-in duration
+  icon: mdi:clock-in
+  initial: 30
+  min: 5
+  max: 60
+  step: 5
+denon_avr_x4200w:
+  name: Zone 1 Volume
+  initial: 0
+  min: 0
+  max: 100
+  step: 5
+  unit_of_measurement: dB
+denon_avr_x4200w_zone_2:
+  name: Zone 2 Volume
+  initial: 0
+  min: 0
+  max: 100
+  step: 5
+  unit_of_measurement: dB
+lg_tv:
+  name: LG TV Volume
+  mode: slider
+#  initial: 0
+  min: 0
+  max: 100
+  step: 5
+  icon: mdi:volume-high
+sony_tv:
+  name: Sony TV Volume
+  mode: slider
+#  initial: 0
+  min: 0
+  max: 100
+  step: 5
+  icon: mdi:volume-high

@@ -1,0 +1,91 @@
+- id: notify_everyones_asleep
+  alias: Notify Night Mode
+  trigger:
+    platform: time
+    at: '21:55:00'
+  action:
+    service: notify.living_room_tv
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: Media Shutdown in 5 Minutes"
+
+# ***********************************************************************************
+
+- id: everyones_asleep
+  alias: Night Mode
+  trigger:
+    platform: time
+    at: '22:00:00'
+  condition:
+    condition: state
+    entity_id: binary_sensor.motion_living_room_motion
+    state: 'off'
+  action:
+    - service: script.turn_on
+      entity_id: script.shutdown_media
+    - delay: '00:00:30'
+    - service: script.turn_on
+      entity_id: script.turn_off_mfi
+    - service: fan.turn_off
+      entity_id: fan.living_room_fan
+    - service: notify.pushbullet
+      data:
+        message: Night Mode Activated
+
+# ***********************************************************************************
+
+- id: enable_night_mode
+  alias: Re-enable Night Mode
+  trigger:
+    platform: time
+    at: '23:55:00'
+  action:
+    - service: automation.turn_on
+      entity_id: automation.night_mode
+
+# ***********************************************************************************  
+
+- id: someones_up
+  alias: End Night Mode
+  trigger:
+    platform: state
+    entity_id: motion.living_room
+    to: 'on'
+  condition:
+    condition: and
+    conditions:
+      - condition: time
+        after: 00:30:00
+        before: 09:00:00
+      - condition: state
+        entity_id: group.mfi
+        state: 'off'
+  action:
+    - service: script.turn_on
+      entity_id: script.turn_on_mfi
+    - service: notify.pushbullet
+      data:
+        message: Day Mode Activated
+
+# ***********************************************************************************
+
+- id: go_to_standby
+  alias: Set Media Devices to Standby
+  trigger:
+    platform: time
+    at: 09:00:00
+  condition:
+    - condition: state
+      entity_id: group.presence
+      state: home
+  action:
+    - service: script.turn_on
+      entity_id: script.turn_on_mfi
+    - service: fan.turn_on
+      entity_id: fan.living_room_fan
+    - service: dyson.set_speed
+      data:
+        entity_id: fan.living_room_fan
+        dyson_speed: 2
+    - service: notify.pushbullet
+      data:
+        message: Day Mode Activated

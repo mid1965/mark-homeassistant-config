@@ -1,0 +1,47 @@
+- id: mandy_left_work
+  alias: Mandy Left Work and is on her way
+  trigger:
+    platform: state
+    entity_id: device_tracker.life360_mandy_davies
+    from: 'Work-BARA'
+    to: 'Away'
+  condition:
+    condition: time
+    after: '16:00:00'
+    before: '22:00:00'
+  action:
+    service: notify.notifyme
+    data:
+      message: "Mandy has left work and is on her way."
+
+- id: mark_left_work
+  alias: Mark Left Work and is on his way
+  trigger:
+    platform: state
+    entity_id: device_tracker.life360_mark_davies
+    from: 'Work-Bio-Rad'
+    to: 'Away'
+  condition:
+    condition: time
+    after: '16:00:00'
+    before: '22:00:00'
+  action:
+    service: notify.notifyme
+    data:
+      message: "Mark has left work and is on his way."
+
+- id: you_have_mail
+  alias: New Mail in The MarkDavies.Com Mailbox
+  trigger:
+    platform: state
+    entity_id: group.presence
+    from: not_home
+    to: home
+  condition:
+    condition: numeric_state
+    entity_id: sensor.emails
+    above: 0
+  action:
+    service: notify.notifyme
+    data:
+      message: "You have unread email"

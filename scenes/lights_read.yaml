@@ -1,0 +1,53 @@
+- name: Lights Read
+  entities:
+    light.access_lights: off
+    light.dining_room_square_lamps: off
+    light.kitchen_ceiling: off
+    light.chandelier: off
+    light.reading_lamp:
+      state: on
+      rgb_color: [255,210,129]
+      brightness: 254
+      transition: 1
+    light.ikea_lamp:
+      state: on
+      transition: 1
+      rgb_color: [255,210,129]
+      brightness: 254
+      effect: none
+    light.sofa_right_lamp:
+      state: on
+      transition: 1
+      rgb_color: [255,210,129]
+      brightness: 254
+      effect: none
+    light.sofa_left_lamp:
+      state: on
+      transition: 1
+      rgb_color: [255,210,129]
+      brightness: 254
+      effect: none
+    light.hugo:
+      state: on
+      transition: 1
+      rgb_color: [255,210,129]
+      brightness: 254
+      effect: none
+    light.bloom:
+      state: on
+      transition: 1
+      rgb_color: [255,210,129]
+      brightness: 254
+      effect: none
+    light.kitchen_cabinets:
+      state: on
+      transition: 1
+      rgb_color: [255,210,129]
+      brightness: 254
+      effect: none
+    light.dining_room_floor_lamps:
+      state: on
+      transition: 1
+      rgb_color: [255,210,129]
+      brightness: 254
+      effect: none

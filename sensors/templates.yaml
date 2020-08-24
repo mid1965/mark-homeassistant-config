@@ -1,0 +1,113 @@
+#####################################################################
+#
+#   ENVIRONMENT
+#
+#####################################################################
+
+- platform: template
+  sensors:
+   period_of_day:
+     friendly_name: 'period of the day'
+     value_template: >-
+       {% if (as_timestamp(states.sun.sun.attributes.next_dusk)) - (as_timestamp(states.sun.sun.attributes.next_setting)) < 0 %}
+         dusk
+       {% elif (as_timestamp(states.sun.sun.attributes.next_rising)) - (as_timestamp(states.sun.sun.attributes.next_dawn)) < 0 %}
+         dawn
+       {% elif (states.sun.sun.attributes.elevation) < -4 %}
+         night
+       {% else %}
+         day
+       {% endif %}
+     icon_template: >-
+       {% if (as_timestamp(states.sun.sun.attributes.next_dusk)) - (as_timestamp(states.sun.sun.attributes.next_setting)) < 0 %}
+         mdi:weather-sunset-down
+       {% elif (as_timestamp(states.sun.sun.attributes.next_rising)) - (as_timestamp(states.sun.sun.attributes.next_dawn)) < 0 %}
+         mdi:weather-sunset-up
+       {% elif (states.sun.sun.attributes.elevation) < -4 %}
+         mdi:weather-night
+       {% else %}
+         mdi:weather-sunny
+       {% endif %}
+
+#####################################################################
+#
+#   CLIMATE
+#
+#####################################################################
+
+- platform: template
+  sensors:
+    ecobee_operation:
+      value_template:
+        "{% if states.climate.apartment.attributes.equipment_running == '' %}
+          0
+        {% else %}
+          1
+        {% endif %}"
+      friendly_name: "Ecobee Operation"
+
+- platform: template
+  sensors:
+    ecobee_fan:
+      value_template: '{{ states.climate.apartment.attributes.fan }}'
+      friendly_name: "Ecobee Fan"
+      
+- platform: template
+  sensors:
+    temperature_ecobee:
+      value_template: '{{ states.climate.apartment.attributes.current_temperature | float }}'
+      friendly_name: "Ecobee Temperature"
+      unit_of_measurement: "°F"
+
+#####################################################################
+#
+#   WITHINGS
+#
+#####################################################################
+
+- platform: template
+  sensors:
+    withings_weight_lbs_mark:
+      friendly_name: "withings weight_lbs_mark"
+      unit_of_measurement: 'lbs'
+      value_template: "{{ (states('sensor.withings_weight_kg_mark') | float * 2.20462262185) | round(2) }}"
+      icon_template: mdi:weight-pound
+
+- platform: template
+  sensors:
+    withings_bone_mass_lbs_mark:
+      friendly_name: "withings bone_mass_lbs_mark"
+      unit_of_measurement: 'lbs'
+      value_template: "{{ (states('sensor.withings_bone_mass_kg_mark') | float * 2.20462262185) | round(2) }}"
+      icon_template: mdi:weight-pound
+
+- platform: template
+  sensors:
+    withings_fat_free_mass_lbs_mark:
+      friendly_name: "withings fat_free_mass_lbs_mark"
+      unit_of_measurement: 'lbs'
+      value_template: "{{ (states('sensor.withings_fat_free_mass_kg_mark') | float * 2.20462262185) | round(2) }}"
+      icon_template: mdi:weight-pound
+
+- platform: template
+  sensors:
+    withings_fat_mass_lbs_mark:
+      friendly_name: "withings fat_mass_lbs_mark"
+      unit_of_measurement: 'lbs'
+      value_template: "{{ (states('sensor.withings_fat_mass_kg_mark') | float * 2.20462262185) | round(2) }}"
+      icon_template: mdi:weight-pound
+
+- platform: template
+  sensors:
+    withings_muscle_mass_lbs_mark:
+      friendly_name: "withings muscle_mass_lbs_mark"
+      unit_of_measurement: 'lbs'
+      value_template: "{{ (states('sensor.withings_muscle_mass_kg_mark') | float * 2.20462262185) | round(2) }}"
+      icon_template: mdi:weight-pound
+  
+- platform: template
+  sensors:
+    withings_bmi_mark:
+      friendly_name: "Mark's BMI"
+      value_template: "{{ (float(states('sensor.withings_weight_lbs_mark')) / 4900 * 703) | round(1) }}"
+      unit_of_measurement: "bmi"

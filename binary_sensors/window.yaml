@@ -1,0 +1,39 @@
+#####################################################################
+#
+#   WINDOW SENSORS
+#
+#####################################################################
+- platform: mqtt
+  name: "Contact Dining Room Window"
+  state_topic: "smartthings/Contact Dining Room Window/contact/state"
+  payload_on: "open"
+  payload_off: "closed"
+  device_class: opening
+  
+
+
+- platform: mqtt
+  name: "Contact Guest Room Window"
+  state_topic: "smartthings/Contact Guest Room Window/contact/state"
+  payload_on: "open"
+  payload_off: "closed"
+  device_class: opening
+  
+
+
+- platform: mqtt
+  name: "Contact Bedroom East Window"
+  state_topic: "smartthings/Contact Bedroom East Window/contact/state"
+  payload_on: "open"
+  payload_off: "closed"
+  device_class: opening
+  
+
+
+- platform: mqtt
+  name: "Contact Bedroom North Window"
+  state_topic: "smartthings/Contact Bedroom North Window/contact/state"
+  payload_on: "open"
+  payload_off: "closed"
+  device_class: opening
+  

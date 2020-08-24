@@ -1,0 +1,49 @@
+- name: Lights Spring Blossom
+  entities:
+    light.access_lights: off
+    light.dining_room_square_lamps: off
+    light.reading_lamp: off
+    light.kitchen_ceiling: off
+    light.chandelier: off
+    light.ikea_lamp:
+      state: on
+      transition: 5
+      rgb_color: [255,148,182]
+      brightness: 150
+      effect: none
+    light.sofa_right_lamp:
+      state: on
+      transition: 5
+      rgb_color: [255,184,206]
+      brightness: 216
+      effect: none
+    light.sofa_left_lamp:
+      state: on
+      transition: 5
+      rgb_color: [255,184,206]
+      brightness: 216
+      effect: none
+    light.hugo:
+      state: on
+      transition: 5
+      rgb_color: [255,186,209]
+      brightness: 216
+      effect: none
+    light.bloom:
+      state: on
+      transition: 5
+      rgb_color: [255,150,182]
+      brightness: 216
+      effect: none
+    light.kitchen_cabinets:
+      state: on
+      transition: 5
+      rgb_color: [255,148,182]
+      brightness: 216
+      effect: none
+    light.dining_room_floor_lamps:
+      state: on
+      transition: 5
+      rgb_color: [255,150,182]
+      brightness: 216
+      effect: none

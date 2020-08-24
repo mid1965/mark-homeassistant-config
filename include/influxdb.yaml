@@ -1,0 +1,74 @@
+host: !secret influx_host
+port: !secret influx_port
+max_retries: 3
+tags:
+  source: hass
+include:
+    entities:
+        - sensor.living_room_temperature
+        - sensor.bathroom_temperature
+        - sensor.apartment_temperature
+        - sensor.temperature_ecobee
+        - sensor.kitchen_temperature
+        - sensor.bedroom_temperature
+        - sensor.guest_room_temperature
+        - sensor.master_bathroom_temperature
+        - sensor.guest_bathroom_temperature
+        - sensor.motion_balcony_temperature_measurement
+        - sensor.motion_front_porch_temperature_measurement
+        - sensor.dark_sky_apparent_temperature
+        - sensor.outside_temperature_celsius
+        - sensor.temperature_balcony_c
+        - sensor.temperature_front_porch_c
+        - sensor.ecobee_fan
+        - sensor.ecobee_operation
+        - sensor.daily_usage
+        - sensor.weekly_usage
+        - sensor.hvac_daily
+        - sensor.memory_free
+        - sensor.processor_use
+        - sensor.disk_free
+        - sensor.disk_use_percent_home
+        - cover.bedroom_blind_east_window
+        - cover.bedroom_blind_north_window
+        - cover.dining_room_blind_window
+        - cover.guest_room_blind_window
+        - cover.living_room_blind_left_door
+        - cover.living_room_blind_right_door
+        - cover.living_room_blind_left_window
+        - cover.living_room_blind_right_window
+        - binary_sensor.contact_balcony_door_contact
+        - binary_sensor.contact_bedroom_balcony_door_contact
+        - binary_sensor.contact_front_door_contact
+        - binary_sensor.contact_bedroom_east_window_contact
+        - binary_sensor.contact_bedroom_north_window_contact
+        - binary_sensor.contact_dining_room_window_contact
+        - binary_sensor.contact_guest_room_window_contact
+        - sensor.hvac_today
+        - sensor.tv_today_lg
+        - sensor.tv_today_sony
+        - sensor.vizzini_today
+        - sensor.vent_bedroom_tilt
+        - sensor.vent_guest_room_tilt
+        - light.vent_bedroom
+        - light.vent_guest_room
+        - sensor.withings_weight_kg_mark
+        - sensor.withings_weight_lbs_mark
+        - sensor.withings_bmi_mark
+        - sensor.withings_bone_mass_lbs_mark
+        - sensor.withings_fat_free_mass_lbs_mark
+        - sensor.withings_fat_mass_lbs_mark
+        - sensor.withings_fat_ratio_pct_mark
+        - sensor.withings_muscle_mass_lbs_mark
+        - sensor.withings_heart_pulse_bpm_mark
+        - sensor.withings_systolic_blood_pressure_mmhg_mark
+        - sensor.withings_diastolic_blood_pressure_mmhg_mark 
+        - sensor.mark_sleep
+        - sensor.mandy_sleep
+        - switch.bathroom_extractor
+        - switch.guest_bathroom_extractor
+        - switch.laundry_extractor
+        # - sensor.withings_fat_free_mass_kg_mark
+        # - sensor.withings_fat_mass_kg_mark
+        # - sensor.withings_bone_mass_kg_mark
+        # - sensor.withings_muscle_mass_kg_mark 

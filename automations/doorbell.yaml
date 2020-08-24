@@ -1,0 +1,69 @@
+- id: download_video_on_doorbell_ring
+  alias: Doorbell rang download video
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.front_door_ding
+    to: 'on'
+  action:
+  - service: downloader.download_file
+    data_template:
+      url: "{{ state_attr('camera.front_door', 'video_url') }}"
+      subdir: "{{state_attr('camera.front_door', 'friendly_name')}}"
+      filename: "Ding_{{state_attr('camera.front_door', 'friendly_name')}}.mpg"
+
+# - id: download_video_on_doorbell_motion
+  # alias: Motion at door download video
+  # trigger:
+  # - platform: state
+    # entity_id: binary_sensor.front_door_motion
+    # to: 'on'
+  # action:
+  # - service: downloader.download_file
+    # data_template:
+      # url: "{{ state_attr('camera.front_door', 'video_url') }}"
+      # subdir: "{{state_attr('camera.front_door', 'friendly_name')}}"
+      # filename: "Motion_{{state_attr('camera.front_door', 'friendly_name')}}.mpg"
+      
+- id: someones_ringing_the_bell
+  alias: Someone rang the doorbell
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.ring_front_door_ding
+    to: 'on'
+  action:
+  - service: media_player.play_media
+    data_template:
+      entity_id: media_player.googlehome
+      media_content_id: https://ha.markdavies.com/local/audio/labrador.mp3
+      media_content_type: audio/mp3
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: *Someone Rang The Doorbell*\nSomeone at the door rang the bell."
+  - service: notify.gmail
+    data:
+      title: Someone Rang the Doorbell
+      message: Someone at the door rang the bell!
+
+- id: someones_on_the_doorstep
+  alias: Someone is at the door
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.ring_front_door_motion
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: group.presence
+    state: 'not_home'
+  action:
+  - service: media_player.play_media
+    data_template:
+      entity_id: media_player.googlehome
+      media_content_id: https://ha.markdavies.com/local/audio/labrador.mp3
+      media_content_type: audio/mp3
+  - service: notify.pushbullet
+    data:
+      message: "{{ now().strftime('%a - %H:%M') }}: *Someone is on the Doorstep*\nThere is someone at the door."
+  - service: notify.gmail
+    data:
+      title: Someone is on the Doorstep
+      message: There is someone at the door!

@@ -1,0 +1,582 @@
+#####################################################################
+#
+#   DEVICES
+#
+#####################################################################
+# switch.fireswamp:
+  # icon: mdi:desktop-classic
+# switch.vizzini:
+  # icon: mdi:desktop-classic
+# light.chandelier:
+  # friendly_name: Chandelier
+  # hidden: False
+switch.light_cabinet_led:
+  friendly_name: Cabinet LED
+  hidden: False
+light.light_balcony_string_lights:
+  friendly_name: Balcony String Lights
+  hidden: False
+
+#####################################################################
+#
+#   SENSORS
+#
+#####################################################################
+
+sensor.dark_sky_apparent_temperature:
+  friendly_name: Feels Like
+  hidden: False
+sensor.dark_sky_cloud_coverage:
+  friendly_name: Cloud Cover
+  hidden: False
+sensor.dark_sky_cloud_coverage_1d:
+  friendly_name: Tomorrow's Cloud Cover
+  hidden: False
+sensor.dark_sky_daily_max_precip_intensity_1d:
+  friendly_name: Tomorrow's Forecast Rain Intensity
+  hidden: False
+sensor.dark_sky_daily_summary:
+  friendly_name: For the next 7 days
+  hidden: False
+sensor.dark_sky_daytime_high_apparent_temperature_1d:
+  friendly_name: Tomorrow's High "Feels Like" Temperature
+  hidden: False
+sensor.dark_sky_daytime_high_temperature_1d:
+  friendly_name: Tomorrow's High Temperature
+  hidden: False
+sensor.dark_sky_dew_point:
+  friendly_name: Dew Point
+  hidden: False
+  # Temperature below which water will condense
+sensor.dark_sky_dew_point_1d:
+  friendly_name: Tomorrow's Dew Point
+  hidden: False
+sensor.dark_sky_hourly_summary:
+  friendly_name: For the next 24 hours
+  hidden: False
+sensor.dark_sky_humidity:
+  friendly_name: Humidity
+  hidden: False
+sensor.dark_sky_humidity_1d:
+  friendly_name: Tomorrow's Humidity
+  hidden: False
+sensor.dark_sky_icon:
+  friendly_name: Icon
+  hidden: False
+sensor.dark_sky_icon_1d:
+  friendly_name: Tomorrow's Icon
+  hidden: False
+sensor.dark_sky_minutely_summary:
+  friendly_name: For the next hour
+  hidden: False
+sensor.dark_sky_nearest_storm_distance:
+  friendly_name: Closest Storm
+  hidden: False
+sensor.dark_sky_overnight_low_apparent_temperature_1d:
+  friendly_name: Tomorrow's Low Temperature Feels Like
+  hidden: False
+sensor.dark_sky_overnight_low_temperature_1d:
+  friendly_name: Tomorrow's Low Temperature
+  hidden: False
+sensor.dark_sky_ozone:
+  friendly_name: Ozone
+  hidden: False
+sensor.dark_sky_ozone_1d:
+  friendly_name: Ozone
+  hidden: False
+sensor.dark_sky_precip:
+  friendly_name: Rain Forecast
+  hidden: False
+sensor.dark_sky_precip_1d:
+  friendly_name: Tomorrow's Rain Forecast
+  hidden: False
+sensor.dark_sky_precip_intensity:
+  friendly_name: Rain Intensity
+  hidden: False
+sensor.dark_sky_precip_intensity_1d:
+  friendly_name: Tomorrow's Rain Intensity
+  hidden: False
+sensor.dark_sky_precip_probability:
+  friendly_name: Rain Probability
+  hidden: False
+sensor.dark_sky_precip_probability_1d:
+  friendly_name: Tomorrow's Rain Probability
+  hidden: False
+sensor.dark_sky_pressure:
+  friendly_name: Atmospheric Pressure
+  hidden: False
+sensor.dark_sky_pressure_1d:
+  friendly_name: Tomorrow's Atmospheric Pressure
+  hidden: False
+sensor.dark_sky_summary:
+  friendly_name: Weather Summary
+  hidden: False
+sensor.dark_sky_summary_1d:
+  friendly_name: Tomorrow's Weather Summary
+  hidden: False
+sensor.dark_sky_temperature:
+  friendly_name: Temperature
+  hidden: False
+sensor.dark_sky_visibility:
+  friendly_name: Visibility
+  hidden: False
+sensor.dark_sky_visibility_1d:
+  friendly_name: Tomorrow's Visibility
+  hidden: False
+sensor.dark_sky_wind_bearing:
+  friendly_name: Wind Direction (degrees)
+  hidden: False
+sensor.dark_sky_wind_bearing_1d:
+  friendly_name: Tomorrow's Wind Direction (degrees)
+  hidden: False
+sensor.dark_sky_wind_speed:
+  friendly_name: Wind Speed
+  hidden: False
+sensor.dark_sky_wind_speed_1d:
+  friendly_name: Wind Speed
+  hidden: False
+sensor.outside_temperature_celsius:
+  friendly_name: Outside Temperature (C)
+#  unit_of_measurement: "°C"
+sensor.temperature_bedroom:
+  friendly_name: Bedroom Temperature
+  hidden: False
+sensor.temperature_bathroom:
+  friendly_name: Bathroom Temperature
+  hidden: False
+sensor.temperature_garage:
+  friendly_name: Garage Temperature
+sensor.mark_presence:
+  entity_picture: /local/mark2-40x40.jpg
+sensor.mandy_presence:
+  entity_picture: /local/mandy40x40.jpg
+person.mark:
+  entity_picture: /local/mark2-40x40.jpg
+person.mandy:
+  entity_picture: /local/mandy40x40.jpg
+sensor.mandy:
+  entity_picture: /local/mandy40x40.jpg
+
+#####################################################################
+#
+#   VENTS
+#
+#####################################################################
+light.vent_bedroom:
+  icon: mdi:weather-windy
+light.vent_guest_room:
+  icon: mdi:weather-windy
+
+#####################################################################
+#
+#   SCENE MODIFICATIONS
+#
+#####################################################################
+
+scene.blinds_close_guest_room:
+  friendly_name: Close Guest Room Blind
+  hidden: False
+scene.blinds_open_guest_room:
+  friendly_name: Open Guest Room Blind
+  hidden: False
+
+  
+#####################################################################
+#
+#   GROUP MODIFICATIONS
+#
+#####################################################################
+
+group.all_automations:
+  friendly_name: All Automations
+  hidden: false
+  icon: mdi:auto-fix
+group.all_plants:
+  friendly_name: All Plants
+  hidden: false
+  icon: mdi:flower
+group.all_lights:
+  friendly_name: All Lights
+  hidden: false
+  icon: mdi:light
+group.all_covers:
+  friendly_name: All Blinds
+  hidden: false
+  icon: mdi:blinds
+group.all_scripts:
+  friendly_name: All Scripts
+  hidden: false
+  icon: mdi:code-braces
+group.mark_tracker:
+  friendly_name: Mark
+  hidden: false
+  icon: mdi:human-male
+group.mandy_tracker:
+  friendly_name: Mandy
+  hidden: false
+  icon: mdi:human-female
+  
+#####################################################################
+#
+#   TAB ORDER
+#
+#####################################################################
+
+group.default_view:
+  order: "1"
+group.alerts:
+  order: "2"
+group.lights:
+  order: "3"
+group.blinds:
+  order: "4"
+group.info:
+  order: "5"
+group.media:
+  order: "6"
+group.automations:
+  order: "7"
+group.system:
+  order: "8"
+group.cameras:
+  order: "9"
+
+  
+#####################################################################
+#
+#   PLANTS
+#
+#####################################################################
+
+plant.umbrella_plant:
+  friendly_name: Schefflera (Umbrella Plant)
+  hidden: False
+sensor.umbrella_plant_battery:
+  friendly_name: Battery Umbrella Plant
+  hidden: False
+sensor.umbrella_plant_moisture:
+  friendly_name: Moisture Umbrella Plant
+  hidden: False
+sensor.umbrella_plant_temperature:
+  friendly_name: Temperature Umbrella Plant
+  hidden: False
+sensor.umbrella_plant_brightness:
+  friendly_name: Brightness Umbrella Plant
+  hidden: False
+sensor.umbrella_plant_conductivity:
+  friendly_name: Fertilizer Umbrella Plant
+  hidden: False
+plant.dragon_tree_guest:
+  friendly_name: Madagascar Dragon Tree (Guest)
+  hidden: False
+sensor.dragon_tree_guest_battery:
+  friendly_name: Battery Dragon Tree (Guest)
+  hidden: False
+sensor.dragon_tree_guest_moisture:
+  friendly_name: Moisture Dragon Tree (Guest)
+  hidden: False
+sensor.dragon_tree_guest_temperature:
+  friendly_name: Temperature Dragon Tree (Guest)
+  hidden: False
+sensor.dragon_tree_guest_brightness:
+  friendly_name: Brightness Dragon Tree (Guest)
+  hidden: False
+sensor.dragon_tree_guest_conductivity:
+  friendly_name: Fertilizer Dragon Tree (Guest)
+  hidden: False
+plant.climbing_jasmine:
+  friendly_name: Climbing Jasmine
+  hidden: False
+sensor.climbing_jasmine_battery:
+  friendly_name: Battery Climbing Jasmine
+  hidden: False
+sensor.climbing_jasmine_moisture:
+  friendly_name: Moisture Climbing Jasmine
+  hidden: False
+sensor.climbing_jasmine_temperature:
+  friendly_name: Temperature Climbing Jasmine
+  hidden: False
+sensor.climbing_jasmine_brightness:
+  friendly_name: Brightness Climbing Jasmine
+  hidden: False
+sensor.climbing_jasmine_conductivity:
+  friendly_name: Fertilizer Climbing Jasmine
+  hidden: False
+plant.spider_plant:
+  friendly_name: Spider Plant
+  hidden: False
+sensor.spider_plant_battery:
+  friendly_name: Battery Spider Plant
+  hidden: False
+sensor.spider_plant_moisture:
+  friendly_name: Moisture Spider Plant
+  hidden: False
+sensor.spider_plant_temperature:
+  friendly_name: Temperature Spider Plant
+  hidden: False
+sensor.spider_plant_brightness:
+  friendly_name: Brightness Spider Plant
+  hidden: False
+sensor.spider_plant_conductivity:
+  friendly_name: Fertilizer Spider Plant
+  hidden: False
+plant.jasmine_shrub:
+  friendly_name: Jasmine Shrub
+  hidden: False
+sensor.jasmine_shrub_battery:
+  friendly_name: Battery Jasmine Shrub
+  hidden: False
+sensor.jasmine_shrub_moisture:
+  friendly_name: Moisture Jasmine Shrub
+  hidden: False
+sensor.jasmine_shrub_temperature:
+  friendly_name: Temperature Jasmine Shrub
+  hidden: False
+sensor.jasmine_shrub_brightness:
+  friendly_name: Brightness Jasmine Shrub
+  hidden: False
+sensor.jasmine_shrub_conductivity:
+  friendly_name: Fertilizer Jasmine Shrub
+  hidden: False
+plant.dragon_tree_bathroom:
+  friendly_name: Madagascar Dragon Tree (Bathroom)
+  hidden: False
+sensor.dragon_tree_bathroom_battery:
+  friendly_name: Battery Madagascar Dragon Tree (Bathroom)
+  hidden: False
+sensor.dragon_tree_bathroom_moisture:
+  friendly_name: Moisture Madagascar Dragon Tree (Bathroom)
+  hidden: False
+sensor.dragon_tree_bathroom_temperature:
+  friendly_name: Temperature Madagascar Dragon Tree (Bathroom)
+  hidden: False
+sensor.dragon_tree_bathroom_brightness:
+  friendly_name: Brightness Madagascar Dragon Tree (Bathroom)
+  hidden: False
+sensor.dragon_tree_bathroom_conductivity:
+  friendly_name: Fertilizer Madagascar Dragon Tree (Bathroom)
+  hidden: False
+plant.sun_parasol:
+  friendly_name: Sun Parasol
+  hidden: False
+sensor.sun_parasol_battery:
+  friendly_name: Battery Sun Parasol
+  hidden: False
+sensor.sun_parasol_moisture:
+  friendly_name: Moisture Sun Parasol
+  hidden: False
+sensor.sun_parasol_temperature:
+  friendly_name: Temperature Sun Parasol
+  hidden: False
+sensor.sun_parasol_brightness:
+  friendly_name: Brightness Sun Parasol
+  hidden: False
+sensor.sun_parasol_conductivity:
+  friendly_name: Fertilizer Sun Parasol
+  hidden: False
+plant.asparagus_fern_left:
+  friendly_name: Asparagus Fern (Left)
+  hidden: False
+sensor.asparagus_fern_left_battery:
+  friendly_name: Battery Asparagus Fern (Left)
+  hidden: False
+sensor.asparagus_fern_left_moisture:
+  friendly_name: Moisture Asparagus Fern (Left)
+  hidden: False
+sensor.asparagus_fern_left_temperature:
+  friendly_name: Temperature Asparagus Fern (Left)
+  hidden: False
+sensor.asparagus_fern_left_brightness:
+  friendly_name: Brightness Asparagus Fern (Left)
+  hidden: False
+sensor.asparagus_fern_left_conductivity:
+  friendly_name: Fertilizer Asparagus Fern (Left)
+  hidden: False
+plant.asparagus_fern_right:
+  friendly_name: Asparagus Fern (Right)
+  hidden: False
+sensor.asparagus_fern_right_battery:
+  friendly_name: Battery Asparagus Fern (Right)
+  hidden: False
+sensor.asparagus_fern_right_moisture:
+  friendly_name: Moisture Asparagus Fern (Right)
+  hidden: False
+sensor.asparagus_fern_right_temperature:
+  friendly_name: Temperature Asparagus Fern (Right)
+  hidden: False
+sensor.asparagus_fern_right_brightness:
+  friendly_name: Brightness Asparagus Fern (Right)
+  hidden: False
+sensor.asparagus_fern_right_conductivity:
+  friendly_name: Fertilizer Asparagus Fern (Right)
+  hidden: False
+plant.dragon_tree_large:
+  friendly_name: Madagascar Dragon Tree (Large)
+  hidden: False
+sensor.dragon_tree_large_battery:
+  friendly_name: Battery Madagascar Dragon Tree (Large)
+  hidden: False
+sensor.dragon_tree_large_moisture:
+  friendly_name: Moisture Madagascar Dragon Tree (Large)
+  hidden: False
+sensor.dragon_tree_large_temperature:
+  friendly_name: Temperature Madagascar Dragon Tree (Large)
+  hidden: False
+sensor.dragon_tree_large_brightness:
+  friendly_name: Brightness Madagascar Dragon Tree (Large)
+  hidden: False
+sensor.dragon_tree_large_conductivity:
+  friendly_name: Fertilizer Madagascar Dragon Tree (Large)
+  hidden: False
+plant.lavender:
+  friendly_name: Lavender
+  hidden: False
+sensor.lavender_battery:
+  friendly_name: Battery Lavender
+  hidden: False
+sensor.lavender_moisture:
+  friendly_name: Moisture Lavender
+  hidden: False
+sensor.lavender_temperature:
+  friendly_name: Temperature Lavender
+  hidden: False
+sensor.lavender_brightness:
+  friendly_name: Brightness Lavender
+  hidden: False
+sensor.lavender_conductivity:
+  friendly_name: Fertilizer Lavender
+  hidden: False
+plant.lime_tree:
+  friendly_name: Lime Tree
+  hidden: False
+sensor.lime_tree_battery:
+  friendly_name: Battery Lime Tree
+  hidden: False
+sensor.lime_tree_moisture:
+  friendly_name: Moisture Lime Tree
+  hidden: False
+sensor.lime_tree_temperature:
+  friendly_name: Temperature Lime Tree
+  hidden: False
+sensor.lime_tree_brightness:
+  friendly_name: Brightness Lime Tree
+  hidden: False
+sensor.lime_tree_conductivity:
+  friendly_name: Fertilizer Lime Tree
+  hidden: False
+plant.corn_plant:
+  friendly_name: Corn Plant
+  hidden: False
+sensor.corn_plant_battery:
+  friendly_name: Battery Corn Plant
+  hidden: False
+sensor.corn_plant_moisture:
+  friendly_name: Moisture Corn Plant
+  hidden: False
+sensor.corn_plant_temperature:
+  friendly_name: Temperature Corn Plant
+  hidden: False
+sensor.corn_plant_brightness:
+  friendly_name: Brightness Corn Plant
+  hidden: False
+sensor.corn_plant_conductivity:
+  friendly_name: Fertilizer Corn Plant
+  hidden: False
+plant.swiss_cheese:
+  friendly_name: Swiss Cheese Plant
+  hidden: False
+sensor.swiss_cheese_battery:
+  friendly_name: Battery Swiss Cheese Plant
+  hidden: False
+sensor.swiss_cheese_moisture:
+  friendly_name: Moisture Swiss Cheese Plant
+  hidden: False
+sensor.swiss_cheese_temperature:
+  friendly_name: Temperature Swiss Cheese Plant
+  hidden: False
+sensor.swiss_cheese_brightness:
+  friendly_name: Brightness Swiss Cheese Plant
+  hidden: False
+sensor.swiss_cheese_conductivity:
+  friendly_name: Fertilizer Swiss Cheese Plant
+  hidden: False
+plant.geranium:
+  friendly_name: Geranium
+  hidden: False
+sensor.geranium_battery:
+  friendly_name: Battery Geranium
+  hidden: False
+sensor.geranium_moisture:
+  friendly_name: Moisture Geranium
+  hidden: False
+sensor.geranium_temperature:
+  friendly_name: Temperature Geranium
+  hidden: False
+sensor.geranium_brightness:
+  friendly_name: Brightness Geranium
+  hidden: False
+sensor.geranium_conductivity:
+  friendly_name: Fertilizer Geranium
+  hidden: False
+plant.prayer_plant:
+  friendly_name: Prayer Plant
+  hidden: False
+sensor.prayer_plant_battery:
+  friendly_name: Battery Prayer Plant
+  hidden: False
+sensor.prayer_plant_moisture:
+  friendly_name: Moisture Prayer Plant
+  hidden: False
+sensor.prayer_plant_temperature:
+  friendly_name: Temperature Prayer Plant
+  hidden: False
+sensor.prayer_plant_brightness:
+  friendly_name: Brightness Prayer Plant
+  hidden: False
+sensor.prayer_plant_conductivity:
+  friendly_name: Fertilizer Prayer Plant
+  hidden: False
+  
+  
+#####################################################################
+#
+#   CAMERAS
+#
+#####################################################################
+
+camera.living_room:
+  friendly_name: Living Room Camera
+camera.balcony:
+  friendly_name: Balcony Camera
+camera.dining_room:
+  friendly_name: Dining Room Camera
+camera.front_door:
+  friendly_name: Front Door Camera
+camera.garage:
+  friendly_name: Garage Camera
+  
+  
+#####################################################################
+#
+#   ICON COLORS
+#
+#####################################################################
+
+# Yellow: #fbd229 ; 'rgb(251, 210, 41)'
+# Blue: #365f8c ; 'rgb(54, 95, 140)'
+
+
+media_player.denon_avr_x4200w:
+  templates:
+    icon_color: "if (state === 'on') return 'rgb(251, 210, 41)'; else return 'rgb(54, 95, 140)';"
+
+media_player.guest_tv:
+  templates:
+    icon_color: >
+      if (state === 'on') return 'rgb(251, 210, 41)';
+      return 'rgb(54, 95, 140)';
+    
+media_player.living_room_tv:
+  templates:
+    icon_color: "if (state === 'playing') return 'rgb(251, 210, 41)'; else return 'rgb(54, 95, 140)';"
+    
